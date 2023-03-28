@@ -1,0 +1,203 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/*
+| -------------------------------------------------------------------------
+| URI ROUTING
+| -------------------------------------------------------------------------
+| This file lets you re-map URI requests to specific controller functions.
+|
+| Typically there is a one-to-one relationship between a URL string
+| and its corresponding controller class/method. The segments in a
+| URL normally follow this pattern:
+|
+|	example.com/class/method/id/
+|
+| In some instances, however, you may want to remap this relationship
+| so that a different class/function is called than the one
+| corresponding to the URL.
+|
+| Please see the user guide for complete details:
+|
+|	https://codeigniter.com/user_guide/general/routing.html
+|
+| -------------------------------------------------------------------------
+| RESERVED ROUTES
+| -------------------------------------------------------------------------
+|
+| There are three reserved routes:
+|
+|	$route['default_controller'] = 'welcome';
+|
+| This route indicates which controller class should be loaded if the
+| URI contains no data. In the above example, the "welcome" class
+| would be loaded.
+|
+|	$route['404_override'] = 'errors/page_missing';
+|
+| This route will tell the Router which controller/method to use if those
+| provided in the URL cannot be matched to a valid route.
+|
+|	$route['translate_uri_dashes'] = FALSE;
+|
+| This is not exactly a route, but allows you to automatically route
+| controller and method names that contain dashes. '-' isn't a valid
+| class or method name character, so it requires translation.
+| When you set this option to TRUE, it will replace ALL dashes in the
+| controller and method URI segments.
+|
+| Examples:	my-controller/index	-> my_controller/index
+|		my-controller/my-method	-> my_controller/my_method
+*/
+$route['default_controller'] = 'Home';
+$route['404_override'] = '';
+$route['translate_uri_dashes'] = FALSE;
+
+
+//admin
+$route['login']='Home';
+$route['doLogin']='Home/doLogin';
+$route['forgot-password']='Home/forgot_password';
+$route['admin/dashboard']='Admin/Home';
+$route['admin/logout']='Admin/Home/logout';
+
+$route['admin/employee']='Admin/Employee';
+$route['admin/sendme']='Admin/Employee/sendme';
+$route['admin/filterEmployee']='Admin/Employee/filterEmployee';
+$route['admin/account_type']='Admin/Employee/account_type';
+$route['admin/deleteAccountType/(:any)']='Admin/Employee/deleteAccountType/$1';
+$route['admin/account_type_status/(:any)/(:num)']='Admin/Employee/account_type_status/$1/$2';
+$route['admin/expense_type']='Admin/Employee/expense_type';
+$route['admin/deleteexpense_type/(:any)']='Admin/Employee/deleteexpense_type/$1';
+$route['admin/expense_type_status/(:any)/(:num)']='Admin/Employee/expense_type_status/$1/$2';
+$route['admin/emp_expense_claim']='Admin/Employee/emp_expense_claim';
+$route['admin/expense_claim_status/(:any)/(:num)']='Admin/Employee/expense_claim_status/$1/$2';
+$route['admin/addRemark'] = 'Admin/Employee/addRemark';
+$route['admin/editRemark'] = 'Admin/Employee/editRemark';
+$route['admin/department']='Admin/CoreHr';
+$route['admin/designation']='Admin/CoreHr/designation';
+$route['admin/announcements']='Admin/CoreHr/announcements';
+$route['admin/policies']='Admin/CoreHr/policies';
+$route['admin/addDepartment']='Admin/CoreHr/addDepartment';
+$route['admin/editDepartment']='Admin/CoreHr/editDepartment';
+$route['admin/deleteDepartment/(:any)']='Admin/CoreHr/deleteDepartment/$1';
+$route['admin/addDesignation']='Admin/CoreHr/addDesignation';
+$route['admin/editDesignation']='Admin/CoreHr/editDesignation';
+$route['admin/deleteDesignation/(:any)']='Admin/CoreHr/deleteDesignation/$1';
+$route['admin/roles'] = 'Admin/Employee/role'; //s
+
+$route['admin/addEmployee'] = 'Admin/Employee/addEmployee';
+$route['admin/addEmployeeForm'] = 'Admin/Employee/addEmployeeForm';
+$route['admin/editEmployee/(:any)'] = 'Admin/Employee/editEmployee/$1';
+$route['admin/editEmployeeForm'] = 'Admin/Employee/editEmployeeForm';
+$route['admin/deleteEmployee/(:any)'] = 'Admin/Employee/deleteEmployee/$1';
+$route['admin/changeStatusEmployee/(:any)/(:num)'] = 'Admin/Employee/changeStatusEmployee/$1/$2';
+$route['admin/profile']='Admin/Employee/profile';
+$route['admin/addProfileForm'] = 'Admin/Employee/addProfileForm';
+$route['admin/getdesignation'] = 'Admin/Employee/getdesignation';
+
+$route['admin/addAnnouncement'] = 'Admin/CoreHr/addAnnouncement';
+$route['admin/editAnnouncement'] = 'Admin/CoreHr/editAnnouncement';
+$route['admin/deleteAnnoucment/(:any)'] = 'Admin/CoreHr/deleteAnnoucment/$1';
+
+$route['admin/addPolicies'] = 'Admin/CoreHr/addPolicies';
+$route['admin/editPolicies'] = 'Admin/CoreHr/editPolicies';
+$route['admin/deletePolicies/(:any)'] = 'Admin/CoreHr/deletePolicies/$1';
+
+//Attendance
+$route['admin/attendance'] = 'Admin/Attendence';
+$route['admin/manual_attendance'] = 'Admin/Attendence/manual_attendance';
+$route['admin/monthly_report'] = 'Admin/Attendence/monthly_report';
+$route['admin/overtime_request'] = 'Admin/Attendence/overtime_request';
+
+//Job Vacancy
+$route['admin/add_offer_breakup'] = 'Admin/Job/add_offer_breakup';
+$route['admin/offer_breakup'] = 'Admin/Job/offer_breakup';
+$route['admin/edit_offer/(:any)'] = 'Admin/Job/edit_offer/$1';
+$route['admin/delete_offer/(:any)'] = 'Admin/Job/delete_offer/$1';
+$route['admin/offer_print_view/(:any)'] = 'Admin/Job/offer_print_view/$1';
+
+//Leave
+$route['admin/leave_request'] = 'Admin/Leave';
+$route['admin/compoff_leave_request'] = 'Admin/Leave/compoff_leave_request';
+$route['admin/leave-type'] = 'Admin/Leave/leave_type'; 
+$route['admin/add_leave_type'] = 'Admin/Leave/add_leave_types';
+$route['admin/add_account_type'] = 'Admin/Employee/add_account_type';
+$route['admin/edit_leave_type'] = 'Admin/Leave/edit_leave_types';
+$route['admin/leave_approval_status/(:any)/(:num)'] = 'Admin/Leave/leave_approval_status/$1/$2';
+$route['admin/compoff_leave_approval_status/(:any)/(:num)'] = 'Admin/Leave/compoff_leave_approval_status/$1/$2';
+$route['admin/leave-calendar'] = 'Admin/Leave/leave_calendar';
+
+
+
+
+// Employee
+$route['employee/dashboard']='employee/Home';
+$route['employee/apply_leave']='employee/Home/apply_leave';
+$route['employee/my_leaves']='employee/Home/my_leaves';
+$route['employee/compoff_leaves']='employee/Home/compoff_leaves';
+$route['employee/salary_slips']='employee/Home/salary_slips';
+$route['employee/expense_claims']='employee/Home/expense_claims';
+$route['employee/attendance']='employee/Home/attendance';
+$route['employee/changes_password']='employee/Home/changes_password';
+$route['employee/changePasswordForm'] = 'employee/Home/changePasswordForm';
+$route['employee/fresher_developer']='employee/Home/fresher_developer';
+$route['employee/job_vacancies']='employee/Home/job_vacancies';
+$route['employee/profile']='employee/Home/profile';
+$route['employee/addProfileForm'] = 'employee/Home/addProfileForm';
+$route['employee/logout']='employee/Home/logout';
+$route['employee/apply_emp_leaves'] = 'employee/Home/apply_emp_leaves';
+$route['employee/my_leaves'] = 'employee/Home/my_leaves';
+$route['employee/delete_leave'] = 'employee/Home/delete_emp_leaves';
+$route['employee/add_expense_claims'] = 'employee/Home/add_expense_claims';
+$route['employee/delete_expense_claims'] = 'employee/Home/delete_expense_claims';
+//$route['employee/print']='employee/Home/print';
+// Superadmin
+
+$route['superadmin/dashboard']='Admin/superadmin';
+$route['superadmin/profile']='Admin/superadmin/profile';
+$route['superadmin/addProfileForm'] = 'Admin/superadmin/addProfileForm';
+$route['superadmin/changes_password']='Admin/superadmin/changes_password';
+$route['superadmin/changePasswordForm'] = 'Admin/superadmin/changePasswordForm';
+$route['superadmin/companies']='Admin/superadmin/companies';
+$route['superadmin/contact_requests']='Admin/superadmin/contact_requests';
+$route['superadmin/subscription_plans']='Admin/superadmin/subscription_plans';
+$route['superadmin/subscription_plans/(:num)']='Admin/superadmin/subscription_plans/$1';
+$route['superadmin/addNewPlans']='Admin/superadmin/addNewPlans';
+$route['superadmin/editNewPlans/(:any)']='Admin/superadmin/editNewPlans/$1';
+$route['superadmin/invoices']='Admin/superadmin/invoices';
+$route['superadmin/superadmin_users']='Admin/superadmin/superadmin_users';
+$route['superadmin/add_admin_user']='Admin/superadmin/add_admin_user';
+$route['superadmin/edit_admin_user/(:any)']='Admin/superadmin/edit_admin_user/$1';
+$route['superadmin/pages']='Admin/superadmin/pages';
+$route['superadmin/faq_categories']='Admin/superadmin/faq_categories';
+$route['superadmin/addfaqCategories']='Admin/superadmin/addfaqCategories';
+$route['superadmin/editfaqCategories/(:any)']='Admin/superadmin/editfaqCategories/$1';
+$route['superadmin/deletefaq_category/(:any)']='Admin/superadmin/deletefaq_category/$1';
+$route['superadmin/faq']='Admin/superadmin/faq';
+$route['superadmin/addfaq']='Admin/superadmin/addfaq';
+$route['superadmin/editfaq/(:any)']='Admin/superadmin/editfaq/$1';
+$route['superadmin/deletefaq/(:any)']='Admin/superadmin/deletefaq/$1';
+$route['superadmin/features']='Admin/superadmin/features';
+$route['superadmin/edit']='Admin/superadmin/edit';
+$route['superadmin/editGeneralSettings']='Admin/superadmin/editGeneralSettings';
+$route['superadmin/edit_payment_settings']='Admin/superadmin/edit_payment_settings';
+$route['superadmin/email_templates']='Admin/superadmin/email_templates';
+$route['superadmin/email_templates/(:num)']='Admin/superadmin/email_templates/$1';
+$route['superadmin/editemailtemplate/(:any)']='Admin/superadmin/editemailtemplate/$1';
+$route['superadmin/stripe_settings']='Admin/superadmin/stripe_settings';
+$route['superadmin/language']='Admin/superadmin/language';
+$route['superadmin/language/(:any)']='Admin/superadmin/language/$1';
+$route['superadmin/addLanguage']='Admin/superadmin/addLanguage';
+$route['superadmin/editLanguages/(:any)']='Admin/superadmin/editLanguages/$1';
+$route['superadmin/deleteLanguage/(:any)']='Admin/superadmin/deleteLanguage/$1';
+$route['superadmin/update_new_version']='Admin/superadmin/update_new_version';
+$route['superadmin/smtp_settings']='Admin/superadmin/smtp_settings';
+$route['superadmin/custom_modules']='Admin/superadmin/custom_modules';
+$route['superadmin/google_captcha']='Admin/superadmin/google_captcha';
+$route['superadmin/addCompanies']='Admin/superadmin/addCompanies';
+$route['superadmin/editCompanies/(:any)']='Admin/superadmin/editCompanies/$1';
+$route['superadmin/changePackage']='Admin/superadmin/changePackage';
+$route['superadmin/deleteCompany/(:any)']='Admin/superadmin/deleteCompany/$1';
+$route['superadmin/changeStatusCompany/(:any)/(:num)'] = 'Admin/superadmin/changeStatusCompany/$1/$2';
+

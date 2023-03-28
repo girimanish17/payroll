@@ -1,0 +1,31 @@
+.error {
+	color: red !important;
+}
+input[type="date"].form-control,
+ input[type="time"].form-control,
+  input[type="datetime-local"].form-control,
+   input[type="month"].form-control {
+	line-height: 1;
+}
+
+.malttiis_des .btn {
+	background: transparent !important;
+	box-shadow: none !important;
+	border-radius: 0;
+}
+
+.malttiis_des .multiselect-container.dropdown-menu {
+	min-width: 0px;
+	width: 100%;
+	height: 170px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.malttiis_des .multiselect-container.dropdown-menu a {
+	padding: 0;
+}
+.malttiis_des .multiselect-container.dropdown-menu a label{
+	margin: 0;
+	padding-left: 27px !important;
+}
