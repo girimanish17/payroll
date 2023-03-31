@@ -94,6 +94,7 @@ $route['admin/deleteEmployee/(:any)'] = 'Admin/Employee/deleteEmployee/$1';
 $route['admin/changeStatusEmployee/(:any)/(:num)'] = 'Admin/Employee/changeStatusEmployee/$1/$2';
 $route['admin/profile']='Admin/Employee/profile';
 $route['admin/addProfileForm'] = 'Admin/Employee/addProfileForm';
+$route['admin/add_company_settings'] = 'Admin/Employee/add_company_setting';
 $route['admin/getdesignation'] = 'Admin/Employee/getdesignation';
 
 $route['admin/addAnnouncement'] = 'Admin/CoreHr/addAnnouncement';

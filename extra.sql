@@ -1,0 +1,17 @@
+CREATE TABLE `company_settings` (
+  `id` int(11) NOT NULL,
+  `admin_id` varchar(11) NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `company_address` longtext NOT NULL,
+  `states` varchar(255) NOT NULL,
+  `time_zone` varchar(150) NOT NULL,
+  `pf_no` varchar(150) NOT NULL,
+  `tan_no` varchar(150) NOT NULL,
+  `pan_no` varchar(150) NOT NULL,
+  `esi_no` varchar(150) NOT NULL,
+  `lin_no` varchar(150) NOT NULL,
+  `gst_no` varchar(150) NOT NULL,
+  `registration_certificate_no` varchar(150) NOT NULL,
+  `twitter_handle` varchar(150) NOT NULL,
+  `company_logo` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

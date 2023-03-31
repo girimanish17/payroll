@@ -522,6 +522,65 @@ public function expense_type(){
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
+
+		$data['setting'] = $result = $this->common_model->getSingle('company_settings', array('admin_id' => $user_id));
+		$data['states'] = $this->common_model->getAllrecord('master_state');
+		// print_r($data['states']); die;
+		if($_POST['company_setting'] == 'COMPUTER_SETTING') 
+		{
+			$file_path =  'assets/images/company_settings/';
+			$config['upload_path']          =$file_path;
+			   $config['allowed_types']        = 'gif|jpg|png|jpeg';
+			   $this->load->library('upload', $config);
+			
+			$this->form_validation->set_rules('company_name', 'Company Name', 'trim');
+			$this->form_validation->set_rules('company_address', 'Company Address', 'trim');
+			$this->form_validation->set_rules('states', 'States', 'trim');
+			$this->form_validation->set_rules('pf_no', 'PF No.', 'trim');
+			$this->form_validation->set_rules('tan_no', 'TAN No.', 'trim');
+			$this->form_validation->set_rules('pan_no', 'PAN No.', 'trim');
+			$this->form_validation->set_rules('esi_no', 'ESI No.', 'trim');
+			$this->form_validation->set_rules('lin_no', 'LIN No.', 'trim');
+			$this->form_validation->set_rules('gst_no', 'GST No.', 'trim');
+			$this->form_validation->set_rules('registration_certificate_no', 'Registration Certificate No.', 'trim');
+			$this->form_validation->set_rules('twitter_handle', 'Twitter Handle', 'trim');
+	
+			if($this->form_validation->run())
+			{
+				$company_upd['company_logo'] = $company_logo_old = $result->company_logo;
+	
+				if($this->upload->do_upload('company_logo'))
+				{
+					$company_upd['company_logo'] = $this->upload->data('file_name');
+					// unlink('assets/images/company_settings/'.$company_logo_old);
+				}
+				
+				print_r($_POST); die;
+				
+				$company_upd['company_name'] = $this->input->post('company_name');
+				$company_upd['admin_id'] = $user_id;
+				$company_upd['company_address'] = $this->input->post('company_address');
+				$company_upd['states'] = $this->input->post('states');
+				$company_upd['pf_no'] = $this->input->post('pf_no');
+				$company_upd['tan_no'] = $this->input->post('tan_no');
+				$company_upd['pan_no'] = $this->input->post('pan_no');
+				$company_upd['esi_no'] = $this->input->post('esi_no');
+				$company_upd['lin_no'] = $this->input->post('lin_no');
+				$company_upd['gst_no'] = $this->input->post('gst_no');
+				$company_upd['registration_certificate_no'] = $this->input->post('registration_certificate_no');
+				$company_upd['twitter_handle'] = $this->input->post('twitter_handle');
+				echo "<pre>"; print_r($company_upd); die;
+	
+				if($result != '')
+				{
+					$this->common_model->UpdateData('company_settings', array('admin_id' => $admin_id), $company_upd);
+				} else {
+					$this->common_model->InsertData('company_settings', $company_upd);
+				}
+			}
+		}
+	
+	
 		//echo ""; print_r($data['employees']); die;
 		$this->load->view('Admin/profile',$data);
 	}
@@ -575,6 +634,64 @@ public function expense_type(){
 
 		echo json_encode($json);
 	}
+
+	// public function add_company_setting()
+	// {
+	// 	$admin_id = $this->session->userdata('user_id');
+
+	// 	$data['setting'] = $result = $this->common_model->getSingle('company_settings', array('admin_id' => $admin_id));
+	// 	$data['states'] = $this->common_model->getAllrecord('master_state');
+	// 	// print_r($data['states']); die;
+
+	// 	$file_path =  'assets/images/company_settings/';
+	// 	$config['upload_path']          =$file_path;
+   	// 	$config['allowed_types']        = 'gif|jpg|png|jpeg';
+   	// 	$this->load->library('upload', $config);
+		
+	// 	$this->form_validation->set_rules('company_name', 'Company Name', 'trim');
+	// 	$this->form_validation->set_rules('company_address', 'Company Address', 'trim');
+	// 	$this->form_validation->set_rules('states', 'States', 'trim');
+	// 	$this->form_validation->set_rules('pf_no', 'PF No.', 'trim');
+	// 	$this->form_validation->set_rules('tan_no', 'TAN No.', 'trim');
+	// 	$this->form_validation->set_rules('pan_no', 'PAN No.', 'trim');
+	// 	$this->form_validation->set_rules('esi_no', 'ESI No.', 'trim');
+	// 	$this->form_validation->set_rules('lin_no', 'LIN No.', 'trim');
+	// 	$this->form_validation->set_rules('gst_no', 'GST No.', 'trim');
+	// 	$this->form_validation->set_rules('registration_certificate_no', 'Registration Certificate No.', 'trim');
+	// 	$this->form_validation->set_rules('twitter_handle', 'Twitter Handle', 'trim');
+
+	// 	if($this->form_validation->run())
+	// 	{
+	// 		$company_upd['company_logo'] = $company_logo_old = $result->company_logo;
+
+	// 		if($this->upload->do_upload('company_logo'))
+	// 		{
+	// 			$company_upd['company_logo'] = $this->upload->data('file_name');
+	// 			// unlink('assets/images/company_settings/'.$company_logo_old);
+	// 		}
+
+	// 		$company_upd['company_name'] = $this->input->post('company_name');
+	// 		$company_upd['company_address'] = $this->input->post('company_address');
+	// 		$company_upd['states'] = $this->input->post('states');
+	// 		$company_upd['pf_no'] = $this->input->post('pf_no');
+	// 		$company_upd['tan_no'] = $this->input->post('tan_no');
+	// 		$company_upd['pan_no'] = $this->input->post('pan_no');
+	// 		$company_upd['esi_no'] = $this->input->post('esi_no');
+	// 		$company_upd['lin_no'] = $this->input->post('lin_no');
+	// 		$company_upd['gst_no'] = $this->input->post('gst_no');
+	// 		$company_upd['registration_certificate_no'] = $this->input->post('registration_certificate_no');
+	// 		$company_upd['twitter_handle'] = $this->input->post('twitter_handle');
+
+	// 		if($result != '')
+	// 		{
+	// 			$this->common_model->UpdateData('company_settings', array('admin_id' => $admin_id), $company_upd);
+	// 		} else {
+	// 			$this->common_model->InsertData('company_settings', $company_upd);
+	// 		}
+	// 	}
+		
+		
+	// }
 	
 	public function expense_claim_status($id,$status){
 			

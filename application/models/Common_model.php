@@ -49,6 +49,35 @@ class Common_model extends CI_Model {
       return false;
     }
   }
+
+  /*---GET MULTIPLE RECORD---*/
+	function getAllwhere($table, $where)
+	{
+		$this->db->select('*');
+		$q = $this->db->get_where($table, $where);
+		$num_rows = $q->num_rows();
+		if ($num_rows > 0) {
+			foreach ($q->result() as $rows) {
+				$data[] = $rows;
+			}
+			$q->free_result();
+			return $data;
+		}
+	}
+
+  function getAllrecord($table)
+	{
+		$this->db->select('*');
+		$q = $this->db->get($table);
+		$num_rows = $q->num_rows();
+		if ($num_rows > 0) {
+			foreach ($q->result() as $rows) {
+				$data[] = $rows;
+			}
+			$q->free_result();
+			return $data;
+		}
+	}
   
   function GetAllData($table,$where=null,$ob=null,$obc='',$limit=null,$offset=null,$select=null,$group_by=null){
   if($select) {
@@ -121,6 +150,12 @@ class Common_model extends CI_Model {
       return array();
     }
   }
+
+  function getsingle($table, $wheres)
+	{
+		$q = $this->db->get_where($table, $wheres);
+		return $q->row();
+	}
 	 
 	 function getAllwhere_pagination($table,$limit,$start,$where='',$column='',$type='')
     {
