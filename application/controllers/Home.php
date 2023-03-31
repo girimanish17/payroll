@@ -13,11 +13,12 @@ class Home extends CI_Controller
 		}
 	}
 	public function index(){
+		// echo "hiii"; die;
 		$this->load->view('login');
 	}
 
 	public function doLogin(){
-
+		// echo "hello"; die;
 		$this->form_validation->set_rules('email','Email','required');
 		$this->form_validation->set_rules('password','Password','required');
 

@@ -33,6 +33,7 @@ class Home extends CI_Controller
 
 	public function index()
 	{ 
+		// echo "hi"; die;
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
 		$comp_id = $this->session->userdata('comp_id');
