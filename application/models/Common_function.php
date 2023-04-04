@@ -45,6 +45,7 @@ class Common_function extends CI_Model {
 	  $count = number_format($count2, 0);
 	  return $count;
 	}
+	
 
     function get_user_image($image)
     {

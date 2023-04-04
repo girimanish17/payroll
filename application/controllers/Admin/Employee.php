@@ -227,10 +227,11 @@ public function expense_type(){
 	public function editEmployee($id){
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
-		$data['department'] = $this->common_model->GetAllData('department','','id');
-		$data['designation'] = $this->common_model->GetAllData('designation','','id');
+		$data['employees'] =$employees =  $this->common_model->GetSingleData('users',array('user_id'=>$id));
+		$data['department'] = $this->common_model->GetAllData('department',array('comp_id'=>$this->session->userdata('comp_id')),'id');
+		$data['designation'] = $this->common_model->GetAllData('designation',array('department_id'=>$employees['department_id']),'id');
 		$data['banks'] = $this->common_model->GetAllData('bank_details','','bank_id');
-		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$id));
+		
 		$data['bankDetail'] = $this->common_model->GetSingleData('user_bank_detail',array('user_id'=>$id));
 		$data['document'] = $this->common_model->GetSingleData('user_document',array('user_id'=>$id));
 		$data['admin'] = $this->common_model->GetAllData('users',array('user_type'=>2,'user_id!='=>$user_id),'user_id');
@@ -263,15 +264,13 @@ public function expense_type(){
 		$type = $this->session->userdata('user_type');
 		$this->load->view('Admin/role_&_Privilages');
 	}
-	
+
 	public function addEmployeeForm(){
 		$user_id = $this->session->userdata('user_id');
 		$this->form_validation->set_rules('first_name','First Name','required');
-		$this->form_validation->set_rules('last_name','Last name','required');
-		$this->form_validation->set_rules('father_name','Father name','required');
-		//$this->form_validation->set_rules('email','email','required|is_unique[users.email]');
 		$this->form_validation->set_rules('email','email','required');
 		$this->form_validation->set_rules('password','Password','required');
+		
 		
 		if($this->form_validation->run()){ 
 			
@@ -281,6 +280,14 @@ public function expense_type(){
 			
 			if($email=='')
 			{
+				
+				$emp_random_number = "EMP".rand(1,10000);
+				$rnum = $this->common_model->count_row_data('users',array('emp_id'=>$emp_random_number),'emp_id');
+				if($rnum > 0){
+					$emp_random_number = "EMP".rand(1,10000);
+				}else{
+					$emp_random_number = $emp_random_number;
+				}
 				$insert['first_name'] = $this->input->post('first_name');
 				$insert['last_name'] = $this->input->post('last_name');
 				$insert['father_name'] = $this->input->post('father_name');
@@ -288,9 +295,8 @@ public function expense_type(){
 				$insert['phone'] = $this->input->post('phone');
 				$insert['password'] = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
 				$insert['pw'] = $this->input->post('password');
-				$insert['emp_id'] ="EMP".rand(1000,10000)."".$user_id;
+				$insert['emp_id'] = $emp_random_number;
 				$insert['comp_id'] = $this->session->userdata('comp_id');
-				//$insert['admin_id'] = $this->input->post('admin_id');
 				$insert['dob'] = $this->input->post('dob');
 				$insert['gender'] = $this->input->post('gender');
 				$insert['local_address'] = $this->input->post('local_address');
@@ -316,6 +322,29 @@ public function expense_type(){
 				$insert['incentive'] = $this->input->post('incentive');
 				$insert['net_ctc'] = $this->input->post('net_ctc');
 				
+				$insert['blood_group'] = $this->input->post('blood_group');
+				$insert['marital_status'] = $this->input->post('marital_status');
+				$insert['marrige_date'] = $this->input->post('marrige_date');
+				$insert['spouse_name'] = $this->input->post('spouse_name');
+				$insert['nationality'] = $this->input->post('nationality');
+				$insert['religion'] = $this->input->post('religion');
+				$insert['place_of_birth'] = $this->input->post('place_of_birth');
+				$insert['country_of_origin'] = $this->input->post('country_of_origin');
+				$insert['international_employee'] = $this->input->post('international_employee');
+				$insert['physically_challenged'] = $this->input->post('physically_challenged');
+				$insert['is_director'] = $this->input->post('is_director');
+				$insert['esi_joindate'] = $this->input->post('esi_joindate');
+				$insert['covered_members'] = $this->input->post('covered_members');
+				$insert['PF'] = $this->input->post('PF');
+				$insert['pf_joindate'] = $this->input->post('pf_joindate');
+				$insert['joining_status'] = $this->input->post('joining_status');
+				$insert['probation_period'] = $this->input->post('probation_period');
+				$insert['notice_period'] = $this->input->post('notice_period');
+				$insert['current_comp_exp'] = $this->input->post('current_comp_exp');
+				$insert['previous_exp'] = $this->input->post('previous_exp');
+				$insert['total_exp'] = $this->input->post('total_exp');
+				$insert['confirmation_date'] = $this->input->post('confirmation_date');
+
 				$insert['user_type'] = 1;
 				$insert['created_at'] = date('Y-m-d h:i:s');
 				$insert['updated_at'] = date('Y-m-d h:i:s');
@@ -333,6 +362,7 @@ public function expense_type(){
 				$insert1['bank_ifsc_code'] = $this->input->post('bin');
 				$insert1['branch_location'] = $this->input->post('branch_location');
 				$insert1['tax_payer_id'] = $this->input->post('tax_payer_id');
+				$insert1['micr'] = $this->input->post('micr');
 				$insert1['user_id'] = $run;
 				$insert1['created_at'] = date('Y-m-d h:i:s');
 				$insert1['updated_at'] = date('Y-m-d h:i:s');
@@ -434,6 +464,29 @@ public function expense_type(){
 			$insert['incentive'] = $this->input->post('incentive');
 			$insert['net_ctc'] = $this->input->post('net_ctc');
 			
+			$insert['blood_group'] = $this->input->post('blood_group');
+			$insert['marital_status'] = $this->input->post('marital_status');
+			$insert['marrige_date'] = $this->input->post('marrige_date');
+			$insert['spouse_name'] = $this->input->post('spouse_name');
+			$insert['nationality'] = $this->input->post('nationality');
+			$insert['religion'] = $this->input->post('religion');
+			$insert['place_of_birth'] = $this->input->post('place_of_birth');
+			$insert['country_of_origin'] = $this->input->post('country_of_origin');
+			$insert['international_employee'] = $this->input->post('international_employee');
+			$insert['physically_challenged'] = $this->input->post('physically_challenged');
+			$insert['is_director'] = $this->input->post('is_director');
+			$insert['esi_joindate'] = $this->input->post('esi_joindate');
+			$insert['covered_members'] = $this->input->post('covered_members');
+			$insert['PF'] = $this->input->post('PF');
+			$insert['pf_joindate'] = $this->input->post('pf_joindate');
+			$insert['joining_status'] = $this->input->post('joining_status');
+			$insert['probation_period'] = $this->input->post('probation_period');
+			$insert['notice_period'] = $this->input->post('notice_period');
+			$insert['current_comp_exp'] = $this->input->post('current_comp_exp');
+			$insert['previous_exp'] = $this->input->post('previous_exp');
+			$insert['total_exp'] = $this->input->post('total_exp');
+			$insert['confirmation_date'] = $this->input->post('confirmation_date');
+
 			$insert['PAN_no'] = $this->input->post('PAN_no');
 			$insert['AADHAR_no'] = $this->input->post('AADHAR_no');
 			$insert['ESIC'] = $this->input->post('ESIC');
@@ -453,6 +506,7 @@ public function expense_type(){
 			$insert1['bank_name'] = $this->input->post('bank_name');
 			$insert1['bank_ifsc_code'] = $this->input->post('bin');
 			$insert1['branch_location'] = $this->input->post('branch_location');
+			$insert1['micr'] = $this->input->post('micr');
 			$insert1['tax_payer_id'] = $this->input->post('tax_payer_id');
             $insert1['created_at'] = date('Y-m-d h:i:s');
             $insert1['updated_at'] = date('Y-m-d h:i:s');
