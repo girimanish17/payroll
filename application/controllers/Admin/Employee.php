@@ -524,7 +524,7 @@ public function expense_type(){
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
 
 		$data['setting'] = $result = $this->common_model->getSingle('company_settings', array('admin_id' => $user_id));
-		$data['states'] = $this->common_model->getAllrecord('master_state');
+		$data['states'] = $this->common_model->GetAllData('master_state',array('state_country_id'=>'101'));
 		// print_r($data['states']); die;
 		if($_POST['company_setting'] == 'COMPUTER_SETTING') 
 		{

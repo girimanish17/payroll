@@ -143,10 +143,10 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                </div>
                <div class="form-group col-sm-4">
                   <div class="">
-                     <select name="states[]" id="statesSelect1"  class="form-control  ih-medium ip-lightradius-xs b-light " multiple >
+                     <select name="state_ids[]" id="statesSelect"  class="form-control  ih-medium ip-lightradius-xs b-light " multiple >
                      <?php foreach($states as $state) {
                          ?>   
-                     <option value="<?php echo $state->state_id; ?>"><?php echo $state->state_name; ?></option>
+                     <option value="<?php echo $state['state_id']; ?>"><?php echo $state['state_name']; ?></option>
                        <?php }  ?>
                      </select>
                   </div>
