@@ -1,9 +1,10 @@
 
+
 <?php include('include/header.php'); ?>  
 <div class="contents demo-card expanded">
    <div class="container-fluid">
       <div class="row">
-         <div class="col-lg-4">
+         <div class="col-lg-4 mt-10">
             <div class="breadcrumb-main">
                <ul class="atbd-breadcrumb nav">
                   <li class="atbd-breadcrumb__item">
@@ -31,55 +32,57 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
               ?>
             <div id="eMsg"></div>
             <h3>Profile Detail of Username : <?php echo $employees['username']; ?></h3>
-            <div class="form-row">
+            <div class="form-row mt-4">
 				
 				<div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
+                  <label>Company Name:</label>
                      <input type="text" value="<?php echo $company['name']; ?>" name="company_name" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Company Name">
                   </div>
                </div>
                
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
+                  <label>First Name:</label>
+                     
                      <input type="text" value="<?php echo $employees['first_name']; ?>" name="first_name" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="First Name">
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
+                  <label>Last Name:</label>
+                     
                      <input type="text" value="<?php echo $employees['last_name']; ?>" name="last_name" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Last Name">
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
+                  <label>Father's Name:</label>
                      <input type="text" value="<?php echo $employees['father_name']; ?>" name="father_name" class="form-control  ih-medium ip-lightradius-xs b-light" placeholder="Father name">
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la la-phone color-light"></span>
+                       <label>Date of Birth:</label>
                      <input type="date" value="<?php echo $employees['dob']; ?>" name="dob" class="form-control  ih-medium ip-lightradius-xs b-light"  placeholder="Date of birth">
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la la-phone color-light"></span>
+                       <label>Phone Number:</label>
                      <input type="text" value="<?php echo $employees['phone']; ?>" name="phone" class="form-control  ih-medium ip-lightradius-xs b-light"  placeholder="Phone Number">
                   </div>
                </div>
 			   
 			   <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la la-envelope color-light"></span>
+                  <label>Email:</label>
                      <input type="email" readonly  value="<?php echo $employees['email']; ?>" name="email" class="form-control  ih-medium ip-lightradius-xs b-light" placeholder="Email">
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la la-restroom color-light"></span>
+                  <label>Gender:</label>
                      <select name="gender" class="form-control ih-medium ip-lightradius-xs b-light">
                         <option selected="">Select Gender</option>
                         <option <?php if($employees['gender']=='Male'){ echo "selected"; } ?> value="Male">Male</option>
@@ -89,13 +92,13 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la la-envelope color-light"></span>
+                  <label>Local Address:</label>
                      <input type="text" value="<?php echo $employees['local_address']; ?>" name="local_address" class="form-control  ih-medium ip-lightradius-xs b-light" placeholder="Local Address">
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <span class="la la-user-circle color-light"></span>
+                  <label>Permanent Address:</label>
                      <input type="text" value="<?php echo $employees['permanent_address']; ?>" name="permanent_address" class="form-control  ih-medium ip-lightradius-xs b-light" id="" placeholder="Permanent address">
                   </div>
                </div>
@@ -104,7 +107,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
 			   
 			    <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <!--<span class="la-user lar color-light"></span>-->
+                  <label>Profile Image:</label>
                      <input type="file" name="image">
                      <img src="<?php echo base_url(); ?>assets/images/users/<?php echo $employees['profile_img']; ?>" style="height: 100px;width: 100px;">
                   </div>
@@ -125,28 +128,31 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
 <div class="contents demo-card expanded">
    <div class="row">
       <div class="col-sm-12">
-         <form method="post" action="<?php echo base_url(); ?>admin/profile" id="companySettingForm" enctype="multipart/form-data">
+         <form method="post" action="<?php echo base_url(); ?>admin/profile" id="" enctype="multipart/form-data">
              
             <div id="eMsg"></div>
             <h3>Company Settings</h3>
-            <div class="form-row">
+            <div class="form-row mt-4">
 				
 				<div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="company_name" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Company Name">
+                  <label>Company Name:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->company_name;}  ?>" name="company_name" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Company Name">
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <textarea rows="4" cols="50" name="company_address" class="form-control  " id="inputsummary" placeholder="Company Address"></textarea>
+                  <label>Company Address:</label>
+                     <textarea rows="4" cols="50" name="company_address" class="form-control  " id="inputsummary" placeholder="Company Address"><?php if($setting) {echo $setting->company_address;}  ?></textarea>
                   </div>
                </div>
                <div class="form-group col-sm-4">
                   <div class="">
-                     <select name="states[]" id="statesSelect1"  class="form-control  ih-medium ip-lightradius-xs b-light " multiple >
+                  <label>Select State:</label>
+                     <select name="states" id="statesSelect"  class="form-control  ih-medium ip-lightradius-xs b-light " multiple="multiple">
                      <?php foreach($states as $state) {
                          ?>   
-                     <option value="<?php echo $state->state_id; ?>"><?php echo $state->state_name; ?></option>
+                     <option value="<?php echo $state->state_id; ?>" <?php  if($setting->states == $state->state_id) { echo 'selected'; }  ?>><?php echo $state->state_name; ?></option>
                        <?php }  ?>
                      </select>
                   </div>
@@ -154,6 +160,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                <input type="hidden" name="company_setting" value="COMPUTER_SETTING">
                <div class="form-group col-sm-4">
                   <div class="with-icon">
+                  <label>Time Zone:</label>
                      <select name="" id="time_zone"  class="form-control  ih-medium ip-lightradius-xs b-light" >
                         <option value="">Choose a Time Zone</option>
                      </select>
@@ -161,49 +168,57 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                </div>
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="pf_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="PF Number">
+                  <label>PF Number:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->pf_no;}  ?>" name="pf_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="PF Number">
                   </div>
                </div>
 
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="tan_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="TAN Number">
+                  <label>TAN Number:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->tan_no;}  ?>" name="tan_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="TAN Number">
                   </div>
                </div>
 
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="pan_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="PAN Number">
+                  <label>PAN Number:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->pan_no;}  ?>" name="pan_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="PAN Number">
                   </div>
                </div>
 
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="esi_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="ESI Number">
+                  <label>ESI Number:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->esi_no;}  ?>" name="esi_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="ESI Number">
                   </div>
                </div>
 
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="lin_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="LIN Number">
+                  <label>LIN Number:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->lin_no;}  ?>" name="lin_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="LIN Number">
                   </div>
                </div>
 
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="gst_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="GST Number">
+                  <label>GST Number:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->gst_no;}  ?>" name="gst_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="GST Number">
                   </div>
                </div>
 
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="registration_certificate_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Registration Certificate Number">
+                  <label>Registration Certificate Number:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->registration_certificate_no;}  ?>" name="registration_certificate_no" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Registration Certificate Number">
                   </div>
                </div>
 
                <div class="form-group col-sm-4">
                   <div class="with-icon">
-                     <input type="text" value="" name="twitter_handle" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Twitter Handle">
+                  <label>Twitter Handle:</label>
+                     <input type="text" value="<?php if($setting) {echo $setting->twitter_handle;}  ?>" name="twitter_handle" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Twitter Handle">
                   </div>
                </div>
                
@@ -211,8 +226,9 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                <div class="form-group col-sm-4">
                   <div class="with-icon">
                      <!--<span class="la-user lar color-light"></span>-->
+                     <label>Company Logo:</label>
                      <input type="file" name="company_logo">
-                     <img src="<?php echo base_url(); ?>assets/images/users/<?php echo $employees['profile_img']; ?>" style="height: 100px;width: 100px;">
+                     <img src="<?php echo base_url(); ?>assets/images/company_settings/<?php if($setting) {echo $setting->company_logo;}  ?>" style="height: 100px;width: 100px;">
                   </div>
                </div>
               
@@ -226,16 +242,208 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
       </div>
    </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<!-- company end -->
+<!-- general option start -->
+
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         <form method="post" action="<?php echo base_url(); ?>admin/profile" id="companySettingForm" enctype="multipart/form-data">
+             
+            <div id="eMsg"></div>
+            <h3>General Option</h3>
+            <div class="form-row mt-4">
+				
+				<div class="form-group col-sm-4">
+                  <div class="with-icon">
+                     <label>System Email Address:</label>
+                     <input type="email" value="<?php if($general) {echo $general->system_email;}  ?>" name="system_email" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="System Email Address">
+                  </div>
+               </div>
+               <div class="form-group col-sm-4">
+                  <div class="with-icon">
+                  <label>Contact Email Address:</label>
+                  <input type="email" value="<?php if($general) {echo $general->contact_email;}  ?>" name="contact_email" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Contact Email Address">
+                  </div>
+               </div>
+               <div class="form-group col-sm-4">
+                  <div class="">
+                  <label>Logo Position in reports:</label>
+                     <select name="logo_position" id="statesSelectss"  class="form-control  ih-medium ip-lightradius-xs b-light ">
+                  
+                     <option value="left" <?php  if($general->logo_position == 'left') { echo 'selected'; }  ?>>Left</option>
+                     <option value="right"  <?php  if($general->logo_position == 'right') { echo 'selected'; }  ?>>Right</option>
+                     <option value="center"  <?php  if($general->logo_position == 'center') { echo 'selected'; }  ?>>Center</option>
+                      
+                     </select>
+                  </div>
+               </div>
+
+               <div class="form-group col-sm-4">
+                  <div class="">
+                  <label>Country:</label>
+                     <select name="country" id=""  class="form-control  ih-medium ip-lightradius-xs b-light " >
+                        <option value="">Select Country</option>
+                      <?php foreach ($countries as $country) {?>
+                     <option value="<?php echo $country->country_id;?>" <?php  if($general->country == $country->country_id) { echo 'selected'; }  ?>><?php echo $country->country_name;?></option>
+                    <?php } ?>
+                     </select>
+                  </div>
+               </div>
+
+               <input type="hidden" name="general_option" value="GENERAL_OPTION">
+               <div class="form-group col-sm-4">
+                  <div class="with-icon">
+                  <label>Time Zone:</label>
+                     <select name="" id="time_zone"  class="form-control  ih-medium ip-lightradius-xs b-light" >
+                        <option value="">Choose a Time Zone</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="form-group col-sm-4">
+                  <div class="">
+                  <label>Currency:</label>
+                     <select name="currency" id=""  class="form-control  ih-medium ip-lightradius-xs b-light ">
+                  
+                     <option value="rupees" <?php  if($general->currency == 'rupees') { echo 'selected'; }  ?>>Indian Rupees [INR]</option>
+                     <option value="dollar" <?php  if($general->currency == 'dollar') { echo 'selected'; }  ?>>US Dollar [USD]</option>
+                      
+                     </select>
+                  </div>
+               </div>
+
+            
+              
+
+              <div class="form-group col-sm-12">
+                  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+               </div>
+               
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<!-- general option end -->
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             
+            <div id="eMsg"></div>
+            <h3>Profession Tax Slabs</h3>
+            <div class="form-row mt-0">
+				
+
+                            <div class="card-body">
+                               <a href="<?php echo base_url();?>admin/add_profession_tax" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a>
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Salary From</th>
+                                            <th>Salary Till</th>
+                                            <th>Tax Amount</th>
+                                            <th>Deduction Month</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php if($tax) { 
+                                             foreach($tax as $row) {   
+                                          ?>
+                                          <tr>
+                                             <td><?php echo $row->salary_from; ?></td>
+                                             <td><?php echo $row->salary_till; ?></td>
+                                             <td><?php echo $row->tax_amount; ?></td>
+                                             <td><?php echo $row->deduction_month; ?></td>
+                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
+                                                <a href="<?php echo base_url()?>admin/edit_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
+                                          
+                                             <a href="<?php echo base_url()?>admin/delete_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
+                                          
+                                          </td>
+                                          </tr>
+                                          <?php } } ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+            </div>
+      </div>
+   </div>
+</div>
+<!-- table end -->
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             
+            <div id="eMsg"></div>
+            <h3>List of values</h3>
+            <div class="form-row mt-0">
+				
+
+                            <div class="card-body">
+                               <a href="<?php echo base_url();?>admin/list_of_values" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a>
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Description</th>
+                                            <th>Code</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php if($listValues) { 
+                                             foreach($listValues as $row) {   
+                                          ?>
+                                          <tr>
+                                             <td><?php echo $row->description; ?></td>
+                                             <td><?php echo $row->code; ?></td>
+                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
+                                                <a href="<?php echo base_url()?>admin/edit_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
+                                          
+                                             <a href="<?php echo base_url()?>admin/delete_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
+                                          
+                                          </td>
+                                          </tr>
+                                          <?php } } ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+            </div>
+      </div>
+   </div>
+</div>
+<!-- table end -->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <?php //include('include/footer.php'); ?> 
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $('#statesSelect').select2();
+    $('#statesSelect').select2({
+    placeholder: "Select a State"
+});
+});
+
+$(document).ready(function() {
+    $('.country_s').select2({
+    placeholder: "Select a County"
+});
 });
 
    function addProfile(){

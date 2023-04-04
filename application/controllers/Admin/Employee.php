@@ -518,12 +518,18 @@ public function expense_type(){
 			}
 		 }
 	
-	public function profile(){
+	public function profile()
+	{
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
+
+		$data['tax'] = $this->common_model->getAllwhere('profession_tax_slabs', array('admin_id' => $user_id));
+		$data['listValues'] = $this->common_model->getAllwhere('list_of_values', array('admin_id' => $user_id));
+			
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
 
 		$data['setting'] = $result = $this->common_model->getSingle('company_settings', array('admin_id' => $user_id));
+		// print_r($result); die;
 		$data['states'] = $this->common_model->getAllrecord('master_state');
 		// print_r($data['states']); die;
 		if($_POST['company_setting'] == 'COMPUTER_SETTING') 
@@ -555,7 +561,7 @@ public function expense_type(){
 					// unlink('assets/images/company_settings/'.$company_logo_old);
 				}
 				
-				print_r($_POST); die;
+				// print_r($_POST); die;
 				
 				$company_upd['company_name'] = $this->input->post('company_name');
 				$company_upd['admin_id'] = $user_id;
@@ -569,22 +575,152 @@ public function expense_type(){
 				$company_upd['gst_no'] = $this->input->post('gst_no');
 				$company_upd['registration_certificate_no'] = $this->input->post('registration_certificate_no');
 				$company_upd['twitter_handle'] = $this->input->post('twitter_handle');
-				echo "<pre>"; print_r($company_upd); die;
+				// echo "<pre>"; print_r($company_upd); die;
 	
-				if($result != '')
+				if($result)
 				{
-					$this->common_model->UpdateData('company_settings', array('admin_id' => $admin_id), $company_upd);
+					$this->common_model->UpdateData('company_settings', array('admin_id' => $user_id), $company_upd);
 				} else {
 					$this->common_model->InsertData('company_settings', $company_upd);
 				}
+				redirect('admin/profile');
+			}
+		}
+
+		$data['countries'] = $this->common_model->getAllrecord('master_country');
+		$data['general'] = $result_gen = $this->common_model->getSingle('general_options', array('admin_id' => $user_id));
+		
+		if($_POST['general_option'] == 'GENERAL_OPTION')
+		{
+			$this->form_validation->set_rules('system_email', 'System Email Address', 'trim');
+			$this->form_validation->set_rules('contact_email', 'Contact Email Address', 'trim');
+			$this->form_validation->set_rules('logo_position', 'Logo Position', 'trim');
+			$this->form_validation->set_rules('country', 'Country', 'trim');
+			$this->form_validation->set_rules('currency', 'Currency', 'trim');
+
+			if($this->form_validation->run())
+			{
+				$general['admin_id'] = $user_id;
+				$general['system_email'] = $this->input->post('system_email');
+				$general['contact_email'] = $this->input->post('contact_email');
+				$general['logo_position'] = $this->input->post('logo_position');
+				$general['country'] = $this->input->post('country');
+				$general['currency'] = $this->input->post('currency');
+
+				if($result_gen)
+				{
+					$this->common_model->UpdateData('general_options', array('admin_id' => $user_id), $general);
+				} else {
+					$this->common_model->InsertData('general_options', $general);
+				}
+				redirect('admin/profile');
 			}
 		}
 	
-	
-		//echo ""; print_r($data['employees']); die;
+		// echo ""; print_r($data['countries']); die;
 		$this->load->view('Admin/profile',$data);
 	}
+
+	public function add_profession_tax() 
+	{
+		$admin_id = $this->session->userdata('user_id');
+
+		$this->form_validation->set_rules('salary_from', 'Salary Form', 'trim');
+		$this->form_validation->set_rules('salary_till', 'Salary Till', 'trim');
+		$this->form_validation->set_rules('tax_amount', 'Tax Amount', 'trim');
+		$this->form_validation->set_rules('deduction_month', 'Deduction Month', 'trim');
+
+		if($this->form_validation->run())
+		{
+			$tax_data['admin_id'] = $admin_id;
+			$tax_data['salary_from'] = $this->input->post('salary_from');
+			$tax_data['salary_till'] = $this->input->post('salary_till');
+			$tax_data['tax_amount'] = $this->input->post('tax_amount');
+			$tax_data['deduction_month'] = $this->input->post('deduction_month');
+			$tax_data['date'] = date('Y-m-d');
+
+			$this->common_model->InsertData('profession_tax_slabs', $tax_data);
+			redirect('admin/profile');
+		}
+
+		$this->load->view('Admin/add_profession_tax',$data);
+	}
+
+	public function edit_profession_tax($id)
+	{
+		$data['editdata'] = $this->common_model->getSingle('profession_tax_slabs', array('id' => $id));
+
+		$this->form_validation->set_rules('salary_from', 'Salary Form', 'trim');
+		$this->form_validation->set_rules('salary_till', 'Salary Till', 'trim');
+		$this->form_validation->set_rules('tax_amount', 'Tax Amount', 'trim');
+		$this->form_validation->set_rules('deduction_month', 'Deduction Month', 'trim');
+
+		if($this->form_validation->run())
+		{
+			$tax_dataUpd['salary_from'] = $this->input->post('salary_from');
+			$tax_dataUpd['salary_till'] = $this->input->post('salary_till');
+			$tax_dataUpd['tax_amount'] = $this->input->post('tax_amount');
+			$tax_dataUpd['deduction_month'] = $this->input->post('deduction_month');
+
+			$this->common_model->UpdateData('profession_tax_slabs', array('id' => $id), $tax_dataUpd);
+			redirect('admin/profile');
+		}
+
+		$this->load->view('Admin/edit_profession_tax',$data);
+	}
+
+	public function delete_profession_tax($id)
+	{
+		$this->common_model->DeleteData('profession_tax_slabs', array('id' => $id));
+		redirect('admin/profile');
+	}
 	
+	public function list_of_values() 
+	{
+		$admin_id = $this->session->userdata('user_id');
+
+		$this->form_validation->set_rules('description', 'Description', 'trim');
+		$this->form_validation->set_rules('code', 'Code', 'trim');
+
+		if($this->form_validation->run())
+		{
+			$values['admin_id'] = $admin_id;
+			$values['description'] = $this->input->post('description');
+			$values['code'] = $this->input->post('code');
+			$values['date'] = date('Y-m-d');
+
+			$this->common_model->InsertData('list_of_values', $values);
+			redirect('admin/profile');
+		}
+
+		$this->load->view('Admin/add_list_of_values',$data);
+	}
+
+	public function edit_list_of_values($id) 
+	{
+		$this->form_validation->set_rules('description', 'Description', 'trim');
+		$this->form_validation->set_rules('code', 'Code', 'trim');
+
+		if($this->form_validation->run())
+		{
+			
+			$valuesUpd['description'] = $this->input->post('description');
+			$valuesUpd['code'] = $this->input->post('code');
+			
+			$this->common_model->UpdateData('list_of_values', array('id' => $id), $valuesUpd);
+			redirect('admin/profile');
+		}
+
+		$data['valuesData'] = $this->common_model->getSingle('list_of_values', array('id' => $id));
+		$this->load->view('Admin/edit_list_of_values',$data);
+	}
+	
+	public function delete_list_of_values($id) 
+	{
+		$this->common_model->DeleteData('list_of_values', array('id' => $id));
+		redirect('admin/profile');
+	}
+
 	public function addProfileForm(){
 		$user_id = $this->session->userdata('user_id');
 		

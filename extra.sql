@@ -15,3 +15,36 @@ CREATE TABLE `company_settings` (
   `twitter_handle` varchar(150) NOT NULL,
   `company_logo` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- added on 04-April-23
+
+CREATE TABLE `general_options` (
+  `id` int(11) NOT NULL,
+  `admin_id` varchar(10) NOT NULL,
+  `system_email` varchar(150) NOT NULL,
+  `contact_email` varchar(150) NOT NULL,
+  `logo_position` varchar(20) NOT NULL,
+  `country` varchar(20) NOT NULL,
+  `currency` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `profession_tax_slabs` (
+  `id` int(11) NOT NULL,
+  `admin_id` varchar(10) NOT NULL,
+  `salary_from` varchar(100) NOT NULL,
+  `salary_till` varchar(100) NOT NULL,
+  `tax_amount` varchar(50) NOT NULL,
+  `deduction_month` varchar(20) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `list_of_values` (
+  `id` int(11) NOT NULL,
+  `admin_id` varchar(11) NOT NULL,
+  `description` varchar(750) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
