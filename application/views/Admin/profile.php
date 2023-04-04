@@ -148,11 +148,13 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                </div>
                <div class="form-group col-sm-4">
                   <div class="">
+
                   <label>Select State:</label>
                      <select name="states" id="statesSelect"  class="form-control  ih-medium ip-lightradius-xs b-light " multiple="multiple">
                      <?php foreach($states as $state) {
                          ?>   
                      <option value="<?php echo $state->state_id; ?>" <?php  if($setting->states == $state->state_id) { echo 'selected'; }  ?>><?php echo $state->state_name; ?></option>
+
                        <?php }  ?>
                      </select>
                   </div>

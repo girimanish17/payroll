@@ -263,6 +263,25 @@ class Common_model extends CI_Model {
       return false;
     }			   
    }
+
+	 public function count_row_data($table,$where=null,$select)
+	 {
+	 $this->db->select($select);
+	 $this->db->from($table);
+		 if($where) {
+			 $this->db->where($where);
+		 }
+		 $query = $this->db->get();
+	 //print_r($this->db->last_query($query));die;
+		 if($query->num_rows())
+	 {	
+			 return $query->num_rows();
+		 } 
+	 else 
+	 {
+			 return 0;
+		 }			   
+		}
    
     function year_count_row($status ='')
 	{
