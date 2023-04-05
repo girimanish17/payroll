@@ -19,10 +19,13 @@
       </div>
    </div>
 </div>
+
+<input type="hidden" id="uni_empid" value="<?php echo $emp_random_number; ?>" class="form-control  ih-medium ip-lightradius-xs b-light"  >  
+  
 <div class="contents demo-card expanded">
    <div class="row">
       <div class="col-sm-12">
-         <form method="post" onsubmit="return addEmployee()" id="employeeForm" enctype="multipart/form-data">
+         <form method="post" action="<?php echo base_url();?>admin/addEmployee"  id="employeeForm1" enctype="multipart/form-data">
 		 
              <?php echo $this->session->flashdata('msg');
                if(isset($_SESSION['msg'])){
@@ -32,106 +35,33 @@
             <div id="eMsg"></div>
 			
             <div class="form-row" style="margin-top: -142px;margin-left: 8px;">
-			<div class="form-group col-sm-12">
-               <h3>Employee Details</h3>
-			   </div>
 
-			    <div class="form-group col-sm-4">
-				 <label>Department</label>*
-                  <div class="with-icon">
-                     <span class="la la-user-graduate color-light"></span>
-                     <select name="department_id" id="department_id" class="form-control ih-medium ip-lightradius-xs b-light" required onchange="getdesignation();">
-                        <option selected="">Select Department</option>
-						<?php if($department){?>
-						<?php foreach($department as $val){?>
-                        <option value="<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
-                        <?php } } ?>
-                     </select>
-                  </div>
-               </div>
-               <div class="form-group col-sm-4">
-					<label>Designation</label>*
-                  <div class="with-icon">
-                     <span class="la la-user-shield color-light"></span>
-                     <select name="designation_id"  id="designation_id" class="form-control ih-medium ip-lightradius-xs b-light" required>
-                        <option selected="">Select Designation</option>
-                        <?php if($designation){?>
-						<?php foreach($designation as $val){?>
-                        <option value="<?php echo $val['id'];?>"><?php echo $val['designation_name'];?></option>
-                        <?php } } ?>
-                     </select>
-                  </div>
-               </div>
-
-					<div class="form-group col-sm-4">
-					<label>Date of joining</label>*
-                  <div class="with-icon">
-                     <span class="la la-money-bill-wave color-light"></span>
-                     <input type="date" name="date_of_joining" class="form-control  ih-medium ip-lightradius-xs b-light" id="" placeholder="Date of joining" required>
-                  </div>
-               </div>
-
-					<div class="form-group col-sm-4">
-					<label>Confirmation Date</label>
-                  <div class="with-icon">
-                     <span class="la la-money-bill-wave color-light"></span>
-                     <input type="date" name="confirmation_date" class="form-control  ih-medium ip-lightradius-xs b-light" id="" placeholder="Confirmation Date">
-                  </div>
-               </div>
-
-					<div class="form-group col-sm-4">
-					<label>Joining Status</label>
-                  <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
-                     <input type="text" name="joining_status" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Joining Status">
-                  </div>
-               </div>
-					<div class="form-group col-sm-4">
-					<label>Probation Period</label>
-                  <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
-                     <input type="text" name="probation_period" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Probation Period">
-                  </div>
-               </div>
-					<div class="form-group col-sm-4">
-					<label>Notice Period</label>
-                  <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
-                     <input type="text" name="notice_period" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Notice Period">
-                  </div>
-               </div>
-					<div class="form-group col-sm-4">
-					<label>Current Company Experience</label>
-                  <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
-                     <input type="text" name="current_comp_exp" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Current Company Experience">
-                  </div>
-               </div>
-					<div class="form-group col-sm-4">
-					<label>Previous Experience</label>
-                  <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
-                     <input type="text" name="previous_exp" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Previous Experience">
-                  </div>
-               </div>
-					<div class="form-group col-sm-4">
-					<label>Total Experience</label>
-                  <div class="with-icon">
-                     <span class="la-user lar color-light"></span>
-                     <input type="text" name="total_exp" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Total Experience">
-                  </div>
-               </div>
-               <div class="form-group col-sm-4">
-					<label>Credit leaves</label>
-                  <div class="with-icon">
-                     <span class="la la-money-bill-wave color-light"></span>
-                     <input type="number" name="credit_leaves" class="form-control  ih-medium ip-lightradius-xs b-light" id=""  placeholder="Credit leaves">
-                  </div>
-               </div>
-              
-			<div class="form-group col-sm-12">
+            <div class="form-group col-sm-12">
                <h3>Personal Detail</h3>
 			</div>
+
+         <div class="form-group col-sm-4">
+					<label>Employee ID Type</label>
+                  <div class="with-icon">
+                     <span class="la la-restroom color-light"></span>
+                     <select name="emp_id" class="form-control ih-medium ip-lightradius-xs b-light" id="empID" onchange="return employeeIdCheck()">
+                     <option value="">Select Employee ID</option>   
+                     <option value="auto_generate">Auto Generate</option>
+                        <option value="manual_id">Manual</option>
+                     </select>
+                  </div>
+               </div>
+
+            
+
+               <div class="form-group col-sm-4 d-none" id="uniqID2">
+					<label>Employee ID</label>*
+                  <div class="with-icon">
+                     <span class="la-user lar color-light"></span>
+                     <input type="text" name="employee_id" value="" class="form-control  ih-medium ip-lightradius-xs b-light" id="id_uniq" placeholder="Employee ID" required>
+                  </div>
+               </div>
+
                <div class="form-group col-sm-4">
 					<label>Firstname</label>*
                   <div class="with-icon">
@@ -294,7 +224,105 @@
                      <input type="file" name="image" class="form-control  ih-medium ip-lightradius-xs b-light">
                   </div>
                </div>
-			   
+
+			<div class="form-group col-sm-12">
+               <h3>Employee Details</h3>
+			   </div>
+
+			    <div class="form-group col-sm-4">
+				 <label>Department</label>*
+                  <div class="with-icon">
+                     <span class="la la-user-graduate color-light"></span>
+                     <select name="department_id" id="department_id" class="form-control ih-medium ip-lightradius-xs b-light" required onchange="getdesignation();">
+                        <option selected="">Select Department</option>
+						<?php if($department){?>
+						<?php foreach($department as $val){?>
+                        <option value="<?php echo $val['id'];?>"><?php echo $val['name'];?></option>
+                        <?php } } ?>
+                     </select>
+                  </div>
+               </div>
+               <div class="form-group col-sm-4">
+					<label>Designation</label>*
+                  <div class="with-icon">
+                     <span class="la la-user-shield color-light"></span>
+                     <select name="designation_id"  id="designation_id" class="form-control ih-medium ip-lightradius-xs b-light" required>
+                        <option selected="">Select Designation</option>
+                        <?php if($designation){?>
+						<?php foreach($designation as $val){?>
+                        <option value="<?php echo $val['id'];?>"><?php echo $val['designation_name'];?></option>
+                        <?php } } ?>
+                     </select>
+                  </div>
+               </div>
+
+					<div class="form-group col-sm-4">
+					<label>Date of joining</label>*
+                  <div class="with-icon">
+                     <span class="la la-money-bill-wave color-light"></span>
+                     <input type="date" name="date_of_joining" class="form-control  ih-medium ip-lightradius-xs b-light" id="" placeholder="Date of joining" required>
+                  </div>
+               </div>
+
+					<div class="form-group col-sm-4">
+					<label>Confirmation Date</label>
+                  <div class="with-icon">
+                     <span class="la la-money-bill-wave color-light"></span>
+                     <input type="date" name="confirmation_date" class="form-control  ih-medium ip-lightradius-xs b-light" id="" placeholder="Confirmation Date">
+                  </div>
+               </div>
+
+					<div class="form-group col-sm-4">
+					<label>Joining Status</label>
+                  <div class="with-icon">
+                     <span class="la-user lar color-light"></span>
+                     <input type="text" name="joining_status" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Joining Status">
+                  </div>
+               </div>
+					<div class="form-group col-sm-4">
+					<label>Probation Period</label>
+                  <div class="with-icon">
+                     <span class="la-user lar color-light"></span>
+                     <input type="text" name="probation_period" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Probation Period">
+                  </div>
+               </div>
+					<div class="form-group col-sm-4">
+					<label>Notice Period</label>
+                  <div class="with-icon">
+                     <span class="la-user lar color-light"></span>
+                     <input type="text" name="notice_period" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Notice Period">
+                  </div>
+               </div>
+					<div class="form-group col-sm-4">
+					<label>Current Company Experience</label>
+                  <div class="with-icon">
+                     <span class="la-user lar color-light"></span>
+                     <input type="text" name="current_comp_exp" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Current Company Experience">
+                  </div>
+               </div>
+					<div class="form-group col-sm-4">
+					<label>Previous Experience</label>
+                  <div class="with-icon">
+                     <span class="la-user lar color-light"></span>
+                     <input type="text" name="previous_exp" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Previous Experience">
+                  </div>
+               </div>
+					<div class="form-group col-sm-4">
+					<label>Total Experience</label>
+                  <div class="with-icon">
+                     <span class="la-user lar color-light"></span>
+                     <input type="text" name="total_exp" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Total Experience">
+                  </div>
+               </div>
+               <div class="form-group col-sm-4">
+					<label>Credit leaves</label>
+                  <div class="with-icon">
+                     <span class="la la-money-bill-wave color-light"></span>
+                     <input type="number" name="credit_leaves" class="form-control  ih-medium ip-lightradius-xs b-light" id=""  placeholder="Credit leaves">
+                  </div>
+               </div>
+              
+		   
 		   <div class="form-group col-sm-12">
 			  <h3>Account Login</h3>
 		   </div>
@@ -536,34 +564,63 @@
 </div>
 <?php include('include/footer.php'); ?> 
 <script type="text/javascript">
-   function addEmployee(){
-   //alert("hi");
-   $.ajax({
-            url: "<?php echo base_url(); ?>admin/addEmployeeForm",
-            type: "POST",
-            data:new FormData($('#employeeForm')[0]),
-            dataType:"JSON",
-            async:false,
-            cache:false,
-            contentType:false,
-            processData:false,
-            success: function (res) {
-				console.log(res); 
-             if(res.status==1){
-               //swal('Employee added successfully')
-              window.location.href="<?php echo base_url(); ?>admin/employee";
-             } else {
+
+function employeeIdCheck() {
+   let empid = $('#empID').val();
+   let id_emp = $('#uni_empid').val();
+
+   if(empid == 'auto_generate') {
+     
+      $('#uniqID2').removeClass('d-none');
+      $('#id_uniq').val(id_emp);
+      $('#id_uniq').prop('readonly', true);
+   } else  {
+      // $('#uniqID2').addClass('d-none');
+      $('#id_uniq').val('');
+   }
+   
+   if(empid == 'manual_id'){
+      $('#uniqID2').removeClass('d-none');
+      $('#id_uniq').prop('readonly', false);
+   } 
+
+   if(empid == '') {
+      $('#uniqID2').addClass('d-none');
+   }
+
+
+}
+  
+
+   // function addEmployee(){
+//       // console.log('hello');
+//    // alert("hi");
+//    $.ajax({
+//             url: "<?php // echo base_url(); ?>admin/addEmployeeForm",
+//             type: "POST",
+//             data:new FormData($('#employeeForm')[0]),
+//             dataType:"JSON",
+//             async:false,
+//             cache:false,
+//             contentType:false,
+//             processData:false,
+//             success: function (res) {
+// 				console.log(res); 
+//              if(res.status==1){
+//                //swal('Employee added successfully')
+//               window.location.href="<?php //echo base_url(); ?>admin/employee";
+//              } else {
              
-			   $('html,body').animate({
-        scrollTop: $("#scrolltophere").offset().top},
-        'slow');
-		 $('#eMsg').html(res.msg);
-              return false;
-             }
-        }
-    });
-   return false;  
-}  
+// 			   $('html,body').animate({
+//         scrollTop: $("#scrolltophere").offset().top},
+//         'slow');
+// 		 $('#eMsg').html(res.msg);
+//               return false;
+//              }
+//         }
+//     });
+//    return false;  
+// }  
 
 function getdesignation()
   {
