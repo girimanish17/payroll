@@ -151,11 +151,11 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
 
                   <label>Select State:</label>
                      <select name="states" id="statesSelect"  class="form-control  ih-medium ip-lightradius-xs b-light " multiple="multiple">
-                     <?php foreach($states as $state) {
+                     <?php if($states) { foreach($states as $state) {
                          ?>   
-                     <option value="<?php echo $state->state_id; ?>" <?php  if($setting->states == $state->state_id) { echo 'selected'; }  ?>><?php echo $state->state_name; ?></option>
+                     <option value="<?php echo $state['state_id']; ?>" <?php  if($setting->states == $state['state_id']) { echo 'selected'; }  ?>><?php echo $state['state_name']; ?></option>
 
-                       <?php }  ?>
+                       <?php } }  ?>
                      </select>
                   </div>
                </div>
@@ -388,6 +388,54 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
              
             <div id="eMsg"></div>
             <h3>List of values</h3>
+            <div class="form-row mt-0">
+				
+
+                            <div class="card-body">
+                               <a href="<?php echo base_url();?>admin/list_of_values" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a>
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Description</th>
+                                            <th>Code</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php if($listValues) { 
+                                             foreach($listValues as $row) {   
+                                          ?>
+                                          <tr>
+                                             <td><?php echo $row->description; ?></td>
+                                             <td><?php echo $row->code; ?></td>
+                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
+                                                <a href="<?php echo base_url()?>admin/edit_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
+                                          
+                                             <a href="<?php echo base_url()?>admin/delete_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
+                                          
+                                          </td>
+                                          </tr>
+                                          <?php } } ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+            </div>
+      </div>
+   </div>
+</div>
+<!-- table end -->
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             
+            <div id="eMsg"></div>
+            <h3>Tax Slabs</h3>
             <div class="form-row mt-0">
 				
 

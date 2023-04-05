@@ -31,7 +31,7 @@ class Home extends CI_Controller
 			{
 				$run = $this->common_model->GetSingleData('users',array('email' =>$email,'user_type'=>$type));
 		    } else {
-				$run = $this->common_model->GetSingleData('users',array('email' =>$email,'user_type!='=>1));	
+				$run = $this->common_model->GetSingleData('users',array('username' =>$email,'user_type!='=>1));	
 		    }
 			//echo $this->db->last_query();
 			if($run) {
