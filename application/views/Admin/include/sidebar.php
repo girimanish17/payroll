@@ -689,6 +689,7 @@
                         </a>
                         <!--submenu-->
                     </li>
+                    
                     <li class="menu-item ">
                         <a href="#" onclick="return alert('comming soon');" class="menu-link">
                         <a href="settings.html"  class="menu-link">
@@ -765,6 +766,17 @@
                         </a>
                     </li>
                     <li class="menu-item">
+                        <a href="<?php echo base_url(); ?>superadmin/pages" class=" menu-link">
+                            <span class="menu-label">
+                                <span class="menu-name">Pages</span>
+                            </span>
+                            <span class="menu-icon">
+                                <i class="la la-file-alt"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li class="menu-item">
                         <a href="javascript:void(0)" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">CMS
@@ -811,7 +823,7 @@
                     </li>
 					
 					<li class="menu-item">
-                        <a href="javascript:void(0)" class="open-dropdown menu-link">
+                        <!-- <a href="javascript:void(0)" class="open-dropdown menu-link">
                             <span class="menu-label">
                                 <span class="menu-name">Settings
                                     <span class="menu-arrow"></span>
@@ -820,10 +832,72 @@
                             <span class="menu-icon">
                                 <i class="la la-cog"></i>
                             </span>
-                        </a>
+                        </a> -->
+                        <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/country" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Country</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/bulletin_category" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Bulletin Category</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
                         <!--submenu-->
                         <ul class="sub-menu">
-                             
+                        <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/qualification_level" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Qualification Level</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/bank" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Bank</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/bankAccountType" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Bank Account Type</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/bloodgroup" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Blood Group</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+                           
+                                                                                 
+                       
                             <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/edit" class="menu-link">
                                     <span class="menu-label">
