@@ -1,6 +1,6 @@
 <?php include('include/header.php'); ?>  
 
- 
+
 <div class="contents demo-card expanded">
 	<div class="container-fluid">
 		<div class="row">
@@ -15,7 +15,7 @@
 								</span>
 							</li>
 							<li class="atbd-breadcrumb__item">
-								<span>Bloodgroup</span>
+								<span>Country</span>
 							</li>
 						</ul>
 					</div>
@@ -29,9 +29,9 @@
 			<div class="col-md-12">
 				<div class="card mb-30">
 					<div class="card-header">
-						<h5>Bloodgroup List</h5>
+						<h5>Country List</h5>
 						<div class="card-extra">
-							<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Add_NewCompany">+ Add New Bloodgroup</button>
+							<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Add_NewCompany">+ Add New Country</button>
 						</div>
 					</div>
 					<?php echo $this->session->flashdata('msg');
@@ -45,31 +45,31 @@
 								<thead>
 									<tr>
 										<th scope="col">ID</th>
-										<th scope="col">Name</th>
+										<th scope="col">Country</th>
 										<th scope="col">Created On</th>
 										<th scope="col">Status</th>
 										<th scope="col">Action</th>
 									</tr>
 								</thead>
 								<tbody>
-								<?php $i = 1;if($bloodgroup){ foreach($bloodgroup as $key => $value){
+								<?php $i = 1;if($country){ foreach($country as $key => $value){
 									//$package = $this->common_model->GetSingleData('packages',array('id'=>$value['package_id']));
 									//$admins = $this->common_model->GetSingleData('users',array('user_id'=>$value['admin_id']));
 									?>
 									<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $value['blood_group'];?></td>
+										<td><?php echo $value['country'];?></td>
 										<td><?php echo date('d M Y',strtotime($value['created_date']));?></td>
 										<td><?php echo $value['status']=='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
 										<td>
 											<div class="atbd-button-list d-flex flex-wrap">
 											   <button class="btn btn-icon btn-success btn-squared" title="Edit" data-toggle="modal" data-target="#Edit_NewCompany<?php echo $i; ?>"><i class="la la-edit mr-0"></i></button>
-												<a onclick="return confirm('Are you sure want to delete this bloodgroup?');" href="<?php echo base_url(); ?>superadmin/deleteBloodgroup/<?php echo $value['id']; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to delete this Country?');" href="<?php echo base_url(); ?>superadmin/deletecountry/<?php echo $value['id']; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
 									
 												<?php if($value['status']=='0'){?>
-												<a onclick="return confirm('Are you sure want to change status of this bloodgroup?');" href="<?php echo base_url(); ?>superadmin/changeStatusBloodgroup/<?php echo $value['id'];?>/1"><button class="btn btn-icon btn-success btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to change status of this Country?');" href="<?php echo base_url(); ?>superadmin/changeStatuscountry/<?php echo $value['id'];?>/1"><button class="btn btn-icon btn-success btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }else{?>
-												<a onclick="return confirm('Are you sure want to change status of this bloodgroup?');" href="<?php echo base_url(); ?>superadmin/changeStatusBloodgroup/<?php echo $value['id'];?>/0"><button class="btn btn-icon btn-danger btn-squared" title="Disable" ><i class="la la-ban mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to change status of this Country?');" href="<?php echo base_url(); ?>superadmin/changeStatuscountry/<?php echo $value['id'];?>/0"><button class="btn btn-icon btn-danger btn-squared" title="Disable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }?>
 												</div>
 										</td>
@@ -80,19 +80,19 @@
 									<div class="modal-dialog modal-md" role="document">
 										<div class="modal-content modal-bg-white ">
 											<div class="modal-header">
-												<h6 class="modal-title">Edit New Bloodgrup</h6>
+												<h6 class="modal-title">Edit Country</h6>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span data-feather="x"></span></button>
 											</div>
 											<div class="modal-body">
 												<div class="Vertical-form">
-													<form action="<?php echo base_url(); ?>superadmin/editBloodgroup/<?php echo $value['id']; ?>" method="post" id="companyForm2" enctype="multipart/form-data">
+													<form action="<?php echo base_url(); ?>superadmin/editcountry/<?php echo $value['id']; ?>" method="post" id="companyForm2" enctype="multipart/form-data">
 														<div class="form-row">
 															
 															
 															<div class="form-group col-sm-12">
-																<label>Name</label>
-																<input type="text" name="name" value="<?php echo $value['blood_group'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Name">
+																<label>Country</label>
+																<input type="text" name="country"  value="<?php echo $value['country'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Country">
 															</div>
 															
 															<div class="layout-button mt-25">
@@ -128,20 +128,20 @@
 <div class="modal-dialog modal-md" role="document">
 	<div class="modal-content modal-bg-white ">
 		<div class="modal-header">
-			<h6 class="modal-title">Add New Bloodgroup</h6>
+			<h6 class="modal-title">Add New Country</h6>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span data-feather="x"></span></button>
 		</div>
 		<div class="modal-body">
 			<div class="Vertical-form">
-				<form action="<?php echo base_url(); ?>superadmin/addBloodgroup" method="post" id="companyForm" enctype="multipart/form-data">
+				<form action="<?php echo base_url(); ?>superadmin/addcountry" method="post" id="companyForm" enctype="multipart/form-data">
 					<div class="form-row">
 						
 						
 						
 						<div class="form-group col-sm-12">
-							<label> Name</label>
-							<input type="text" name="name" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Name">
+							<label> Country</label>
+							<input type="text" name="country" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Country">
 						</div>
 						
 						<div class="layout-button mt-25">
