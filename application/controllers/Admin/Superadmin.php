@@ -1361,27 +1361,557 @@ class Superadmin extends CI_Controller
 				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
                  redirect('superadmin/bloodgroup');
 			}
-		 }
+	}
 
-		 public function changeStatusBloodgroup($id,$status){
+	public function changeStatusBloodgroup($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_bloodgroup',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_bloodgroup',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
 			
-			$companies = $this->common_model->GetSingleData('master_bloodgroup',array('id'=>$id));
-			$run = $this->common_model->UpdateData('master_bloodgroup',array('id'=>$id),array('status'=>$status));
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Bloodgroup Status Changed successfully</div>');
+				redirect('superadmin/bloodgroup');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/bloodgroup');
+		}
+	}
+
+	public function qualification_level() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['q_level'] = $this->common_model->GetAllData('master_qualification_level',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['q_level']); die;
+		$this->load->view('Admin/s_qualification_level',$data);
+	}
+
+	public function addQualificationLevel() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
 		
+		$this->form_validation->set_rules('qualification_level','Qualification Level','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_qualification_level',array('qualification_level'=>$this->input->post('qualification_level')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['qualification_level'] = $this->input->post('qualification_level');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_qualification_level',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Qualification Level added successfully!</div>');
+					redirect('superadmin/qualification_level');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Qualification Level already exist!</div>');
+				redirect('superadmin/qualification_level');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/qualification_level');
+		}
+	}
+
+	public function editQualificationLevel($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('qualification_level','Qualification Level','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['qualification_level'] = $this->input->post('qualification_level');
+					$run = $this->common_model->UpdateData('master_qualification_level',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Qualification Level Updated successfully!</div>');
+				redirect('superadmin/qualification_level');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/qualification_level');
+		}
+	}
+	
+	public function deleteQualificationLevel($id)
+	{
+		$run = $this->common_model->UpdateData('master_qualification_level',array('id'=>$id),array('status'=>2));
 			//echo $this->db->last_query();
 			if($run) {
 				
-				$this->session->set_flashdata('msg','<div class="alert alert-success">Bloodgroup Status Changed successfully</div>');
-                 redirect('superadmin/bloodgroup');
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Qualification Level deleted successfully</div>');
+                 redirect('superadmin/qualification_level');
 							
 			} else {
 				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
-                 redirect('superadmin/bloodgroup');
+                 redirect('superadmin/qualification_level');
 			}
-		 }
-
+	}
 	
+	public function changeStatusQualificationLevel($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_qualification_level',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_qualification_level',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Qualification Level Status Changed successfully</div>');
+				redirect('superadmin/qualification_level');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/qualification_level');
+		}
+	}
+
+	// bank 
+	public function bank() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['bank'] = $this->common_model->GetAllData('master_bank',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['q_level']); die;
+		$this->load->view('Admin/s_bank',$data);
+	}
+
+	public function addBank() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('bank_name','Bank','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_bank',array('bank_name'=>$this->input->post('bank_name')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['bank_name'] = $this->input->post('bank_name');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_bank',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Bank added successfully!</div>');
+					redirect('superadmin/bank');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Bank already exist!</div>');
+				redirect('superadmin/bank');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/qualification_level');
+		}
+	}
+
+	public function editBank($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('bank_name','Bank','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['bank_name'] = $this->input->post('bank_name');
+					$run = $this->common_model->UpdateData('master_bank',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bank Updated successfully!</div>');
+				redirect('superadmin/bank');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/bank');
+		}
+	}
+	
+	public function deleteBank($id)
+	{
+		$run = $this->common_model->UpdateData('master_bank',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bank deleted successfully</div>');
+                 redirect('superadmin/bank');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/bank');
+			}
+	}
+	
+	public function changeStatusBank($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_bank',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_bank',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Bank Status Changed successfully</div>');
+				redirect('superadmin/bank');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/bank');
+		}
+	}
+
+	//bank account type 
+	public function bankAccountType() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['bankAccountType'] = $this->common_model->GetAllData('master_bankAccount_type',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_bankAccountType',$data);
+	}
+
+	public function addbankAccountType() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('bank_account_type','Bank Account Type','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_bankAccount_type',array('bank_account_type'=>$this->input->post('bank_account_type')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['bank_account_type'] = $this->input->post('bank_account_type');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_bankAccount_type',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Bank account type added successfully!</div>');
+					redirect('superadmin/bankAccountType');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Bank account type already exist!</div>');
+				redirect('superadmin/bankAccountType');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/bankAccountType');
+		}
+	}
+
+	public function editbankAccountType($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('bank_account_type','Bank account type','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['bank_account_type'] = $this->input->post('bank_account_type');
+					$run = $this->common_model->UpdateData('master_bankAccount_type',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bank account type Updated successfully!</div>');
+				redirect('superadmin/bankAccountType');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/bankAccountType');
+		}
+	}
+	
+	public function deletebankAccountType($id)
+	{
+		$run = $this->common_model->UpdateData('master_bankAccount_type',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bank account type deleted successfully</div>');
+                 redirect('superadmin/bankAccountType');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/bankAccountType');
+			}
+	}
+	
+	public function changeStatusbankAccountType($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_bankAccount_type',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_bankAccount_type',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Bank account type Status Changed successfully</div>');
+				redirect('superadmin/bankAccountType');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/bankAccountType');
+		}
+	}
+
+	//bulletin category type 
+	public function bulletin_category() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['bulletin_category'] = $this->common_model->GetAllData('master_bulletin_category',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_bulletin_category',$data);
+	}
+
+	public function addbulletin_category() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('bulletin_category','Bulletin Category','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_bulletin_category',array('bulletin_category'=>$this->input->post('bulletin_category')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['bulletin_category'] = $this->input->post('bulletin_category');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_bulletin_category',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Bulletin Category added successfully!</div>');
+					redirect('superadmin/bulletin_category');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Bulletin Category already exist!</div>');
+				redirect('superadmin/bulletin_category');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/bulletin_category');
+		}
+	}
+
+	public function editbulletin_category($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('bulletin_category','Bulletin Category','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['bulletin_category'] = $this->input->post('bulletin_category');
+					$run = $this->common_model->UpdateData('master_bulletin_category',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bulletin Category Updated successfully!</div>');
+				redirect('superadmin/bulletin_category');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/bulletin_category');
+		}
+	}
+	
+	public function deletebulletin_category($id)
+	{
+		$run = $this->common_model->UpdateData('master_bulletin_category',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bulletin Category deleted successfully</div>');
+                 redirect('superadmin/bulletin_category');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/bulletin_category');
+			}
+	}
+	
+	public function changeStatusbulletin_category($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_bulletin_category',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_bulletin_category',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Bulletin Category Status Changed successfully</div>');
+				redirect('superadmin/bulletin_category');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/bulletin_category');
+		}
+	}
+
+	//countryy
+	public function country() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['country'] = $this->common_model->GetAllData('master_super_country',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_country',$data);
+	}
+
+	public function addcountry() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('country','Country','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_super_country',array('country'=>$this->input->post('country')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['country'] = $this->input->post('country');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_super_country',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Country added successfully!</div>');
+					redirect('superadmin/country');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Country already exist!</div>');
+				redirect('superadmin/country');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/country');
+		}
+	}
+
+	public function editcountry($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('country','Country','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['country'] = $this->input->post('country');
+					$run = $this->common_model->UpdateData('master_super_country',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Country Updated successfully!</div>');
+				redirect('superadmin/country');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/country');
+		}
+	}
+	
+	public function deletecountry($id)
+	{
+		$run = $this->common_model->UpdateData('master_super_country',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Country deleted successfully</div>');
+                 redirect('superadmin/country');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/country');
+			}
+	}
+	
+	public function changeStatuscountry($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_super_country',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_super_country',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Country Status Changed successfully</div>');
+				redirect('superadmin/country');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/country');
+		}
+	}
 
 }
+
+
 
 ?>
