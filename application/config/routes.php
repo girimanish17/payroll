@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed'); 
 
 /*
 | -------------------------------------------------------------------------
@@ -172,6 +172,23 @@ $route['superadmin/addBloodgroup']='Admin/superadmin/addBloodgroup';
 $route['superadmin/editBloodgroup/(:num)']='Admin/superadmin/editBloodgroup/$1';
 $route['superadmin/deleteBloodgroup/(:num)']='Admin/superadmin/deleteBloodgroup/$1';
 $route['superadmin/changeStatusBloodgroup/(:num)/(:any)']='Admin/superadmin/changeStatusBloodgroup/$1/$2';
+
+$route['superadmin/qualification']='Admin/superadmin/qualification';
+$route['superadmin/addqualification']='Admin/superadmin/addqualification';
+$route['superadmin/editqualification/(:num)']='Admin/superadmin/editqualification/$1';
+$route['superadmin/deletequalification/(:num)']='Admin/superadmin/deletequalification/$1';
+$route['superadmin/changeStatusqualification/(:num)/(:any)']='Admin/superadmin/changeStatusqualification/$1/$2';
+$route['superadmin/confirmation_reason']='Admin/superadmin/confirmation_reason';
+$route['superadmin/addconfirmation_reason']='Admin/superadmin/addconfirmation_reason';
+$route['superadmin/editconfirmation_reason/(:num)']='Admin/superadmin/editconfirmation_reason/$1';
+$route['superadmin/deleteconfirmation_reason/(:num)']='Admin/superadmin/deleteconfirmation_reason/$1';
+$route['superadmin/changeStatusconfirmation_reason/(:num)/(:any)']='Admin/superadmin/changeStatusconfirmation_reason/$1/$2';
+$route['superadmin/currency']='Admin/superadmin/currency';
+$route['superadmin/addcurrency']='Admin/superadmin/addcurrency';
+$route['superadmin/editcurrency/(:num)']='Admin/superadmin/editcurrency/$1';
+$route['superadmin/deletecurrency/(:num)']='Admin/superadmin/deletecurrency/$1';
+$route['superadmin/changeStatuscurrency/(:num)/(:any)']='Admin/superadmin/changeStatuscurrency/$1/$2';
+=======
 
 $route['superadmin/qualification_level']='Admin/superadmin/qualification_level';
 $route['superadmin/addQualificationLevel']='Admin/superadmin/addQualificationLevel';
