@@ -188,7 +188,7 @@ $route['superadmin/addcurrency']='Admin/superadmin/addcurrency';
 $route['superadmin/editcurrency/(:num)']='Admin/superadmin/editcurrency/$1';
 $route['superadmin/deletecurrency/(:num)']='Admin/superadmin/deletecurrency/$1';
 $route['superadmin/changeStatuscurrency/(:num)/(:any)']='Admin/superadmin/changeStatuscurrency/$1/$2';
-=======
+
 
 $route['superadmin/qualification_level']='Admin/superadmin/qualification_level';
 $route['superadmin/addQualificationLevel']='Admin/superadmin/addQualificationLevel';

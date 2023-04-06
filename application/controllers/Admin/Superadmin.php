@@ -1776,7 +1776,7 @@ class Superadmin extends CI_Controller
 						   }
 						}
 
-	}
+	
 	
 	public function changeStatusQualificationLevel($id,$status)
 	{
