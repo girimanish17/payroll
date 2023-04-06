@@ -3,7 +3,7 @@ error_reporting(0);
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * 
+ *  
  */
 class Superadmin extends CI_Controller
 {
@@ -1379,7 +1379,313 @@ class Superadmin extends CI_Controller
                  redirect('superadmin/bloodgroup');
 			}
 		 }
-
+		 
+		 public function qualification()
+		 { 
+			 $user_id = $this->session->userdata('user_id');
+			 $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+			 $data['qualification'] = $this->common_model->GetAllData('master_qualification',array('status!='=>2),'id');
+			 $this->load->view('Admin/s_qualification',$data);
+		 }
+		 public function addqualification()
+		 {
+			 
+			 $user_id = $this->session->userdata('user_id');
+			 $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+			 
+			 $this->form_validation->set_rules('name','name','required');
+			 
+			 if($this->form_validation->run()){
+				 $chk = $this->common_model->GetSingleData('master_qualification',array('qualification'=>$this->input->post('name')));
+				 
+				 if($chk=='')
+				 {
+					 
+						 
+						 $insert1['qualification'] = $this->input->post('name');
+						 $insert1['created_date'] = date('Y-m-d h:i:s');
+						 
+						 $run = $this->common_model->InsertData('master_qualification',$insert1);
+						 $this->session->set_flashdata('msg','<div class="alert alert-success">qualification added successfully!</div>');
+						 redirect('superadmin/qualification');
+					 
+				 }else{
+					 $this->session->set_flashdata('msg','<div class="alert alert-danger">qualification already exist!</div>');
+					 redirect('superadmin/qualification');
+				 }
+			 
+				 
+				 
+			  } else {
+					 $this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+					 redirect('superadmin/qualification');
+			 }
+		 }
+		 
+		 public function editqualification($id)
+		 {
+			 $user_id = $this->session->userdata('user_id');
+			 $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+			 
+			 $this->form_validation->set_rules('name','name','required');
+			 
+			 if($this->form_validation->run()){
+				 
+						 $insert['qualification'] = $this->input->post('name');
+						 $run = $this->common_model->UpdateData('master_qualification',array('id'=>$id),$insert);
+						 
+				 if($run)
+				 {
+					 $this->session->set_flashdata('msg','<div class="alert alert-success">qualification Updated successfully!</div>');
+					 redirect('superadmin/qualification');
+				 } 
+				 else
+				 {
+					 $this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+				 }
+				 
+				 
+			  } else {
+					 $this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+					 redirect('superadmin/qualification');
+			 }
+		 }
+	 
+		 public function deletequalification($id)
+		 {
+				 $run = $this->common_model->UpdateData('master_qualification',array('id'=>$id),array('status'=>2));
+				 //echo $this->db->last_query();
+				 if($run) {
+					 
+					 $this->session->set_flashdata('msg','<div class="alert alert-success">qualification deleted successfully</div>');
+					  redirect('superadmin/qualification');
+								 
+				 } else {
+					 $this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+					  redirect('superadmin/qualification');
+				 }
+			  }
+	 
+			  public function changeStatusqualification($id,$status){
+				 
+				 $companies = $this->common_model->GetSingleData('master_qualification',array('id'=>$id));
+				 $run = $this->common_model->UpdateData('master_qualification',array('id'=>$id),array('status'=>$status));
+			 
+				 //echo $this->db->last_query();
+				 if($run) {
+					 
+					 $this->session->set_flashdata('msg','<div class="alert alert-success">qualification Status Changed successfully</div>');
+					  redirect('superadmin/qualification');
+								 
+				 } else {
+					 $this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+					  redirect('superadmin/qualification');
+				 }
+			  }
+			  public function confirmation_reason()
+			  { 
+				  $user_id = $this->session->userdata('user_id');
+				  $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+				  $data['confirmation_reason'] = $this->common_model->GetAllData('master_confirmation_reason',array('status!='=>2),'id');
+				  $this->load->view('Admin/s_confirmation_reason',$data);
+			  }
+			  public function addconfirmation_reason()
+			  {
+				  
+				  $user_id = $this->session->userdata('user_id');
+				  $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+				  
+				  $this->form_validation->set_rules('name','name','required');
+				  
+				  if($this->form_validation->run()){
+					  $chk = $this->common_model->GetSingleData('master_confirmation_reason',array('confirmation_reason'=>$this->input->post('name')));
+					  
+					  if($chk=='')
+					  {
+						  
+							  
+							  $insert1['confirmation_reason'] = $this->input->post('name');
+							  $insert1['created_date'] = date('Y-m-d h:i:s');
+							  
+							  $run = $this->common_model->InsertData('master_confirmation_reason',$insert1);
+							  $this->session->set_flashdata('msg','<div class="alert alert-success">confirmation reason added successfully!</div>');
+							  redirect('superadmin/confirmation_reason');
+						  
+					  }else{
+						  $this->session->set_flashdata('msg','<div class="alert alert-danger">confirmation already exist!</div>');
+						  redirect('superadmin/confirmation_reason');
+					  }
+				  
+					  
+					  
+				   } else {
+						  $this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+						  redirect('superadmin/confirmation_reason');
+				  }
+			  }
+			  
+			  public function editconfirmation_reason($id)
+			  {
+				  $user_id = $this->session->userdata('user_id');
+				  $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+				  
+				  $this->form_validation->set_rules('name','name','required');
+				  
+				  if($this->form_validation->run()){
+					  
+							  $insert['confirmation_reason'] = $this->input->post('name');
+							  $run = $this->common_model->UpdateData('master_confirmation_reason',array('id'=>$id),$insert);
+							  
+					  if($run)
+					  {
+						  $this->session->set_flashdata('msg','<div class="alert alert-success">confirmation reason Updated successfully!</div>');
+						  redirect('superadmin/confirmation_reason');
+					  } 
+					  else
+					  {
+						  $this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+					  }
+					  
+					  
+				   } else {
+						  $this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+						  redirect('superadmin/confirmation_reason');
+				  }
+			  }
+		  
+			  public function deleteconfirmation_reason($id)
+			  {
+					  $run = $this->common_model->UpdateData('master_confirmation_reason',array('id'=>$id),array('status'=>2));
+					  //echo $this->db->last_query();
+					  if($run) {
+						  
+						  $this->session->set_flashdata('msg','<div class="alert alert-success">confirmation reason deleted successfully</div>');
+						   redirect('superadmin/confirmation_reason');
+									  
+					  } else {
+						  $this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+						   redirect('superadmin/confirmation_reason');
+					  }
+				   }
+		  
+				   public function changeStatusconfirmation_reason($id,$status){
+					  
+					  $companies = $this->common_model->GetSingleData('master_confirmation_reason',array('id'=>$id));
+					  $run = $this->common_model->UpdateData('master_confirmation_reason',array('id'=>$id),array('status'=>$status));
+				  
+					  //echo $this->db->last_query();
+					  if($run) {
+						  
+						  $this->session->set_flashdata('msg','<div class="alert alert-success">confirmation reason Status Changed successfully</div>');
+						   redirect('superadmin/confirmation_reason');
+									  
+					  } else {
+						  $this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+						   redirect('superadmin/confirmation_reason');
+					  }
+				   }
+				   public function currency()
+				   { 
+					   $user_id = $this->session->userdata('user_id');
+					   $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+					   $data['currency'] = $this->common_model->GetAllData('master_currency',array('status!='=>2),'id');
+					   $this->load->view('Admin/s_currency',$data);
+				   }
+				   public function addcurrency()
+				   {
+					   
+					   $user_id = $this->session->userdata('user_id');
+					   $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+					   
+					   $this->form_validation->set_rules('name','name','required');
+					   
+					   if($this->form_validation->run()){
+						   $chk = $this->common_model->GetSingleData('master_currency',array('currency'=>$this->input->post('name')));
+						   
+						   if($chk=='')
+						   {
+							   
+								   
+								   $insert1['currency'] = $this->input->post('name');
+								   $insert1['created_date'] = date('Y-m-d h:i:s');
+								   
+								   $run = $this->common_model->InsertData('master_currency',$insert1);
+								   $this->session->set_flashdata('msg','<div class="alert alert-success">currency reason added successfully!</div>');
+								   redirect('superadmin/currency');
+							   
+						   }else{
+							   $this->session->set_flashdata('msg','<div class="alert alert-danger">currency already exist!</div>');
+							   redirect('superadmin/currency');
+						   }
+					   
+						   
+						   
+						} else {
+							   $this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+							   redirect('superadmin/currency');
+					   }
+				   }
+				   
+				   public function editcurrency($id)
+				   {
+					   $user_id = $this->session->userdata('user_id');
+					   $type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+					   
+					   $this->form_validation->set_rules('name','name','required');
+					   
+					   if($this->form_validation->run()){
+						   
+								   $insert['currency'] = $this->input->post('name');
+								   $run = $this->common_model->UpdateData('master_currency',array('id'=>$id),$insert);
+								   
+						   if($run)
+						   {
+							   $this->session->set_flashdata('msg','<div class="alert alert-success">currency reason Updated successfully!</div>');
+							   redirect('superadmin/currency');
+						   } 
+						   else
+						   {
+							   $this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+						   }
+						   
+						   
+						} else {
+							   $this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+							   redirect('superadmin/currency');
+					   }
+				   }
+			   
+				   public function deletecurrency($id)
+				   {
+						   $run = $this->common_model->UpdateData('master_currency',array('id'=>$id),array('status'=>2));
+						   //echo $this->db->last_query();
+						   if($run) {
+							   
+							   $this->session->set_flashdata('msg','<div class="alert alert-success">currency reason deleted successfully</div>');
+								redirect('superadmin/currency');
+										   
+						   } else {
+							   $this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+								redirect('superadmin/currency');
+						   }
+						}
+			   
+						public function changeStatuscurrency($id,$status){
+						   
+						   $companies = $this->common_model->GetSingleData('master_currency',array('id'=>$id));
+						   $run = $this->common_model->UpdateData('master_currency',array('id'=>$id),array('status'=>$status));
+					   
+						   //echo $this->db->last_query();
+						   if($run) {
+							   
+							   $this->session->set_flashdata('msg','<div class="alert alert-success">currency reason Status Changed successfully</div>');
+								redirect('superadmin/currency');
+										   
+						   } else {
+							   $this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+								redirect('superadmin/currency');
+						   }
+						}
 	
 
 }

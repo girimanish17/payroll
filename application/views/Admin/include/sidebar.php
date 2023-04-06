@@ -1,6 +1,6 @@
     <main class="main-content">
         <aside class="sidebar admin-sidebar">
-            <div class="admin-sidebar-brand">
+            <div class="admin-sidebar-brand"> 
                 <p><img src="<?php echo base_url();?>assets/img/logo.jpeg" width="100" alt="Logo"></p>
             </div>
             <div class="admin-sidebar-wrapper js-scrollbar">
@@ -824,6 +824,46 @@
                         <!--submenu-->
                         <ul class="sub-menu">
                              
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/bloodgroup" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Blood Group</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/qualification" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Qualification</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/confirmation_reason" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Confirmation Reason</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/currency" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Currency</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
                             <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/edit" class="menu-link">
                                     <span class="menu-label">
