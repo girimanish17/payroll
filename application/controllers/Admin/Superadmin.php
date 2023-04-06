@@ -1276,6 +1276,110 @@ class Superadmin extends CI_Controller
 		redirect();
 	}
 
+	public function bloodgroup()
+	{ 
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['bloodgroup'] = $this->common_model->GetAllData('master_bloodgroup',array('status!='=>2),'id');
+		$this->load->view('Admin/s_bloodgroup',$data);
+	}
+	
+	public function addBloodgroup()
+	{
+		
+	    $user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('name','name','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_bloodgroup',array('blood_group'=>$this->input->post('name')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['blood_group'] = $this->input->post('name');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_bloodgroup',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Bloodgroup added successfully!</div>');
+					redirect('superadmin/bloodgroup');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Bloodgroup already exist!</div>');
+				redirect('superadmin/bloodgroup');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/bloodgroup');
+		}
+	}
+	
+	public function editBloodgroup($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('name','name','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['blood_group'] = $this->input->post('name');
+					$run = $this->common_model->UpdateData('master_bloodgroup',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bloodgroup Updated successfully!</div>');
+				redirect('superadmin/bloodgroup');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/bloodgroup');
+		}
+	}
+
+	public function deleteBloodgroup($id)
+	{
+			$run = $this->common_model->UpdateData('master_bloodgroup',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bloodgroup deleted successfully</div>');
+                 redirect('superadmin/bloodgroup');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/bloodgroup');
+			}
+		 }
+
+		 public function changeStatusBloodgroup($id,$status){
+			
+			$companies = $this->common_model->GetSingleData('master_bloodgroup',array('id'=>$id));
+			$run = $this->common_model->UpdateData('master_bloodgroup',array('id'=>$id),array('status'=>$status));
+		
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Bloodgroup Status Changed successfully</div>');
+                 redirect('superadmin/bloodgroup');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/bloodgroup');
+			}
+		 }
+
 	
 
 }
