@@ -765,17 +765,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="<?php echo base_url(); ?>superadmin/pages" class=" menu-link">
-                            <span class="menu-label">
-                                <span class="menu-name">Pages</span>
-                            </span>
-                            <span class="menu-icon">
-                                <i class="la la-file-alt"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
+
                     <li class="menu-item">
                         <a href="javascript:void(0)" class="open-dropdown menu-link">
                             <span class="menu-label">
@@ -944,7 +934,7 @@
                                 </a>
                             </li>
                         <!--submenu-->
-                        <ul class="sub-menu">
+                        <!-- <ul class="sub-menu"> -->
                         <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/qualification_level" class="menu-link">
                                     <span class="menu-label">
@@ -986,20 +976,21 @@
                                 </a>
                             </li>
 
-                            <li class="menu-item ">
-                                <a href="<?php echo base_url(); ?>superadmin/qualification" class="menu-link">
+                           
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/confirmation_reason" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">Qualification</span>
+                                        <span class="menu-name">Confirmation Reason</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="la la-users-cog"></i>
                                     </span>
                                 </a>
                             </li>
-							<li class="menu-item ">
-                                <a href="<?php echo base_url(); ?>superadmin/confirmation_reason" class="menu-link">
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/qualification" class="menu-link">
                                     <span class="menu-label">
-                                        <span class="menu-name">Confirmation Reason</span>
+                                        <span class="menu-name">Qualification</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="la la-users-cog"></i>
@@ -1150,7 +1141,7 @@
                                 </a>
                             </li>
                         
-                        </ul>
+                        <!-- </ul> -->
                     </li>
 					
 					
