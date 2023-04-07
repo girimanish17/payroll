@@ -2220,6 +2220,156 @@ class Superadmin extends CI_Controller
 				redirect('superadmin/country');
 		}
 	}
+	//hold salary 
+	public function hold_salary() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['hold_salary'] = $this->common_model->GetAllData('master_hold_salary',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_hold_salary',$data);
+	}
+
+	public function addhold_salary() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('hold_salary','Hold Salary payout reason','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_hold_salary',array('hold_salary'=>$this->input->post('hold_salary')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['hold_salary'] = $this->input->post('hold_salary');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_hold_salary',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Hold Salary payout reason added successfully!</div>');
+					redirect('superadmin/hold_salary');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Hold Salary payout reason already exist!</div>');
+				redirect('superadmin/hold_salary');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/hold_salary');
+		}
+	}
+
+	public function edithold_salary($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('hold_salary','Hold Salary payout reason','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['hold_salary'] = $this->input->post('hold_salary');
+					$run = $this->common_model->UpdateData('master_hold_salary',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Hold Salary payout reason Updated successfully!</div>');
+				redirect('superadmin/hold_salary');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/hold_salary');
+		}
+	}
+
+	
+	public function deletehold_salary($id)
+	{
+		$run = $this->common_model->UpdateData('master_hold_salary',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Hold Salary payout reason  deleted successfully</div>');
+                 redirect('superadmin/hold_salary');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/hold_salary');
+			}
+	}
+	
+	public function changeStatushold_salary($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_hold_salary',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_hold_salary',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Hold Salary payout reason Status Changed successfully</div>');
+				redirect('superadmin/hold_salary');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/hold_salary');
+		}
+	}
+	//other incomes
+	public function other_incomes() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['other_incomes'] = $this->common_model->GetAllData('master_other_incomes',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_other_incomes',$data);
+	}
+
+	public function addother_incomes() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('other_incomes','Other Incomes','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_other_incomes',array('other_incomes'=>$this->input->post('other_incomes')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['other_incomes'] = $this->input->post('other_incomes');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_other_incomes',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Other Incomes added successfully!</div>');
+					redirect('superadmin/other_incomes');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Other Incomes already exist!</div>');
+				redirect('superadmin/other_incomes');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/other_incomes');
+		}
+	}
+
 
 		//emp doc category
 		public function empDocCategory() 
@@ -3177,6 +3327,496 @@ public function changeStatusreligion($id,$status)
 	}
 }
 
+
+=======
+	public function editother_incomes($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('other_incomes','Other Incomes','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['other_incomes'] = $this->input->post('other_incomes');
+					$run = $this->common_model->UpdateData('master_other_incomes',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Other Incomes Updated successfully!</div>');
+				redirect('superadmin/other_incomes');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/other_incomes');
+		}
+	}
+
+	
+	public function deleteother_incomes($id)
+	{
+		$run = $this->common_model->UpdateData('master_other_incomes',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Other Incomes  deleted successfully</div>');
+                 redirect('superadmin/other_incomes');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/other_incomes');
+			}
+	}
+	
+	public function changeStatusother_incomes($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_other_incomes',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_other_incomes',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Other Incomes Status Changed successfully</div>');
+				redirect('superadmin/other_incomes');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/other_incomes');
+		}
+	}
+	//marrital status
+	public function marrital_status() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['marrital_status'] = $this->common_model->GetAllData('master_marrital_status',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_marrital_status',$data);
+	}
+
+	public function addmarrital_status() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('marrital_status','Marrital Status','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_marrital_status',array('marrital_status'=>$this->input->post('marrital_status')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['marrital_status'] = $this->input->post('marrital_status');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_marrital_status',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Marrital Status added successfully!</div>');
+					redirect('superadmin/marrital_status');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Marrital Status already exist!</div>');
+				redirect('superadmin/marrital_status');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/marrital_status');
+		}
+	}
+
+	public function editmarrital_status($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('marrital_status','Marrital Status','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['marrital_status'] = $this->input->post('marrital_status');
+					$run = $this->common_model->UpdateData('master_marrital_status',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Marrital Status Updated successfully!</div>');
+				redirect('superadmin/marrital_status');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/marrital_status');
+		}
+	}
+
+	
+	public function deletemarrital_status($id)
+	{
+		$run = $this->common_model->UpdateData('master_marrital_status',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Marrital Status  deleted successfully</div>');
+                 redirect('superadmin/marrital_status');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/marrital_status');
+			}
+	}
+	
+	public function changeStatusmarrital_status($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_marrital_status',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_marrital_status',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Marrital Status Status Changed successfully</div>');
+				redirect('superadmin/marrital_status');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/marrital_status');
+		}
+	}
+	// residential status
+	public function residential_status() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['residential_status'] = $this->common_model->GetAllData('master_residential_status',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_residential_status',$data);
+	}
+
+	public function addresidential_status() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('residential_status','Residential Status','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_residential_status',array('residential_status'=>$this->input->post('residential_status')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['residential_status'] = $this->input->post('residential_status');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_residential_status',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Residential Status added successfully!</div>');
+					redirect('superadmin/residential_status');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Residential Status already exist!</div>');
+				redirect('superadmin/residential_status');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/residential_status');
+		}
+	}
+
+	public function editresidential_status($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('residential_status','Residential Status','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['residential_status'] = $this->input->post('residential_status');
+					$run = $this->common_model->UpdateData('master_residential_status',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Residential Status Updated successfully!</div>');
+				redirect('superadmin/residential_status');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/residential_status');
+		}
+	}
+
+	
+	public function deleteresidential_status($id)
+	{
+		$run = $this->common_model->UpdateData('master_residential_status',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Residential Status  deleted successfully</div>');
+                 redirect('superadmin/residential_status');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/residential_status');
+			}
+	}
+	
+	public function changeStatusresidential_status($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_residential_status',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_residential_status',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Residential Status Status Changed successfully</div>');
+				redirect('superadmin/residential_status');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/residential_status');
+		}
+	}
+	//vaccination reason
+	public function vaccination_reason() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['vaccination_reason'] = $this->common_model->GetAllData('master_vaccination_reason',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_vaccination_reason',$data);
+	}
+
+	public function addvaccination_reason() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('vaccination_reason','Vaccination Reason','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_vaccination_reason',array('vaccination_reason'=>$this->input->post('vaccination_reason')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['vaccination_reason'] = $this->input->post('vaccination_reason');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_vaccination_reason',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Vaccination Reason added successfully!</div>');
+					redirect('superadmin/vaccination_reason');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Vaccination Reason already exist!</div>');
+				redirect('superadmin/vaccination_reason');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/vaccination_reason');
+		}
+	}
+
+	public function editvaccination_reason($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('vaccination_reason','Vaccination Reason','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['vaccination_reason'] = $this->input->post('vaccination_reason');
+					$run = $this->common_model->UpdateData('master_vaccination_reason',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Vaccination Reason Updated successfully!</div>');
+				redirect('superadmin/vaccination_reason');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/vaccination_reason');
+		}
+	}
+
+	
+	public function deletevaccination_reason($id)
+	{
+		$run = $this->common_model->UpdateData('master_vaccination_reason',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Vaccination Reason  deleted successfully</div>');
+                 redirect('superadmin/vaccination_reason');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/vaccination_reason');
+			}
+	}
+	
+	public function changeStatusvaccination_reason($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_vaccination_reason',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_vaccination_reason',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Vaccination Reason Status Changed successfully</div>');
+				redirect('superadmin/vaccination_reason');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/vaccination_reason');
+		}
+	}
+	//Category Change Reason
+	public function category_change_reason() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['category_change_reason'] = $this->common_model->GetAllData('master_category_change_reason',array('status!='=>2),'id');
+		// echo "<pre>"; print_r($data['bankAccountType']); die;
+		$this->load->view('Admin/s_category_change_reason',$data);
+	}
+
+	public function addcategory_change_reason() 
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('category_change_reason','Category Change Reason','required');
+		
+		if($this->form_validation->run()){
+			$chk = $this->common_model->GetSingleData('master_category_change_reason',array('category_change_reason'=>$this->input->post('category_change_reason')));
+			
+			if($chk=='')
+			{
+				
+					
+					$insert1['category_change_reason'] = $this->input->post('category_change_reason');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_category_change_reason',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">Category Change Reason added successfully!</div>');
+					redirect('superadmin/category_change_reason');
+				
+			}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Category Change Reason already exist!</div>');
+				redirect('superadmin/category_change_reason');
+			}
+		
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/category_change_reason');
+		}
+	}
+
+	public function editcategory_change_reason($id)
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('category_change_reason','Category Change Reason','required');
+		
+		if($this->form_validation->run()){
+			
+					$insert['category_change_reason'] = $this->input->post('category_change_reason');
+					$run = $this->common_model->UpdateData('master_category_change_reason',array('id'=>$id),$insert);
+					
+			if($run)
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Category Change Reason Updated successfully!</div>');
+				redirect('superadmin/category_change_reason');
+			} 
+			else
+			{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+			}
+			
+			
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/category_change_reason');
+		}
+	}
+
+	
+	public function deletecategory_change_reason($id)
+	{
+		$run = $this->common_model->UpdateData('master_category_change_reason',array('id'=>$id),array('status'=>2));
+			//echo $this->db->last_query();
+			if($run) {
+				
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Category Change Reason  deleted successfully</div>');
+                 redirect('superadmin/category_change_reason');
+							
+			} else {
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+                 redirect('superadmin/category_change_reason');
+			}
+	}
+	
+	public function changeStatuscategory_change_reason($id,$status)
+	{
+	
+		$companies = $this->common_model->GetSingleData('master_category_change_reason',array('id'=>$id));
+		$run = $this->common_model->UpdateData('master_category_change_reason',array('id'=>$id),array('status'=>$status));
+
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Category Change Reason Status Changed successfully</div>');
+				redirect('superadmin/category_change_reason');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+				redirect('superadmin/category_change_reason');
+		}
+	}
+	
+	
 
 }
 

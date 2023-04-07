@@ -49,7 +49,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>-->
+                    </li>--> 
 					
 					<li class="menu-item ">
                         <a href="#" class="open-dropdown menu-link">
@@ -1010,6 +1010,56 @@
                                 <a href="<?php echo base_url(); ?>superadmin/currency" class="menu-link">
                                     <span class="menu-label">
                                         <span class="menu-name">Currency</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/hold_salary" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Hold Salary Payout Reason</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/marrital_status" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Marrital Status</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/residential_status" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Residential Status</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/vaccination_reason" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Vaccination Reason</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/category_change_reason" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Category Change Reason</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="la la-users-cog"></i>
