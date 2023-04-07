@@ -227,6 +227,7 @@ $route['superadmin/editcategory_change_reason/(:num)']='Admin/superadmin/editcat
 $route['superadmin/deletecategory_change_reason/(:num)']='Admin/superadmin/deletecategory_change_reason/$1';
 $route['superadmin/changeStatuscategory_change_reason/(:num)/(:any)']='Admin/superadmin/changeStatuscategory_change_reason/$1/$2';
 
+
 $route['superadmin/qualification_level']='Admin/superadmin/qualification_level';
 $route['superadmin/addQualificationLevel']='Admin/superadmin/addQualificationLevel';
 $route['superadmin/editQualificationLevel/(:num)']='Admin/superadmin/editQualificationLevel/$1';
