@@ -3328,7 +3328,7 @@ public function changeStatusreligion($id,$status)
 }
 
 
-=======
+
 	public function editother_incomes($id)
 	{
 		$user_id = $this->session->userdata('user_id');

@@ -64,10 +64,10 @@
 										<td>
 											<div class="atbd-button-list d-flex flex-wrap">
 											   <button class="btn btn-icon btn-success btn-squared" title="Edit" data-toggle="modal" data-target="#Edit_NewCompany<?php echo $i; ?>"><i class="la la-edit mr-0"></i></button>
-												<a onclick="return confirm('Are you sure want to delete this qualification?');" href="<?php echo base_url(); ?>superadmin/deletequalificationgroup/<?php echo $value['id']; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to delete this qualification?');" href="<?php echo base_url(); ?>superadmin/deletequalification/<?php echo $value['id']; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
 									
 												<?php if($value['status']=='0'){?>
-												<a onclick="return confirm('Are you sure want to change status of this qualification?');" href="<?php echo base_url(); ?>superadmin/changeStatusqualificationgroup/<?php echo $value['id'];?>/1"><button class="btn btn-icon btn-danger btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to change status of this qualification?');" href="<?php echo base_url(); ?>superadmin/changeStatusqualification/<?php echo $value['id'];?>/1"><button class="btn btn-icon btn-danger btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }else{?>
 												<a onclick="return confirm('Are you sure want to change status of this qualification?');" href="<?php echo base_url(); ?>superadmin/changeStatusqualification/<?php echo $value['id'];?>/0"><button class="btn btn-icon btn-danger btn-squared" title="Disable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }?>
