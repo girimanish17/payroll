@@ -724,9 +724,11 @@ public function expense_type(){
 	{
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
-
+		
+		$data['listValues'] = $this->common_model->getAllwhere('master_bloodgroup', array('status' => 1));
+		
+		// echo "<pre>"; print_r($data['listValues']); die;
 		$data['tax'] = $this->common_model->getAllwhere('profession_tax_slabs', array('admin_id' => $user_id));
-		$data['listValues'] = $this->common_model->getAllwhere('list_of_values', array('admin_id' => $user_id));
 			
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
 
@@ -879,23 +881,19 @@ public function expense_type(){
 	
 	public function list_of_values() 
 	{
-		$admin_id = $this->session->userdata('user_id');
-
-		$this->form_validation->set_rules('description', 'Description', 'trim');
-		$this->form_validation->set_rules('code', 'Code', 'trim');
-
-		if($this->form_validation->run())
-		{
-			$values['admin_id'] = $admin_id;
-			$values['description'] = $this->input->post('description');
-			$values['code'] = $this->input->post('code');
-			$values['date'] = date('Y-m-d');
-
-			$this->common_model->InsertData('list_of_values', $values);
-			redirect('admin/profile');
+		$table_name = $this->input->post('valueId');
+		$data = $this->common_model->getallwhere($table_name, array('status' => 1));
+		if($data) {
+			foreach($data as $row) {
+				$html .= '<tr>';
+				$html .= '<td>'.$row->description.' </td>';
+				$html .= '<td><input type="checkbox" name="check_record[]" class="checkId" value="'.$row->id.'"  onclick="validateFun();" >
+				
+				</td>';
+				$html .= '</tr>';
+			}
 		}
-
-		$this->load->view('Admin/add_list_of_values',$data);
+		echo json_encode($html);
 	}
 
 	public function edit_list_of_values($id) 
@@ -919,6 +917,7 @@ public function expense_type(){
 	
 	public function delete_list_of_values($id) 
 	{
+		echo "heloooo"; die;
 		$this->common_model->DeleteData('list_of_values', array('id' => $id));
 		redirect('admin/profile');
 	}

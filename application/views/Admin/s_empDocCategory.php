@@ -58,7 +58,7 @@
 									?>
 									<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $value['empDocCategory'];?></td>
+										<td><?php echo $value['description'];?></td>
 										<td><?php echo date('d M Y',strtotime($value['created_date']));?></td>
 										<td><?php echo $value['status']=='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
 										<td>
@@ -92,7 +92,7 @@
 															
 															<div class="form-group col-sm-12">
 																<label>Emp Doc Category</label>
-																<input type="text" name="empDocCategory"  value="<?php echo $value['empDocCategory'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Emp Doc Category">
+																<input type="text" name="empDocCategory"  value="<?php echo $value['description'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Emp Doc Category">
 															</div>
 															
 															<div class="layout-button mt-25">

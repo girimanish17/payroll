@@ -387,43 +387,63 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
          
              
             <div id="eMsg"></div>
-            <h3>List of values</h3>
+            <h3>List of Values</h3>
+      
+               <select name="list_search" class="form-control mt-2" style="width:20%;" onchange="listSearch()" id="list_name">
+                  <option value="">Select List of Values</option>
+                  <option value="master_super_country">Country</option>
+                  <option value="master_bulletin_category">Bulletin Category</option>
+                  <option value="master_empdoccategory">Emp Doc Category</option>
+                  <option value="master_empstatus">Employee Status</option>
+                  <option value="master_empresignationreason">Employee Registration Reason</option>
+                  <option value="master_formscategory">Forms Category</option>
+                  <option value="master_pfschemes">PF Scheme</option>
+                  <option value="master_involuntaryreasons">In Voluntary Reasons</option>
+                  <option value="master_nationality">Nationality</option>
+                  <option value="master_relation">Relation</option>
+                  <option value="master_religion">Religion</option>
+                  <option value="master_qualification_level">Qualification Level</option>
+                  <option value="master_qualification_area">Qualification Area</option>
+                  <option value="master_bank">Bank</option>
+                  <option value="master_bankaccount_type">Bank Account Type</option>
+                  <option value="master_bloodgroup">Blood Group</option>
+                  <option value="master_confirmation_reason">Confirmation Reason</option>
+                  <option value="master_qualification">Qualification</option>
+                  <option value="master_currency">Currency</option>
+                  <option value="master_hold_salary">Hold Salary Payout Reason</option>
+                  <option value="master_other_incomes">Other Incomes</option>
+                  <option value="master_marrital_status">Marrital Status</option>
+                  <option value="master_residential_status">Residential Status</option>
+                  <option value="master_vaccination_reason">Vaccination Reason</option>
+                  <option value="master_category_change_reason">Category Change Reason</option>
+                  <option value="master_pf_leaving_reason">PF Leaving Reason</option>
+                  <option value="master_leaving_feedback">Leaving Feedback</option>
+               </select>
+           
             <div class="form-row mt-0">
-				
 
                             <div class="card-body">
-                               <a href="<?php echo base_url();?>admin/list_of_values" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a>
+                              
                                 <div class="table-responsives">
                               
-                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                    <table class="table  mb-0 table-basic mt-2 text-">
                                         <thead>
                                             <tr  class="userDatatable-header">
                                             <th>Description</th>
-                                            <th>Code</th>
                                             <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                          <?php if($listValues) { 
-                                             foreach($listValues as $row) {   
-                                          ?>
-                                          <tr>
-                                             <td><?php echo $row->description; ?></td>
-                                             <td><?php echo $row->code; ?></td>
-                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
-                                                <a href="<?php echo base_url()?>admin/edit_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
-                                          
-                                             <a href="<?php echo base_url()?>admin/delete_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
-                                          
-                                          </td>
-                                          </tr>
-                                          <?php } } ?>
-                                      </tbody>
+                                        <form>
+                                          <tbody id="tableDataId" class="">
+                                         
+                                          </tbody>
+                                      </form>
                                     </table>
                                 </div>
                             </div>   
             </div>
       </div>
+      
    </div>
 </div>
 <!-- table end -->
@@ -457,9 +477,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                                           ?>
                                           <tr>
                                              <td><?php echo $row->description; ?></td>
-                                             <td><?php echo $row->code; ?></td>
                                              <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
-                                                <a href="<?php echo base_url()?>admin/edit_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
                                           
                                              <a href="<?php echo base_url()?>admin/delete_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
                                           
@@ -475,13 +493,41 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
    </div>
 </div>
 <!-- table end -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
-<script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script> -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <?php //include('include/footer.php'); ?> 
+<script>
+function validateFun(){
+   
+   // let ss = $('#checkId').val();
+   let ss = $("input[name=check_record]").val();
+  
+   console.log(ss);
+}
+
+function listSearch() 
+{
+   let valueId = $('#list_name').val();
+   // console.log(valueId);
+   
+   $.ajax({
+            url : "<?php echo base_url()?>admin/list_of_values",
+            method : 'POST',
+            dataType : 'json',
+            data : {valueId : valueId},
+            success : function(response)
+            {
+              console.log(response);
+              $('#tableDataId').html(response);
+            },
+        });
+}
+</script>
 <script type="text/javascript">
 
 $(document).ready(function() {
