@@ -27207,12 +27207,12 @@ ul.k-group li.k-item {
 
 
 /*== Zainul ==*/
-
+/*
 .admin-sidebar .menu .menu-item:nth-child(5),
 .admin-sidebar .menu .menu-item:nth-child(7),
 .admin-sidebar .menu .menu-item:last-child {
     display: none;
-}
+}*/
 
 .admin-sidebar .menu .menu-item .sub-menu .menu-item:first-child {
     pointer-events: all;
