@@ -1293,13 +1293,13 @@ class Superadmin extends CI_Controller
 		$this->form_validation->set_rules('name','name','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_bloodgroup',array('blood_group'=>$this->input->post('name')));
+			$chk = $this->common_model->GetSingleData('master_bloodgroup',array('description'=>$this->input->post('name')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['blood_group'] = $this->input->post('name');
+					$insert1['description'] = $this->input->post('name');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_bloodgroup',$insert1);
@@ -1328,7 +1328,7 @@ class Superadmin extends CI_Controller
 		
 		if($this->form_validation->run()){
 			
-					$insert['blood_group'] = $this->input->post('name');
+					$insert['description'] = $this->input->post('name');
 					$run = $this->common_model->UpdateData('master_bloodgroup',array('id'=>$id),$insert);
 					
 			if($run)
@@ -1398,13 +1398,13 @@ class Superadmin extends CI_Controller
 		$this->form_validation->set_rules('qualification_level','Qualification Level','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_qualification_level',array('qualification_level'=>$this->input->post('qualification_level')));
+			$chk = $this->common_model->GetSingleData('master_qualification_level',array('description'=>$this->input->post('qualification_level')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['qualification_level'] = $this->input->post('qualification_level');
+					$insert1['description'] = $this->input->post('qualification_level');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_qualification_level',$insert1);
@@ -1433,7 +1433,7 @@ class Superadmin extends CI_Controller
 		
 		if($this->form_validation->run()){
 			
-					$insert['qualification_level'] = $this->input->post('qualification_level');
+					$insert['description'] = $this->input->post('qualification_level');
 					$run = $this->common_model->UpdateData('master_qualification_level',array('id'=>$id),$insert);
 					
 			if($run)
@@ -1485,13 +1485,13 @@ class Superadmin extends CI_Controller
 			 $this->form_validation->set_rules('name','name','required');
 			 
 			 if($this->form_validation->run()){
-				 $chk = $this->common_model->GetSingleData('master_qualification',array('qualification'=>$this->input->post('name')));
+				 $chk = $this->common_model->GetSingleData('master_qualification',array('description'=>$this->input->post('name')));
 				 
 				 if($chk=='')
 				 {
 					 
 						 
-						 $insert1['qualification'] = $this->input->post('name');
+						 $insert1['description'] = $this->input->post('name');
 						 $insert1['created_date'] = date('Y-m-d h:i:s');
 						 
 						 $run = $this->common_model->InsertData('master_qualification',$insert1);
@@ -1520,7 +1520,7 @@ class Superadmin extends CI_Controller
 			 
 			 if($this->form_validation->run()){
 				 
-						 $insert['qualification'] = $this->input->post('name');
+						 $insert['description'] = $this->input->post('name');
 						 $run = $this->common_model->UpdateData('master_qualification',array('id'=>$id),$insert);
 						 
 				 if($run)
@@ -1587,13 +1587,13 @@ class Superadmin extends CI_Controller
 				  $this->form_validation->set_rules('name','name','required');
 				  
 				  if($this->form_validation->run()){
-					  $chk = $this->common_model->GetSingleData('master_confirmation_reason',array('confirmation_reason'=>$this->input->post('name')));
+					  $chk = $this->common_model->GetSingleData('master_confirmation_reason',array('description'=>$this->input->post('name')));
 					  
 					  if($chk=='')
 					  {
 						  
 							  
-							  $insert1['confirmation_reason'] = $this->input->post('name');
+							  $insert1['description'] = $this->input->post('name');
 							  $insert1['created_date'] = date('Y-m-d h:i:s');
 							  
 							  $run = $this->common_model->InsertData('master_confirmation_reason',$insert1);
@@ -1622,7 +1622,7 @@ class Superadmin extends CI_Controller
 				  
 				  if($this->form_validation->run()){
 					  
-							  $insert['confirmation_reason'] = $this->input->post('name');
+							  $insert['description'] = $this->input->post('name');
 							  $run = $this->common_model->UpdateData('master_confirmation_reason',array('id'=>$id),$insert);
 							  
 					  if($run)
@@ -1689,13 +1689,13 @@ class Superadmin extends CI_Controller
 					   $this->form_validation->set_rules('name','name','required');
 					   
 					   if($this->form_validation->run()){
-						   $chk = $this->common_model->GetSingleData('master_currency',array('currency'=>$this->input->post('name')));
+						   $chk = $this->common_model->GetSingleData('master_currency',array('description'=>$this->input->post('name')));
 						   
 						   if($chk=='')
 						   {
 							   
 								   
-								   $insert1['currency'] = $this->input->post('name');
+								   $insert1['description'] = $this->input->post('name');
 								   $insert1['created_date'] = date('Y-m-d h:i:s');
 								   
 								   $run = $this->common_model->InsertData('master_currency',$insert1);
@@ -1724,7 +1724,7 @@ class Superadmin extends CI_Controller
 					   
 					   if($this->form_validation->run()){
 						   
-								   $insert['currency'] = $this->input->post('name');
+								   $insert['description'] = $this->input->post('name');
 								   $run = $this->common_model->UpdateData('master_currency',array('id'=>$id),$insert);
 								   
 						   if($run)
@@ -1814,13 +1814,13 @@ class Superadmin extends CI_Controller
 		$this->form_validation->set_rules('bank_name','Bank','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_bank',array('bank_name'=>$this->input->post('bank_name')));
+			$chk = $this->common_model->GetSingleData('master_bank',array('description'=>$this->input->post('bank_name')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['bank_name'] = $this->input->post('bank_name');
+					$insert1['description'] = $this->input->post('bank_name');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_bank',$insert1);
@@ -1849,7 +1849,7 @@ class Superadmin extends CI_Controller
 		
 		if($this->form_validation->run()){
 			
-					$insert['bank_name'] = $this->input->post('bank_name');
+					$insert['description'] = $this->input->post('bank_name');
 					$run = $this->common_model->UpdateData('master_bank',array('id'=>$id),$insert);
 					
 			if($run)
@@ -1920,13 +1920,13 @@ class Superadmin extends CI_Controller
 		$this->form_validation->set_rules('bank_account_type','Bank Account Type','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_bankAccount_type',array('bank_account_type'=>$this->input->post('bank_account_type')));
+			$chk = $this->common_model->GetSingleData('master_bankAccount_type',array('description'=>$this->input->post('bank_account_type')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['bank_account_type'] = $this->input->post('bank_account_type');
+					$insert1['description'] = $this->input->post('bank_account_type');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_bankAccount_type',$insert1);
@@ -1955,7 +1955,7 @@ class Superadmin extends CI_Controller
 		
 		if($this->form_validation->run()){
 			
-					$insert['bank_account_type'] = $this->input->post('bank_account_type');
+					$insert['description'] = $this->input->post('bank_account_type');
 					$run = $this->common_model->UpdateData('master_bankAccount_type',array('id'=>$id),$insert);
 					
 			if($run)
@@ -2026,13 +2026,13 @@ class Superadmin extends CI_Controller
 		$this->form_validation->set_rules('bulletin_category','Bulletin Category','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_bulletin_category',array('bulletin_category'=>$this->input->post('bulletin_category')));
+			$chk = $this->common_model->GetSingleData('master_bulletin_category',array('description'=>$this->input->post('bulletin_category')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['bulletin_category'] = $this->input->post('bulletin_category');
+					$insert1['description'] = $this->input->post('bulletin_category');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_bulletin_category',$insert1);
@@ -2061,7 +2061,7 @@ class Superadmin extends CI_Controller
 		
 		if($this->form_validation->run()){
 			
-					$insert['bulletin_category'] = $this->input->post('bulletin_category');
+					$insert['description'] = $this->input->post('bulletin_category');
 					$run = $this->common_model->UpdateData('master_bulletin_category',array('id'=>$id),$insert);
 					
 			if($run)
@@ -2133,13 +2133,13 @@ class Superadmin extends CI_Controller
 		$this->form_validation->set_rules('country','Country','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_super_country',array('country'=>$this->input->post('country')));
+			$chk = $this->common_model->GetSingleData('master_super_country',array('description'=>$this->input->post('country')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['country'] = $this->input->post('country');
+					$insert1['description'] = $this->input->post('country');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_super_country',$insert1);
@@ -2168,7 +2168,7 @@ class Superadmin extends CI_Controller
 		
 		if($this->form_validation->run()){
 			
-					$insert['country'] = $this->input->post('country');
+					$insert['description'] = $this->input->post('country');
 					$run = $this->common_model->UpdateData('master_super_country',array('id'=>$id),$insert);
 					
 			if($run)
@@ -2238,13 +2238,13 @@ class Superadmin extends CI_Controller
 		$this->form_validation->set_rules('hold_salary','Hold Salary payout reason','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_hold_salary',array('hold_salary'=>$this->input->post('hold_salary')));
+			$chk = $this->common_model->GetSingleData('master_hold_salary',array('description'=>$this->input->post('hold_salary')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['hold_salary'] = $this->input->post('hold_salary');
+					$insert1['description'] = $this->input->post('hold_salary');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_hold_salary',$insert1);
@@ -2273,7 +2273,7 @@ class Superadmin extends CI_Controller
 		
 		if($this->form_validation->run()){
 			
-					$insert['hold_salary'] = $this->input->post('hold_salary');
+					$insert['description'] = $this->input->post('hold_salary');
 					$run = $this->common_model->UpdateData('master_hold_salary',array('id'=>$id),$insert);
 					
 			if($run)
@@ -2389,13 +2389,13 @@ class Superadmin extends CI_Controller
 			$this->form_validation->set_rules('empDocCategory','Emp Doc Category','required');
 			
 			if($this->form_validation->run()){
-				$chk = $this->common_model->GetSingleData('master_empdoccategory',array('empDocCategory'=>$this->input->post('empDocCategory')));
+				$chk = $this->common_model->GetSingleData('master_empdoccategory',array('description'=>$this->input->post('empDocCategory')));
 				
 				if($chk=='')
 				{
 					
 						
-						$insert1['empDocCategory'] = $this->input->post('empDocCategory');
+						$insert1['description'] = $this->input->post('empDocCategory');
 						$insert1['created_date'] = date('Y-m-d h:i:s');
 						
 						$run = $this->common_model->InsertData('master_empdoccategory',$insert1);
@@ -2424,7 +2424,7 @@ class Superadmin extends CI_Controller
 			
 			if($this->form_validation->run()){
 				
-						$insert['empDocCategory'] = $this->input->post('empDocCategory');
+						$insert['description'] = $this->input->post('empDocCategory');
 						$run = $this->common_model->UpdateData('master_empdoccategory',array('id'=>$id),$insert);
 						
 				if($run)
@@ -2495,13 +2495,13 @@ class Superadmin extends CI_Controller
 			$this->form_validation->set_rules('empStatus','Employee Status','required');
 			
 			if($this->form_validation->run()){
-				$chk = $this->common_model->GetSingleData('master_empstatus',array('empStatus'=>$this->input->post('empStatus')));
+				$chk = $this->common_model->GetSingleData('master_empstatus',array('description'=>$this->input->post('empStatus')));
 				
 				if($chk=='')
 				{
 					
 						
-						$insert1['empStatus'] = $this->input->post('empStatus');
+						$insert1['description'] = $this->input->post('empStatus');
 						$insert1['created_date'] = date('Y-m-d h:i:s');
 						
 						$run = $this->common_model->InsertData('master_empstatus',$insert1);
@@ -2530,7 +2530,7 @@ class Superadmin extends CI_Controller
 			
 			if($this->form_validation->run()){
 				
-						$insert['empStatus'] = $this->input->post('empStatus');
+						$insert['description'] = $this->input->post('empStatus');
 						$run = $this->common_model->UpdateData('master_empstatus',array('id'=>$id),$insert);
 						
 				if($run)
@@ -2603,13 +2603,13 @@ public function addempResignationReason()
 ','required');
 	
 	if($this->form_validation->run()){
-		$chk = $this->common_model->GetSingleData('master_empresignationreason',array('empResignationReason'=>$this->input->post('empResignationReason')));
+		$chk = $this->common_model->GetSingleData('master_empresignationreason',array('description'=>$this->input->post('empResignationReason')));
 		
 		if($chk=='')
 		{
 			
 				
-				$insert1['empResignationReason'] = $this->input->post('empResignationReason');
+				$insert1['description'] = $this->input->post('empResignationReason');
 				$insert1['created_date'] = date('Y-m-d h:i:s');
 				
 				$run = $this->common_model->InsertData('master_empresignationreason',$insert1);
@@ -2638,7 +2638,7 @@ public function editempResignationReason($id)
 	
 	if($this->form_validation->run()){
 		
-				$insert['empResignationReason'] = $this->input->post('empResignationReason');
+				$insert['description'] = $this->input->post('empResignationReason');
 				$run = $this->common_model->UpdateData('master_empresignationreason',array('id'=>$id),$insert);
 				
 		if($run)
@@ -2709,13 +2709,13 @@ public function addformsCategory()
 	$this->form_validation->set_rules('formsCategory','Forms Category','required');
 	
 	if($this->form_validation->run()){
-		$chk = $this->common_model->GetSingleData('master_formscategory',array('formsCategory'=>$this->input->post('formsCategory')));
+		$chk = $this->common_model->GetSingleData('master_formscategory',array('description'=>$this->input->post('formsCategory')));
 		
 		if($chk=='')
 		{
 			
 				
-				$insert1['formsCategory'] = $this->input->post('formsCategory');
+				$insert1['description'] = $this->input->post('formsCategory');
 				$insert1['created_date'] = date('Y-m-d h:i:s');
 				
 				$run = $this->common_model->InsertData('master_formscategory',$insert1);
@@ -2744,7 +2744,7 @@ public function editformsCategory($id)
 	
 	if($this->form_validation->run()){
 		
-				$insert['formsCategory'] = $this->input->post('formsCategory');
+				$insert['description'] = $this->input->post('formsCategory');
 				$run = $this->common_model->UpdateData('master_formscategory',array('id'=>$id),$insert);
 				
 		if($run)
@@ -2815,13 +2815,13 @@ public function addpfSchemes()
 	$this->form_validation->set_rules('pfSchemes','PF Scheme','required');
 	
 	if($this->form_validation->run()){
-		$chk = $this->common_model->GetSingleData('master_pfschemes',array('pfSchemes'=>$this->input->post('pfSchemes')));
+		$chk = $this->common_model->GetSingleData('master_pfschemes',array('description'=>$this->input->post('pfSchemes')));
 		
 		if($chk=='')
 		{
 			
 				
-				$insert1['pfSchemes'] = $this->input->post('pfSchemes');
+				$insert1['description'] = $this->input->post('pfSchemes');
 				$insert1['created_date'] = date('Y-m-d h:i:s');
 				
 				$run = $this->common_model->InsertData('master_pfschemes',$insert1);
@@ -2850,7 +2850,7 @@ public function editpfSchemes($id)
 	
 	if($this->form_validation->run()){
 		
-				$insert['pfSchemes'] = $this->input->post('pfSchemes');
+				$insert['description'] = $this->input->post('pfSchemes');
 				$run = $this->common_model->UpdateData('master_pfschemes',array('id'=>$id),$insert);
 				
 		if($run)
@@ -2921,13 +2921,13 @@ public function addinVoluntaryReasons()
 	$this->form_validation->set_rules('inVoluntaryReasons','In Voluntary Reasons','required');
 	
 	if($this->form_validation->run()){
-		$chk = $this->common_model->GetSingleData('master_involuntaryreasons',array('inVoluntaryReasons'=>$this->input->post('inVoluntaryReasons')));
+		$chk = $this->common_model->GetSingleData('master_involuntaryreasons',array('description'=>$this->input->post('inVoluntaryReasons')));
 		
 		if($chk=='')
 		{
 			
 				
-				$insert1['inVoluntaryReasons'] = $this->input->post('inVoluntaryReasons');
+				$insert1['description'] = $this->input->post('inVoluntaryReasons');
 				$insert1['created_date'] = date('Y-m-d h:i:s');
 				
 				$run = $this->common_model->InsertData('master_involuntaryreasons',$insert1);
@@ -2956,7 +2956,7 @@ public function editinVoluntaryReasons($id)
 	
 	if($this->form_validation->run()){
 		
-				$insert['inVoluntaryReasons'] = $this->input->post('inVoluntaryReasons');
+				$insert['description'] = $this->input->post('inVoluntaryReasons');
 				$run = $this->common_model->UpdateData('master_involuntaryreasons',array('id'=>$id),$insert);
 				
 		if($run)
@@ -3027,13 +3027,13 @@ public function addnationality()
 	$this->form_validation->set_rules('nationality','Nationality','required');
 	
 	if($this->form_validation->run()){
-		$chk = $this->common_model->GetSingleData('master_nationality',array('nationality'=>$this->input->post('nationality')));
+		$chk = $this->common_model->GetSingleData('master_nationality',array('description'=>$this->input->post('nationality')));
 		
 		if($chk=='')
 		{
 			
 				
-				$insert1['nationality'] = $this->input->post('nationality');
+				$insert1['description'] = $this->input->post('nationality');
 				$insert1['created_date'] = date('Y-m-d h:i:s');
 				
 				$run = $this->common_model->InsertData('master_nationality',$insert1);
@@ -3062,7 +3062,7 @@ public function editnationality($id)
 	
 	if($this->form_validation->run()){
 		
-				$insert['nationality'] = $this->input->post('nationality');
+				$insert['description'] = $this->input->post('nationality');
 				$run = $this->common_model->UpdateData('master_nationality',array('id'=>$id),$insert);
 				
 		if($run)
@@ -3133,13 +3133,13 @@ public function addrelation()
 	$this->form_validation->set_rules('relation','Relation','required');
 	
 	if($this->form_validation->run()){
-		$chk = $this->common_model->GetSingleData('master_relation',array('relation'=>$this->input->post('relation')));
+		$chk = $this->common_model->GetSingleData('master_relation',array('description'=>$this->input->post('relation')));
 		
 		if($chk=='')
 		{
 			
 				
-				$insert1['relation'] = $this->input->post('relation');
+				$insert1['description'] = $this->input->post('relation');
 				$insert1['created_date'] = date('Y-m-d h:i:s');
 				
 				$run = $this->common_model->InsertData('master_relation',$insert1);
@@ -3239,13 +3239,13 @@ public function addreligion()
 	$this->form_validation->set_rules('religion','Religion','required');
 	
 	if($this->form_validation->run()){
-		$chk = $this->common_model->GetSingleData('master_religion',array('religion'=>$this->input->post('religion')));
+		$chk = $this->common_model->GetSingleData('master_religion',array('description'=>$this->input->post('religion')));
 		
 		if($chk=='')
 		{
 			
 				
-				$insert1['religion'] = $this->input->post('religion');
+				$insert1['description'] = $this->input->post('religion');
 				$insert1['created_date'] = date('Y-m-d h:i:s');
 				
 				$run = $this->common_model->InsertData('master_religion',$insert1);
@@ -3274,7 +3274,7 @@ public function editreligion($id)
 	
 	if($this->form_validation->run()){
 		
-				$insert['religion'] = $this->input->post('religion');
+				$insert['description'] = $this->input->post('religion');
 				$run = $this->common_model->UpdateData('master_religion',array('id'=>$id),$insert);
 				
 		if($run)
@@ -3409,13 +3409,13 @@ public function changeStatusreligion($id,$status)
 		$this->form_validation->set_rules('marrital_status','Marrital Status','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_marrital_status',array('marrital_status'=>$this->input->post('marrital_status')));
+			$chk = $this->common_model->GetSingleData('master_marrital_status',array('description'=>$this->input->post('marrital_status')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['marrital_status'] = $this->input->post('marrital_status');
+					$insert1['description'] = $this->input->post('marrital_status');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_marrital_status',$insert1);
@@ -3444,7 +3444,7 @@ public function changeStatusreligion($id,$status)
 		
 		if($this->form_validation->run()){
 			
-					$insert['marrital_status'] = $this->input->post('marrital_status');
+					$insert['description'] = $this->input->post('marrital_status');
 					$run = $this->common_model->UpdateData('master_marrital_status',array('id'=>$id),$insert);
 					
 			if($run)
@@ -3515,13 +3515,13 @@ public function changeStatusreligion($id,$status)
 		$this->form_validation->set_rules('residential_status','Residential Status','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_residential_status',array('residential_status'=>$this->input->post('residential_status')));
+			$chk = $this->common_model->GetSingleData('master_residential_status',array('description'=>$this->input->post('residential_status')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['residential_status'] = $this->input->post('residential_status');
+					$insert1['description'] = $this->input->post('residential_status');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_residential_status',$insert1);
@@ -3550,7 +3550,7 @@ public function changeStatusreligion($id,$status)
 		
 		if($this->form_validation->run()){
 			
-					$insert['residential_status'] = $this->input->post('residential_status');
+					$insert['description'] = $this->input->post('residential_status');
 					$run = $this->common_model->UpdateData('master_residential_status',array('id'=>$id),$insert);
 					
 			if($run)
@@ -3621,13 +3621,13 @@ public function changeStatusreligion($id,$status)
 		$this->form_validation->set_rules('vaccination_reason','Vaccination Reason','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_vaccination_reason',array('vaccination_reason'=>$this->input->post('vaccination_reason')));
+			$chk = $this->common_model->GetSingleData('master_vaccination_reason',array('description'=>$this->input->post('vaccination_reason')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['vaccination_reason'] = $this->input->post('vaccination_reason');
+					$insert1['description'] = $this->input->post('vaccination_reason');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_vaccination_reason',$insert1);
@@ -3656,7 +3656,7 @@ public function changeStatusreligion($id,$status)
 		
 		if($this->form_validation->run()){
 			
-					$insert['vaccination_reason'] = $this->input->post('vaccination_reason');
+					$insert['description'] = $this->input->post('vaccination_reason');
 					$run = $this->common_model->UpdateData('master_vaccination_reason',array('id'=>$id),$insert);
 					
 			if($run)
@@ -3727,13 +3727,13 @@ public function changeStatusreligion($id,$status)
 		$this->form_validation->set_rules('category_change_reason','Category Change Reason','required');
 		
 		if($this->form_validation->run()){
-			$chk = $this->common_model->GetSingleData('master_category_change_reason',array('category_change_reason'=>$this->input->post('category_change_reason')));
+			$chk = $this->common_model->GetSingleData('master_category_change_reason',array('description'=>$this->input->post('category_change_reason')));
 			
 			if($chk=='')
 			{
 				
 					
-					$insert1['category_change_reason'] = $this->input->post('category_change_reason');
+					$insert1['description'] = $this->input->post('category_change_reason');
 					$insert1['created_date'] = date('Y-m-d h:i:s');
 					
 					$run = $this->common_model->InsertData('master_category_change_reason',$insert1);
@@ -3762,7 +3762,7 @@ public function changeStatusreligion($id,$status)
 		
 		if($this->form_validation->run()){
 			
-					$insert['category_change_reason'] = $this->input->post('category_change_reason');
+					$insert['description'] = $this->input->post('category_change_reason');
 					$run = $this->common_model->UpdateData('master_category_change_reason',array('id'=>$id),$insert);
 					
 			if($run)

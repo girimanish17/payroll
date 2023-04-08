@@ -58,7 +58,7 @@
 									?>
 									<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $value['residential_status'];?></td>
+										<td><?php echo $value['description'];?></td>
 										<td><?php echo date('d M Y',strtotime($value['created_date']));?></td>
 										<td><?php echo $value['status']=='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
 										<td>
@@ -92,7 +92,7 @@
 															
 															<div class="form-group col-sm-12">
 																<label>Residential Status</label>
-																<input type="text" name="residential_status"  value="<?php echo $value['residential_status'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Residential Status">
+																<input type="text" name="residential_status"  value="<?php echo $value['description'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Residential Status">
 															</div>
 															
 															<div class="layout-button mt-25">

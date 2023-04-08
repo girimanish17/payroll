@@ -58,7 +58,7 @@
 									?>
 									<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $value['bulletin_category'];?></td>
+										<td><?php echo $value['description'];?></td>
 										<td><?php echo date('d M Y',strtotime($value['created_date']));?></td>
 										<td><?php echo $value['status']=='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
 										<td>
@@ -92,7 +92,7 @@
 															
 															<div class="form-group col-sm-12">
 																<label>Bulletin Category</label>
-																<input type="text" name="bulletin_category"  value="<?php echo $value['bulletin_category'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Bulletin Category">
+																<input type="text" name="bulletin_category"  value="<?php echo $value['description'];?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Bulletin Category">
 															</div>
 															
 															<div class="layout-button mt-25">
