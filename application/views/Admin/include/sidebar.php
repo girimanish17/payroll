@@ -997,6 +997,7 @@
                                     </span>
                                 </a>
                             </li>
+						
 							<li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/currency" class="menu-link">
                                     <span class="menu-label">
@@ -1011,6 +1012,67 @@
                                 <a href="<?php echo base_url(); ?>superadmin/hold_salary" class="menu-link">
                                     <span class="menu-label">
                                         <span class="menu-name">Hold Salary Payout Reason</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/other_incomes" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Other Incomes</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/leaving_feedback" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Leaving Feedback</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/pf_leaving_reason" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">PF Leaving Reason</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/qualification_area" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Qualification Area</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/project" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Project</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-users-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+							<li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/release_salary_reason" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Release Salary Reason</span>
                                     </span>
                                     <span class="menu-icon">
                                         <i class="la la-users-cog"></i>
