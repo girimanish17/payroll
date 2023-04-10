@@ -724,10 +724,7 @@ public function expense_type(){
 	{
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
-		
-		$data['listValues'] = $this->common_model->getAllwhere('master_bloodgroup', array('status' => 1));
-		
-		// echo "<pre>"; print_r($data['listValues']); die;
+
 		$data['tax'] = $this->common_model->getAllwhere('profession_tax_slabs', array('admin_id' => $user_id));
 			
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
@@ -881,13 +878,27 @@ public function expense_type(){
 	
 	public function list_of_values() 
 	{
+		$admin_id = $this->session->userdata('user_id');
+
 		$table_name = $this->input->post('valueId');
 		$data = $this->common_model->getallwhere($table_name, array('status' => 1));
 		if($data) {
 			foreach($data as $row) {
+				$checked="";
+				$dataR = $this->common_model->getSingle('list_of_values_checked', array('table_name' => $table_name, 'admin_id' => $admin_id));
+				$values = $dataR->checked_value;
+				$exarrr = explode(" ",$values);
+				if($dataR)
+				{
+					if(in_array($row->id,$exarrr))
+					{
+						$checked="checked";
+					}					
+				}
+
 				$html .= '<tr>';
 				$html .= '<td>'.$row->description.' </td>';
-				$html .= '<td><input type="checkbox" name="check_record[]" class="checkId" value="'.$row->id.'"   >
+				$html .= '<td><input type="checkbox" name="check_record[]" class="checkId" value="'.$row->id.'"  '.$checked.' >
 				</td>';
 				$html .= '</tr>';
 			}
