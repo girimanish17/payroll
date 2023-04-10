@@ -887,38 +887,33 @@ public function expense_type(){
 			foreach($data as $row) {
 				$html .= '<tr>';
 				$html .= '<td>'.$row->description.' </td>';
-				$html .= '<td><input type="checkbox" name="check_record[]" class="checkId" value="'.$row->id.'"  onclick="validateFun();" >
-				
+				$html .= '<td><input type="checkbox" name="check_record[]" class="checkId" value="'.$row->id.'"   >
 				</td>';
 				$html .= '</tr>';
 			}
 		}
 		echo json_encode($html);
 	}
-
-	public function edit_list_of_values($id) 
-	{
-		$this->form_validation->set_rules('description', 'Description', 'trim');
-		$this->form_validation->set_rules('code', 'Code', 'trim');
-
-		if($this->form_validation->run())
-		{
-			
-			$valuesUpd['description'] = $this->input->post('description');
-			$valuesUpd['code'] = $this->input->post('code');
-			
-			$this->common_model->UpdateData('list_of_values', array('id' => $id), $valuesUpd);
-			redirect('admin/profile');
-		}
-
-		$data['valuesData'] = $this->common_model->getSingle('list_of_values', array('id' => $id));
-		$this->load->view('Admin/edit_list_of_values',$data);
-	}
 	
-	public function delete_list_of_values($id) 
+	public function checked_list_of_values() 
 	{
-		echo "heloooo"; die;
-		$this->common_model->DeleteData('list_of_values', array('id' => $id));
+		$admin_id = $this->session->userdata('user_id');
+
+		$table_name = $this->input->post('list_search');
+		$checkValue = $this->input->post('check_record');
+		$empValue =  implode(" ",$checkValue);
+		
+		$insert['admin_id'] = $admin_id; 
+		$insert['table_name'] = $table_name; 
+		$insert['checked_value'] = $empValue; 
+
+		$check = $this->common_model->getSingle('list_of_values_checked', array('table_name' => $table_name, 'admin_id' => $admin_id));
+		
+		if($check) {
+			$this->common_model->DeleteData('list_of_values_checked', array('table_name' => $table_name, 'admin_id' => $admin_id));
+		} 
+		
+		$this->common_model->InsertData('list_of_values_checked', $insert);
 		redirect('admin/profile');
 	}
 

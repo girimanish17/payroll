@@ -385,7 +385,9 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
    <div class="row">
       <div class="col-sm-12">
          
-             
+             <form action="<?php echo base_url();?>admin/checked_list_of_values" method="post">
+               
+            
             <div id="eMsg"></div>
             <h3>List of Values</h3>
       
@@ -433,12 +435,13 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                                             <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <form>
+                                        
                                           <tbody id="tableDataId" class="">
                                          
                                           </tbody>
-                                      </form>
-                                    </table>
+                                       </table>
+                                       <button type="submit" class="btn btn-primary">Save</button>
+                                   </form>
                                 </div>
                             </div>   
             </div>
@@ -502,13 +505,24 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
 
 <?php //include('include/footer.php'); ?> 
 <script>
-function validateFun(){
+
+var selectedOptions = $('input[type="checkbox"]:checked').map(function() {
+    return $(this).val();
+   // alert('hiii');
+}).get();
+
+console.log(selectedOptions); // Output: ["1", "3"]
+
+// function validateFun(id){
    
-   // let ss = $('#checkId').val();
-   let ss = $("input[name=check_record]").val();
+//    let ss = $('.checkId').val();
+//    // var inputName = $('input[name="check_record[]"]').attr('name');
+//    // var inputName = $(".checkId").attr("name");
+// console.log(inputName); 
+//    // alert(ss);
   
-   console.log(ss);
-}
+//    // console.log(ss);
+// }
 
 function listSearch() 
 {
