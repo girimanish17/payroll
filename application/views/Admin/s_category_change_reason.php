@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Category Change Reason</label>
-							<input type="text" name="category_change_reason" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Category Change Reason">
+							<input type="text" name="category_change_reason" value="<?php echo set_value('category_change_reason') ?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Category Change Reason">
 						</div>
 						
 						<div class="layout-button mt-25">

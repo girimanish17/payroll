@@ -125,6 +125,7 @@
                                     <label class="il-gray fs-14 fw-500 align-center">Expense Type Name <span class="text-danger">*</span></label>
                                     <div class="position-relative">
 									 <input type="text" name="name"  class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Expense Type" value="<?php  echo set_value('name'); ?>">
+
                                        
                                     
                                 </div>

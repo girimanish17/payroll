@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> In Voluntary Reasons</label>
-							<input type="text" name="inVoluntaryReasons" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter In Voluntary Reasons">
+							<input type="text" name="inVoluntaryReasons"  value="<?php echo set_value('inVoluntaryReasons') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter In Voluntary Reasons">
 						</div>
 						
 						<div class="layout-button mt-25">

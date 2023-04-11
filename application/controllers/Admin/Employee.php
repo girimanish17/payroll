@@ -211,6 +211,8 @@ public function expense_type(){
 		$this->load->view('Admin/emp_expense_claim',$data);
 	}
 
+	
+
 	public function addEmployee()
 	{
 		// echo "hellods welcome"; die;
@@ -230,7 +232,8 @@ public function expense_type(){
 
 		$data['emp_random_number'] = $emp_random_number;
 		// form submission 
-		
+		$this->form_validation->set_rules('employee_id', 'Employee ID', 'required|is_unique[users.emp_id]');
+		$this->form_validation->set_message('is_unique', 'Employee ID already exists');
 		$this->form_validation->set_rules('first_name','First Name','required');
 		$this->form_validation->set_rules('email','email','required');
 		$this->form_validation->set_rules('password','Password','required');

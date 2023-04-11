@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Employee Status</label>
-							<input type="text" name="empStatus" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Employee Status">
+							<input type="text" name="empStatus"  value="<?php echo set_value('empStatus') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Employee Status">
 						</div>
 						
 						<div class="layout-button mt-25">

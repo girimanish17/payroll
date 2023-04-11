@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Religion</label>
-							<input type="text" name="religion" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Religion">
+							<input type="text" name="religion"  value="<?php echo set_value('religion') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Religion">
 						</div>
 						
 						<div class="layout-button mt-25">

@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Emp Doc Category</label>
-							<input type="text" name="empDocCategory" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Emp Doc Category">
+							<input type="text" name="empDocCategory"  value="<?php echo set_value('empDocCategory') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Emp Doc Category">
 						</div>
 						
 						<div class="layout-button mt-25">

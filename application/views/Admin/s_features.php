@@ -120,7 +120,7 @@
                                             <p class="color-light mt-0 fs-14">Change Image</p>
                                         </div>
                                         <div class="avatar-up">
-                                            <input type="file" accept="image/*" onchange="loadFile(event)" name="upload-avatar-input" class="upload-avatar-input">
+                                            <input type="file" accept="image/*" onchange="loadFile(event)" name="upload-avatar-input"  class="upload-avatar-input">
                                         </div>
                                     </div>
                                 </div>

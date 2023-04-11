@@ -102,6 +102,7 @@ $route['admin/delete_profession_tax/(:any)'] = 'Admin/Employee/delete_profession
 $route['admin/delete_list_of_values/(:any)'] = 'Admin/Employee/delete_list_of_values/$1';
 $route['admin/add_company_settings'] = 'Admin/Employee/add_company_setting';
 $route['admin/getdesignation'] = 'Admin/Employee/getdesignation';
+$route['admin/validate_empid'] = 'Admin/Employee/validate_empid';
 
 $route['admin/addAnnouncement'] = 'Admin/CoreHr/addAnnouncement';
 $route['admin/editAnnouncement'] = 'Admin/CoreHr/editAnnouncement';

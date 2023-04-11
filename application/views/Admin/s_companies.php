@@ -314,6 +314,7 @@
 								
 								<div class="form-group col-sm-12">
                                     <label> Company Name</label>
+
                                     <input type="text" name="name" class="form-control ih-medium ip-gray radius-xs b-light px-15" value="<?php  echo set_value('name'); ?>" placeholder="Enter Name">
                                 </div>
 								<div class="form-group col-sm-12">
@@ -331,6 +332,7 @@
 								<div class="form-group col-sm-12">
                                     <label> Password</label>
                                     <input type="password" name="password" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Password" value="<?php  echo set_value('password'); ?>">
+
                                 </div>
 								
                                 <div class="form-group col-md-12">
@@ -338,7 +340,9 @@
                                     <select class="form-control px-15" id="exampleFormControlSelect1" name="packages">
 									<option>Select Package</option>
                                     <?php if($packages){ foreach ($packages as $key => $value) {	?>
+
                                     <option value="<?php echo $value['id'];?>" <?php if(set_value('packages')==$value['id']){ echo "selected"; } ?>><?php echo $value['name']; ?></option>
+
                                     
 									<?php }} ?>
                                 </select>
@@ -347,25 +351,33 @@
                                     <label>Premium</label>
                                     <select class="form-control px-15" id="countryOption" name="premium">
 									<option>Select Premium</option>
+
                                     <option value="Monthly" <?php if(set_value('premium')=="Monthly"){ echo "selected"; } ?>>Monthly</option>
                                     <option  value="Annual" <?php if(set_value('premium')=="Annual"){ echo "selected"; } ?>>Annual</option>     
+
                                 </select>
                                 </div>
                                 <div class="form-group mb-25 col-sm-6">
                                     <label>Amount</label>
+
                                     <input type="text" name="amount" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Amount" value="<?php  echo set_value('amount'); ?>">
+
                                 </div>
                                 <div class="form-group col-sm-6 form-group-calender">
                                     <label>Pay Date</label>
                                     <div class="position-relative">
+
                                        <input type="date" name="pay_date" class="form-control  ih-medium ip-light radius-xs b-light px-15" id="datepicker44" placeholder="01/10/2021" value="<?php  echo set_value('pay_date'); ?>">
+
                                         
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-6 form-group-calender">
                                     <label>Next Pay Date</label>
                                     <div class="position-relative">
+
                                         <input type="date" name="next_pay_date" class="form-control  ih-medium ip-light radius-xs b-light px-15" id="datepicker99" placeholder="01/10/2021" value="<?php  echo set_value('next_pay_date'); ?>">
+
                                         
                                     </div>
                                 </div>

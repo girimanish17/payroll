@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Country</label>
-							<input type="text" name="country" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Country">
+							<input type="text" name="country" value="<?php echo set_value('country') ?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Country">
 						</div>
 						
 						<div class="layout-button mt-25">

@@ -207,7 +207,7 @@
                                     <label class=" col-form-label align-center">Locale:<span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" name="locale" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter Locale" value="">
+                                    <input type="text" name="locale"  value="<?php echo set_value('locale') ?>"  class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter Locale" >
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -215,7 +215,7 @@
                                     <label class=" col-form-label align-center">Language:<span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-9">
-                                    <input type="text" name="language" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter Language" value="">
+                                    <input type="text" name="language"  value="<?php echo set_value('language') ?>"  class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter Language" >
                                 </div>
                             </div>
                             <div class="form-group row">
