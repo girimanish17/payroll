@@ -287,7 +287,7 @@
                             <div id="eMsg"></div>
                             <div class="form-row">
                                 <div class="form-group col-md-6 mb-20">
-                                    <input type="text" class="form-control" name="title" placeholder="Title*">
+                                    <input type="text" class="form-control" name="title" placeholder="Title*" value="<?php  echo set_value('title'); ?>">
                                 </div>
                                 <div class="form-group col-md-6 form-group-calender">
                                     <div class="custom-file">
@@ -296,11 +296,11 @@
                                 </div>
                             </div>
                             <div class="form-group form-element-textarea mb-20">
-                                <textarea class="form-control" name="description" rows="3" placeholder="Description*"></textarea>
+                                <textarea class="form-control" name="description" rows="3" placeholder="Description*"><?php  echo set_value('description'); ?></textarea>
                             </div>
                             <div class="button-group d-flex pt-25">
                                 <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">add new Policies</button>
-                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel</button>
+                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light" data-dismiss="modal">cancel</button>
                             </div>
                         </form>
                     </div>

@@ -124,7 +124,7 @@
                                 <div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Account Type Name <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-									 <input type="text" name="account_type"  class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Account Type">
+									 <input type="text" name="account_type"  class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Account Type" value="<?php  echo set_value('account_type'); ?>" required>
                                        
                                     
                                 </div>
@@ -132,7 +132,7 @@
                            
                             <div class="button-group d-flex pt-25">
                                 <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">Save</button>
-                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel</button>
+                               <button type="button" class="btn btn-secondary btn-sm btn-sm" data-dismiss="modal">Back</button>
                             </div>
                         </form>
                     </div>

@@ -222,7 +222,7 @@
                             <input type="hidden" name="id"  value="<?php echo $value['id']; ?>">
                             <div class="button-group d-flex pt-25">
                                 <button  type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">Update Announcements</button>
-                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel</button>
+                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light" data-dismiss="modal">cancel</button>
                             </div>
                         </form>
                     </div>
@@ -258,15 +258,15 @@
                                     <input type="file" name="image" required>
                                 </div>
                                 <div class="form-group col-md-6 mb-20">
-                                    <input type="text" name="title" class="form-control" placeholder="Title*" required>
+                                    <input type="text" name="title" class="form-control" placeholder="Title*" value="<?php  echo set_value('title'); ?>" required>
                                 </div>
                             </div>
                                 <div class="form-row">
                                 <div class="form-group col-md-6 mb-20">
-                                   <input type="date" class="form-control"   name="start_date" /> 
+                                   <input type="date" class="form-control"   name="start_date"  value="<?php  echo set_value('start_date'); ?>"/> 
                                 </div>
                             <div class="form-control col-md-6 mb-20">
-                                <input type="date" class="form-control"  name="end_date" />
+                                <input type="date" class="form-control"  name="end_date" value="<?php  echo set_value('end_date'); ?>"/>
                             </div>
                             </div>
                             <div class="form-row">
@@ -276,7 +276,7 @@
                                              <option value="0">Department</option>
                                             <?php foreach ($department as $key => $d) { ?>
                                            
-                                            <option  value="<?php echo $d['id']; ?>"><?php echo $d['name']; ?></option>
+                                            <option  value="<?php echo $d['id']; ?>" <?php if(set_value('section')==$d['id']){ echo "selected"; } ?>><?php echo $d['name']; ?></option>
                                             <?php  } ?>
                                           
                                         </select>
@@ -286,13 +286,13 @@
                                     <input type="text" name="summary" class="form-control" placeholder="Summary*">
                                 </div>
                                 <div class="form-group formElement-editor col-md-12 mb-0">
-                                    <textarea name="message" class="form-control form-control-lg" placeholder="Type your message..."></textarea>
+                                    <textarea name="message" class="form-control form-control-lg" placeholder="Type your message..."> <?php  echo set_value('message'); ?></textarea>
                                 </div>
                             </div>
 
                             <div class="button-group d-flex pt-25">
                                 <button  type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">Save Announcements</button>
-                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel</button>
+                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light" data-dismiss="modal">cancel</button>
                             </div>
                         </form>
                     </div>

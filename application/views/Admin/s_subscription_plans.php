@@ -235,7 +235,7 @@
                                     <label class=" col-form-label align-center">Name:<span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" name="name" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter Name">
+                                    <input type="text" name="name" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter Name" value="<?php  echo set_value('name'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -243,10 +243,10 @@
                                     <label class=" col-form-label align-center">Stripe Id:<span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-5">
-                                    <input type="text" name="s_monthly_id" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Monthly id">
+                                    <input type="text" name="s_monthly_id" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Monthly id" value="<?php  echo set_value('s_monthly_id'); ?>">
                                 </div>
                                 <div class="col-sm-5">
-                                    <input type="text" name="s_annual_id" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Annual id">
+                                    <input type="text" name="s_annual_id" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Annual id" value="<?php  echo set_value('s_annual_id'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -254,10 +254,10 @@
                                     <label class=" col-form-label align-center">Price:<span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-5">
-                                    <input type="text" name="monthly_price" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Monthly Price">
+                                    <input type="text" name="monthly_price" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Monthly Price" value="<?php  echo set_value('monthly_price'); ?>">
                                 </div>
                                 <div class="col-sm-5">
-                                    <input type="text" name="annual_price" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Annual Price">
+                                    <input type="text" name="annual_price" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Annual Price" value="<?php  echo set_value('annual_price'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -265,7 +265,7 @@
                                     <label class=" col-form-label align-center">Start User: <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" name="start_user" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Start User">
+                                    <input type="text" name="start_user" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Start User" value="<?php  echo set_value('start_user'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -273,7 +273,7 @@
                                     <label class=" col-form-label align-center">End User: <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" name="end_user" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="End User">
+                                    <input type="text" name="end_user" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="End User" value="<?php  echo set_value('end_user'); ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -281,7 +281,7 @@
                                     <label class=" col-form-label align-center">Comment: <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-10">
-								<textarea class="form-control ih-medium ip-light radius-xs b-light px-15" name="comment" rows="3" placeholder="Comment"></textarea>
+								<textarea class="form-control ih-medium ip-light radius-xs b-light px-15" name="comment" rows="3" placeholder="Comment"><?php  echo set_value('comment'); ?></textarea>
                                     <!--<input type="text" name="status" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Comment">-->
                                 </div>
                             </div>
@@ -291,7 +291,7 @@
                                 </div>
                                 <div class="col-sm-10">
                                     <div class="custom-radio form-check-inline mt-2">
-                                        <input class="radio" type="radio" name="radio_default" value=1 id="radio-un2">
+                                        <input class="radio" type="radio" name="radio_default" value=1 id="radio-un2"  <?php if(set_value('radio_default')==1){ echo "selected"; } ?>>
                                         <label for="radio-un2">
                                                 <span class="radio-text">Enabled</span>
                                             </label>
@@ -299,7 +299,7 @@
 
 
                                     <div class="custom-radio form-check-inline mt-2">
-                                        <input class="radio" type="radio" name="radio_default" value=0 id="radio-un4">
+                                        <input class="radio" type="radio" name="radio_default" value=0 id="radio-un4" <?php if(set_value('radio_default')==0){ echo "selected"; } ?>>
                                         <label for="radio-un4">
                                                 <span class="radio-text">Disabled</span>
                                             </label>

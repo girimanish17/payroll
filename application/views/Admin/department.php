@@ -94,15 +94,7 @@
                         <div class="project-progree-breadcrumb">
                             <div class="breadcrumb-main user-member justify-content-sm-between ">
                                 <div class=" d-flex flex-wrap justify-content-center breadcrumb-main__wrapper">
-                                    <!--<div class="d-flex align-items-center user-member__title justify-content-center mr-sm-25">
-                                        <h4 class="text-capitalize fw-500 breadcrumb-title">List All Departments</h4>
-                                    </div>
-                                    <div class="project-search project-search--height global-shadow ml-md-20 my-10 order-md-2 order-1">
-                                        <form action="/" class="d-flex align-items-center user-member__form">
-                                            <span data-feather="search"></span>
-                                            <input class="form-control mr-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by Name" aria-label="Search">
-                                        </form>
-                                    </div>-->
+                                   
                                 </div>
                                 <div class="action-btn">
                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#new-member" style="float: left;margin-right:5px;">
@@ -125,12 +117,12 @@
                                                         <form method="post" id="departmentForm" onsubmit="return addDepartment();">
                                                             <div id="msg"> </div>
                                                             <div class="form-group mb-20">
-                                                                <input type="text" required class="form-control" name="name" placeholder="Name">
+                                                                <input type="text" required class="form-control" name="name" placeholder="Name" value="<?php  echo set_value('name'); ?>">
                                                             </div>
                                                             
                                                             <div class="button-group d-flex pt-25">
                                                                 <button class="btn btn-primary btn-default btn-squared text-capitalize">Save Department</button>
-                                                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel</button>
+                                                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light" data-dismiss="modal">cancel</button>
                                                             </div>
                                                         </form>
                                                     </div>
