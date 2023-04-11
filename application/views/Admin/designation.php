@@ -94,13 +94,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
-                                    <!--<h5 class="color-dark fw-600 mr-15">List All Designation</h5>
-                                    <div class="project-search project-search--height border ml-md-20 my-10 order-md-2 order-1">
-                                        <form action="/" class="d-flex align-items-center user-member__form user-member-designation">
-                                            <span data-feather="search"></span>
-                                            <input class="form-control mr-sm-2 border-0 box-shadow-none" type="search" placeholder="Search by Name" aria-label="Search">
-                                        </form>
-                                    </div>-->
+                                  
                                 </div>
                                 <div class="card-extra">
                                     <a href="#" class="btn px-15 btn-primary" data-toggle="modal" data-target="#new-member">
@@ -178,7 +172,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content  radius-xl">
                 <div class="modal-header">
-                 <h6 class="modal-title fw-500" id="staticBackdropLabel">Add New Designation</h6>
+                 <h6 class="modal-title fw-500" id="staticBackdropLabel">Edit New Designation</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span data-feather="x"></span>
                     </button>
@@ -251,20 +245,20 @@
                                     <select class="js-example-basic-single js-states form-control" id="" name="department_id" required>
                                         <option value="">Select Department</option>
                                         <?php foreach ($department as $key => $depart): ?>
-                                           <option value="<?php  echo $depart['id'];?>"><?php echo $depart['name'] ?> </option> 
+                                           <option value="<?php  echo $depart['id'];?>" <?php if(set_value('department_id')==$depart['id']){ echo "selected"; } ?>><?php echo $depart['name'] ?></option> 
                                         <?php endforeach ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group mb-20">
-                                <input type="text" class="form-control" name="designation_name" placeholder="Designation Name*" required>
+                                <input type="text" class="form-control" name="designation_name" placeholder="Designation Name*" value="<?php  echo set_value('designation_name'); ?>" required>
                             </div>
                             <div class="form-group form-element-textarea mb-20">
-                                <textarea class="form-control" required rows="2" name="description" placeholder="Description"></textarea>
+                                <textarea class="form-control" required rows="2" name="description" placeholder="Description"><?php  echo set_value('description'); ?></textarea>
                             </div>
                             <div class="button-group d-flex pt-25">
                                 <button class="btn btn-primary btn-default btn-squared text-capitalize">Save Designation</button>
-                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel</button>
+                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light" data-dismiss="modal">cancel</button>
                             </div>
                         </form>
                     </div>

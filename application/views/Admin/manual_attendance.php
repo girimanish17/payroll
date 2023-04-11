@@ -70,29 +70,7 @@ div#date-div {
                                     <span>Manual Attendance </span>
                                 </li>
                             </ul>
-                            <!--<div class="row align-items-center profile_complete">
-                                <div class="col-auto dropdown dropdown-hover">
-                                    <a class="btn-link text-dark fw-600" href="javascript:void(0)">Profile completeness
-                                        <span data-feather=chevron-down></span></a>
-                                    <div class="dropdown-default">
-                                        <a class="dropdown-item" href="department.html"><i data-feather="menu"></i> <span>Department <i data-feather="check-circle" class="text-success"></i></span> </a>
-                                        <a class="dropdown-item" href="designation.html"><i data-feather="list"></i> <span>Designation</span> <i data-feather="check-circle" class="text-success"></i></a>
-                                        <a class="dropdown-item" href="role_&_Privilages.html"><i data-feather="unlock"></i> <span>Set Roles</span> <i data-feather="check-circle" class="text-success"></i></a>
-                                        <a class="dropdown-item" href="shift_&_scheduling.html"><i data-feather="clock"></i> <span>Office Shifts</span> <i data-feather="check-circle" class="text-success"></i></a>
-                                        <a class="dropdown-item" href="#"><i data-feather="list"></i> <span>Competencies</span> <i data-feather="check-circle" class="text-success"></i></a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><i data-feather="help-circle"></i> <span>Need more help?</span> </a>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="progress-wrap d-flex align-items-center mb-0" style="width: 120px;">
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <span class="progress-percentage fw-600">60%</span>
-                                    </div>
-                                </div>
-                            </div>-->
+                           
                         </div>
                     </div>
                 </div>
@@ -147,21 +125,7 @@ div#date-div {
                                 </div>
                             </a>
                         </li>
-                        <!--<li class="">
-                            <a href="<?php echo base_url() ?>admin/overtime_request">
-                                <div class="d-flex justify-content-between border-0 radius-xl">
-                                    <div class="application-task d-flex align-items-center">
-                                        <div class="application-task-icon wh-50 mr-15 bg-warning content-center">
-                                            <i class="fas fa-calendar-plus text-white font-size-20"></i>
-                                        </div>
-                                        <div class="application-task-content">
-                                            <h5>Overtime Request</h5>
-                                            <span class="text-light fs-13 mt-1 text-capitalize">Set up Overtime Request</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>-->
+                       
                     </ul>
                 </div>
             </div>
@@ -364,7 +328,7 @@ div#date-div {
                                             <select name="employee" id="select-alerts2" class="form-control ">
 											<option >Select Employee</option>
 											<?php if($employee){ foreach($employee as $value){?>
-                                                <option value="<?php echo $value['user_id'];?>"><?php echo $value['first_name']." ".$value['last_name'];?></option>
+                                                <option value="<?php echo $value['user_id'];?>"  <?php if(set_value('employee')==$value['user_id']){ echo "selected"; } ?>><?php echo $value['first_name']." ".$value['last_name'];?></option>
                                             <?php }} ?>  
                                             </select>
 
@@ -375,14 +339,14 @@ div#date-div {
                                 <div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Attendance Date <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="attendance_date" class="form-control  ih-medium ip-gray radius-xs b-light" id="datepicker8" placeholder="Attendance Date">
+                                        <input type="text" name="attendance_date" class="form-control  ih-medium ip-gray radius-xs b-light" id="datepicker8" placeholder="Attendance Date" value="<?php  echo set_value('attendance_date'); ?>">
                                         <a href="#"><span data-feather="calendar"></span></a>
                                     </div>
                                 </div>
 								<div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Working From <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="workingFrom" class="form-control  ih-medium ip-gray radius-xs b-light" id="workingFrom" placeholder="Working From- Home /Office">
+                                        <input type="text" name="workingFrom" class="form-control  ih-medium ip-gray radius-xs b-light" id="workingFrom" placeholder="Working From- Home /Office" value="<?php  echo set_value('workingFrom'); ?>">
                                  
                                     </div>
                                 </div>
@@ -393,7 +357,7 @@ div#date-div {
                                         <label for="shift_name">In Time <span class="text-danger">*</span></label>
                                         <div class="input-container icon-right position-relative w-100 color-light">
                                             <span class="input-icon icon-right"><span data-feather="clock"></span></span>
-                                            <input class="form-control ih-medium ip-light radius-xs b-light px-15 color-light timepicker" id="input_starttime" placeholder="In Time" name="in_time" type="text" value="">
+                                            <input class="form-control ih-medium ip-light radius-xs b-light px-15 color-light timepicker" id="input_starttime" placeholder="In Time" name="in_time" type="text" value="<?php  echo set_value('in_time'); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -402,14 +366,14 @@ div#date-div {
                                         <label for="shift_name">Out Time <span class="text-danger">*</span></label>
                                         <div class="input-container icon-right position-relative w-100 color-light">
                                             <span class="input-icon icon-right"><span data-feather="clock"></span></span>
-                                            <input class="form-control ih-medium ip-light radius-xs b-light px-15 color-light timepicker" placeholder="Out Time" name="out_time" type="text" value="">
+                                            <input class="form-control ih-medium ip-light radius-xs b-light px-15 color-light timepicker" placeholder="Out Time" name="out_time" type="text" value="<?php  echo set_value('out_time'); ?>">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="button-group d-flex pt-25">
                                 <button type="submit" class="btn btn-primary btn-default btn-squared text-capitalize">Save</button>
-                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light">cancel</button>
+                                <button class="btn btn-light btn-default btn-squared fw-400 text-capitalize b-light color-light" data-dismiss="modal">cancel</button>
                             </div>
                         </form>
                     </div>

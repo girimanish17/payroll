@@ -168,7 +168,8 @@
                                     <select class="form-control px-15" id="skillsOption" name="category_id" required>
 									<option value=''>Select Category</option>
                                         <?php if($faq_category){ foreach($faq_category as $key1=>$value1){?>
-										<option value="<?php echo $value1['id'];?>"><?php echo $value1['name'];?></option>
+										<option value="<?php echo $value1['id'];?>" <?php if(set_value('category_id')==$value1['id']){ echo "selected"; } ?>
+><?php echo $value1['name'];?></option>
 										<?php }} ?>
                                     </select>
                                 </div>
@@ -178,7 +179,7 @@
                                     <label class=" col-form-label align-center">Title:<span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="text" name="title" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter " value="" required>
+                                    <input type="text" name="title" class="form-control ih-medium ip-light radius-xs b-light px-15" placeholder="Enter " value="<?php  echo set_value('title'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -186,7 +187,7 @@
                                     <label class=" col-form-label align-center">Content:<span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                                    <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3" required><?php  echo set_value('content'); ?></textarea>
                                 </div>
                             </div>
                             <div class="layout-button mt-25 d-flex justify-content-center">
