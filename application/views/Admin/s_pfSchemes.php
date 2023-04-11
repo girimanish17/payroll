@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> PF Scheme</label>
-							<input type="text" name="pfSchemes" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter PF Scheme">
+							<input type="text" name="pfSchemes"  value="<?php echo set_value('pfSchemes') ?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter PF Scheme">
 						</div>
 						
 						<div class="layout-button mt-25">

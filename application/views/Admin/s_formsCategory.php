@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Forms Category</label>
-							<input type="text" name="formsCategory" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Forms Category">
+							<input type="text" name="formsCategory" value="<?php echo set_value('formsCategory') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Forms Category">
 						</div>
 						
 						<div class="layout-button mt-25">

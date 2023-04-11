@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Nationality</label>
-							<input type="text" name="nationality" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Nationality">
+							<input type="text" name="nationality"  value="<?php echo set_value('nationality') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Nationality">
 						</div>
 						
 						<div class="layout-button mt-25">

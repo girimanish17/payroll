@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Employee Resignation Reason</label>
-							<input type="text" name="empResignationReason" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Employee Resignation Reason">
+							<input type="text" name="empResignationReason"  value="<?php echo set_value('empResignationReason') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Employee Resignation Reason">
 						</div>
 						
 						<div class="layout-button mt-25">

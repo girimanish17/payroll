@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Name</label>
-							<input type="text" name="pf_leaving_reason" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Name">
+							<input type="text" name="pf_leaving_reason" value="<?php echo set_value('pf_leaving_reason') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Name">
 						</div>
 						
 						<div class="layout-button mt-25">

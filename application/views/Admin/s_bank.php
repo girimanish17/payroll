@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Bank</label>
-							<input type="text" name="bank_name" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Bank">
+							<input type="text" name="bank_name" value="<?php echo set_value('bank_name') ?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Bank">
 						</div>
 						
 						<div class="layout-button mt-25">

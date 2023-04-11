@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Relation</label>
-							<input type="text" name="relation" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Relation">
+							<input type="text" name="relation"  value="<?php echo set_value('relation') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Relation">
 						</div>
 						
 						<div class="layout-button mt-25">

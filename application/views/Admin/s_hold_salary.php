@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Hold Salary Payout Reason</label>
-							<input type="text" name="hold_salary" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Hold Salary Payout Reason">
+							<input type="text" name="hold_salary"  value="<?php echo set_value('hold_salary') ?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Hold Salary Payout Reason">
 						</div>
 						
 						<div class="layout-button mt-25">
