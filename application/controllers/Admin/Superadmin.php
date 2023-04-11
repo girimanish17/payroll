@@ -4346,6 +4346,129 @@ public function changeStatusrelease_salary_reason($id,$status)
 	}
 }
 
+public function it_declaration()
+	{
+		$user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		$data['category'] = $this->common_model->GetAllData('it_declaration_categories',array('status'=>1),'id');
+		$data['category1'] = $this->common_model->GetAllData('it_declaration_categories',array('status'=>1),'id');
+		$data['it_declarations'] = $this->common_model->GetAllData('master_it_declarations',array('status!='=>2),'id');
+		$data['section1'] = $this->common_model->GetAllData('it_declaration_sections',array('status'=>1),'id');
+		$data['categorys'] = $this->common_model->GetAllData('it_declaration_categories',array('status'=>1),'id');
+		$data['sections'] = $this->common_model->GetAllData('it_declaration_sections',array('status'=>1),'id');
+		$this->load->view('Admin/s_it_declaration',$data);
+	}
+
+	public function addITDeclaration()
+	{
+		
+	   $user_id = $this->session->userdata('user_id');
+		$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+		
+		$this->form_validation->set_rules('financial_year','financial year','required');
+		
+		if($this->form_validation->run()){
+			//$chk = $this->common_model->GetSingleData('master_it_declarations',array('financial_year'=>$this->input->post('financial_year')));
+			
+			//if($chk==''){
+					
+					$insert1['financial_year'] = $this->input->post('financial_year');
+					$insert1['category_id'] = $this->input->post('category');
+					$insert1['description'] = $this->input->post('description');
+					$insert1['section_id'] = $this->input->post('section');
+					$insert1['max_limit'] = $this->input->post('max_limit');
+					$insert1['deduct'] = $this->input->post('deduct');
+					$insert1['sort_order'] = $this->input->post('sort_order');
+					$insert1['visible'] = $this->input->post('visible');
+					$insert1['is_infra'] = $this->input->post('is_infra');
+					$insert1['consider_as'] = $this->input->post('consider_as');
+					$insert1['code'] = $this->input->post('code');
+					$insert1['created_date'] = date('Y-m-d h:i:s');
+					
+					$run = $this->common_model->InsertData('master_it_declarations',$insert1);
+					$this->session->set_flashdata('msg','<div class="alert alert-success">IT Declaration added successfully!</div>');
+					redirect('superadmin/it_declaration');
+				
+			/*}else{
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">IT Declaration already exist!</div>');
+				redirect('superadmin/it_declaration');
+			}*/
+					
+		 } else {
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+				redirect('superadmin/it_declaration');
+		}
+	}
+
+	public function edit_ITDeclaration($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('financial_year','financial year','required');
+	
+	if($this->form_validation->run()){
+		
+				$insert1['financial_year'] = $this->input->post('financial_year');
+				$insert1['category_id'] = $this->input->post('category');
+				$insert1['description'] = $this->input->post('description');
+				$insert1['section_id'] = $this->input->post('section');
+				$insert1['max_limit'] = $this->input->post('max_limit');
+				$insert1['deduct'] = $this->input->post('deduct');
+				$insert1['sort_order'] = $this->input->post('sort_order');
+				$insert1['visible'] = $this->input->post('visible');
+				$insert1['is_infra'] = $this->input->post('is_infra');
+				$insert1['consider_as'] = $this->input->post('consider_as');
+				$insert1['code'] = $this->input->post('code');
+				$run = $this->common_model->UpdateData('master_it_declarations',array('id'=>$id),$insert1);
+				
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">IT Declaration Updated successfully!</div>');
+			redirect('superadmin/it_declaration');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+		
+		
+	 } else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/it_declaration');
+	}
+}
+
+public function deleteITDeclaration($id)
+{
+	$run = $this->common_model->UpdateData('master_it_declarations',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">IT Declaration deleted successfully</div>');
+			 redirect('superadmin/it_declaration');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/it_declaration');
+		}
+}
+
+public function changeStatusITDeclaration($id,$status)
+{
+	$run = $this->common_model->UpdateData('master_it_declarations',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">IT Declaration Status Changed successfully</div>');
+			redirect('superadmin/it_declaration');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/it_declaration');
+	}
+}
 
 
 	
