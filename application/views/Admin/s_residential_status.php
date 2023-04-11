@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Residential Status</label>
-							<input type="text" name="residential_status" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Residential Status">
+							<input type="text" name="residential_status"  value="<?php echo set_value('residential_status') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Residential Status">
 						</div>
 						
 						<div class="layout-button mt-25">

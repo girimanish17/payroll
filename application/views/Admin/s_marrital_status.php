@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Marrital Status</label>
-							<input type="text" name="marrital_status" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Marrital Status">
+							<input type="text" name="marrital_status"  value="<?php echo set_value('marrital_status') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Marrital Status">
 						</div>
 						
 						<div class="layout-button mt-25">

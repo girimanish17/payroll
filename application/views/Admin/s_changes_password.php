@@ -49,7 +49,7 @@
                                                         <label class=" color-dark fs-14 fw-500 align-center">Password</label>
                                                         <div class="with-icon">
                                                             <span class="las la-lock"></span>
-                                                            <input type="password" name="password" class="form-control ih-medium ip-gray radius-xs b-light" placeholder="********************">
+                                                            <input type="password" name="password" value="<?php echo set_value('password') ?>" class="form-control ih-medium ip-gray radius-xs b-light" placeholder="********************">
                                                         </div>
                                                     </div>
 
@@ -57,7 +57,7 @@
                                                         <label class=" color-dark fs-14 fw-500 align-center">Confirm Password</label>
                                                         <div class="with-icon">
                                                             <span class="las la-lock"></span>
-                                                            <input type="password" name="confirm_password" class="form-control ih-medium ip-gray radius-xs b-light" placeholder="********************">
+                                                            <input type="password" name="confirm_password"  value="<?php echo set_value('confirm_password') ?>" class="form-control ih-medium ip-gray radius-xs b-light" placeholder="********************">
                                                         </div>
                                                     </div>
 												 <input type="hidden" name="id" value="<?php echo $superadmin['user_id']; ?>">

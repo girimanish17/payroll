@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Other Incomes</label>
-							<input type="text" name="other_incomes" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Other Incomes">
+							<input type="text" name="other_incomes"  value="<?php echo set_value('other_incomes') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Other Incomes">
 						</div>
 						
 						<div class="layout-button mt-25">

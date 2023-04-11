@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Bank Account Type</label>
-							<input type="text" name="bank_account_type" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Bank Account Type">
+							<input type="text" name="bank_account_type" value="<?php echo set_value('bank_account_type') ?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Bank Account Type">
 						</div>
 						
 						<div class="layout-button mt-25">

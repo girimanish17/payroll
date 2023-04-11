@@ -141,7 +141,7 @@
 						
 						<div class="form-group col-sm-12">
 							<label> Qualification Level</label>
-							<input type="text" name="qualification_level" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Qualification Level">
+							<input type="text" name="qualification_level"  value="<?php echo set_value('qualification_level') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Qualification Level">
 						</div>
 						
 						<div class="layout-button mt-25">
