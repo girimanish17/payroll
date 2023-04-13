@@ -86,7 +86,7 @@
                                                                         <td>
                                                                             <div class="form-group form-group-calender">
                                                                                 <div class="position-relative">
-                                                                                    <input type="text" class="form-control  ih-medium ip-light radius-xs b-light px-15" name="ldate[]" id="datepicker8" placeholder="dd-mm-yyyy" required>
+                                                                                    <input type="text" class="form-control  ih-medium ip-light radius-xs b-light px-15" name="ldate[]" value="<?php echo set_value('ldate') ?>" id="datepicker8" placeholder="dd-mm-yyyy" required>
                                                                                    <a href="#"><span data-feather="calendar"></span></a>
                                                                                 </div>
                                                                             </div>
@@ -110,7 +110,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="checkbox-theme-default custom-checkbox mt-3">
-                                                                                <input class="checkbox" type="checkbox" id="check-un1" onchange="oncheckfun(this)" name="selected_days0"  >
+                                                                                <input class="checkbox" type="checkbox" id="check-un1" onchange="oncheckfun(this)" name="selected_days0" value="<?php echo set_value('selected_days0') ?>" >
                                                                                 <label for="check-un1">
                                                                                     <span class="checkbox-text">Half Day</span>
                                                                                 </label>
@@ -118,7 +118,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="form-group">
-                                                                                <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" placeholder="Reason" name="reason[]" required>
+                                                                                <input type="text" class="form-control ih-medium ip-gray radius-xs b-light px-15" placeholder="Reason" name="reason[]" value="<?php echo set_value('reason') ?>" required>
                                                                             </div>
                                                                         </td>
                                                                         <td>
@@ -143,7 +143,7 @@
                                                             <div class="for-group mb-4">
                                                                 <label for="txtDateRange" class="il-gray fs-14 fw-500 align-center">Date
                                                                 Range:</label>
-                                                                <input type="text" id="txtDateRange" name="txtDateRange" class="inputField shortInputField dateRangeField form-control  ih-medium ip-gray radius-xs b-light" required placeholder="01/10/2021 - 01/15/2021" data-from-field="txtDateFrom" data-to-field="txtDateTo"
+                                                                <input type="text" id="txtDateRange" name="txtDateRange" value="<?php echo set_value('txtDateRange') ?>" class="inputField shortInputField dateRangeField form-control  ih-medium ip-gray radius-xs b-light" required placeholder="01/10/2021 - 01/15/2021" data-from-field="txtDateFrom" data-to-field="txtDateTo"
                                                                 />
                                                                 <input type="hidden" id="txtDateFrom" value="" />
                                                                 <input type="hidden" id="txtDateTo" value="" />

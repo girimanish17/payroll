@@ -401,7 +401,7 @@
 								<option value="" >Select Manager </option>
 								<?php if($manager_add){foreach($manager_add as $values){?>
 									<!--<option value="<?php echo $values['manager_id'];?>"><?php echo $values['first_name']." ".$values['last_name'] ;?></option>    <?php //echo " [".$values['designation_name']."]"?>-->
-										<option value="<?php echo $values['user_id'];?>" ><?php echo $values['first_name']." ".$values['last_name'] ;?></option>
+										<option  <?php if(set_value('manager') == $values['user_id']) { echo 'selected'; } ?>  value="<?php echo $values['user_id'];?>" ><?php echo $values['first_name']." ".$values['last_name'] ;?></option>
 								<?php }} ?>
 								</select>
 							</div>
@@ -414,7 +414,7 @@
 								<option value="Bank">Bank</option>
 								<option value="Gpay">Gpay</option>-->
 								<?php if($account_type){foreach($account_type as $valuee){?>
-									<option value="<?php echo $valuee['account_type'];?>"><?php echo $valuee['account_type'];?></option>
+									<option  <?php if(set_value('account_type') == $valuee['account_type']) { echo 'selected'; } ?>  value="<?php echo $valuee['account_type'];?>"><?php echo $valuee['account_type'];?></option>
 								<?php }} ?>
 							</select>
 							</div>
@@ -423,7 +423,7 @@
 								<select class="form-control px-15" id="expense_type" name="expense_type" required>
 								<option value="" >Select Expense Type </option>
 								<?php if($expense_type){foreach($expense_type as $value){?>
-									<option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
+									<option  <?php if(set_value('expense_type') == $value['id']) { echo 'selected'; } ?> value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
 								<?php }} ?>
 								</select>
 							</div>

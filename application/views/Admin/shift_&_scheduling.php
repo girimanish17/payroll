@@ -817,7 +817,7 @@
                                     <label for="shift_name">Monday In Time <span class="text-danger">*</span></label>
                                     <div class="input-container icon-right position-relative w-100 color-light">
                                         <span class="input-icon icon-right"><span data-feather="clock"></span></span>
-                                        <input class="form-control ih-medium ip-light radius-xs b-light px-15 color-light timepicker" id="input_starttime" placeholder="In Time" name="monday_in_time" type="text" value="">
+                                        <input class="form-control ih-medium ip-light radius-xs b-light px-15 color-light timepicker" id="input_starttime" placeholder="In Time" name="monday_in_time"  type="text" value="">
                                     </div>
                                 </div>
                             </div>
