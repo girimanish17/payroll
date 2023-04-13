@@ -195,35 +195,35 @@
                                 <div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Name <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="name" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Name" required>
+                                        <input type="text" name="name" value="<?php echo set_value('name') ?>" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Name" required>
                                        
                                     </div>
                                 </div>
 								 <div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Type <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="type" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Type" required>
+                                        <input type="text" name="type" value="<?php echo set_value('type') ?>" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Type" required>
                                        
                                     </div>
                                 </div>
 								 <div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Key <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="key" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Key" required>
+                                        <input type="text" name="key" value="<?php echo set_value('key') ?>" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Key" required>
                                        
                                     </div>
                                 </div>
 								 <div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Format <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="format" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Format" required>
+                                        <input type="text" name="format" value="<?php echo set_value('format') ?>" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Format" required>
                                        
                                     </div>
                                 </div>
 								<div class="form-group col-md-12 form-group-calender">
                                     <label class="il-gray fs-14 fw-500 align-center">Index <span class="text-danger">*</span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="index" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Index" required>
+                                        <input type="text" name="index" value="<?php echo set_value('index') ?>" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Index" required>
                                        
                                     </div>
                                 </div>
