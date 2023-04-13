@@ -728,6 +728,9 @@ public function expense_type(){
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
 
+		$data['category'] = $this->common_model->getAllwhere('it_declaration_categories',array('status'=>1),'id');
+		// echo "<pre>"; print_r($data['category']); die;
+
 		$data['tax'] = $this->common_model->getAllwhere('profession_tax_slabs', array('admin_id' => $user_id));
 			
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
@@ -823,6 +826,61 @@ public function expense_type(){
 	
 		// echo ""; print_r($data['countries']); die;
 		$this->load->view('Admin/profile',$data);
+	}
+
+	public function it_declaration_data()
+	{
+		// $year = '2023';
+		// $category = '1';
+		$year = $this->input->post('year');
+		$category = $this->input->post('category');
+		
+		$where = '';
+		if($year && $category) {
+			$where = array('master_it_declarations.financial_year' => $year, 'master_it_declarations.category_id' => $category, 'master_it_declarations.status' => 1);
+		}
+		
+		if($year && $category == '') {
+			$where = array('master_it_declarations.financial_year' => $year, 'master_it_declarations.status' => 1);
+		}
+	
+		$data = $this->common_model->getallwhere_join($where);
+		// echo "<pre>"; print_r($data); die;
+		$checked = 'checked';
+		
+		if($data) {
+			foreach($data as $row) {
+				$html .= '<tr>';
+				$html .= '<td>'.$row["description"].' </td>';
+				$html .= '<td>'.$row["section_name"].'</td>';
+				$html .= '<td>'.$row["max_limit"].'</td>';
+				$html .= '<td>'.$row["deduct"].'</td>';
+				$html .= '<td>'.$row["sort_order"].'</td>';
+
+				if($row['visible'] == 'visible') {
+					$html .= '<td><input type="checkbox" name="" class="checkId" '.$checked.' ></td>';
+				} else if($row['visible'] == 'invisible') {
+					$html .= '<td><input type="checkbox" name="" class="checkId"  ></td>';
+				}
+
+				if($row['is_infra'] == 'yes' || $row['is_infra'] == 'Yes') {
+					$html .= '<td><input type="checkbox" name="" class="checkId" '.$checked.' ></td>';
+				} else if($row['is_infra'] == 'no' || $row['is_infra'] == 'No') {
+					$html .= '<td><input type="checkbox" name="" class="checkId"  ></td>';
+				}
+
+				$html .= '<td>'.$row["consider_as"].'</td>';
+				$html .= '<td>'.$row["code"].'</td>';
+
+				$html .= '</tr>';
+			}
+		}
+		// else {
+		// 	$html .= '<tr>';
+		// 	$html .= '<td>Record not found</td>';
+		// 	$html .= '</tr>';
+		// }
+		echo json_encode($html);
 	}
 
 	public function add_profession_tax() 

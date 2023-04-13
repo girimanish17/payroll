@@ -931,6 +931,16 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/it_section_maxLimit" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">IT Section Max Limit</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-sitemap"></i>
+                                    </span>
+                                </a>
+                            </li>
                              <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/qualification_level" class="menu-link">
                                     <span class="menu-label">

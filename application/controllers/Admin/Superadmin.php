@@ -4471,6 +4471,120 @@ public function changeStatusITDeclaration($id,$status)
 }
 
 
+//it section max limit
+public function it_section_maxLimit() 
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	$data['itSec'] = $this->common_model->getAllwhere('it_declaration_sections',array('status!='=>2),'id');
+	$data['sectionsData'] = $this->common_model->getallwhere_itsectionlimit(array('master_it_section_maxlimit.status!=' => 2));
+	// echo "<pre>"; print_r($data['sectionsData']); die;
+	$this->load->view('Admin/s_it_section_maxLimit',$data);
+}
+
+public function addit_section_maxLimit() 
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('year', 'Year', 'required');
+	$this->form_validation->set_rules('name','Name','required');
+	$this->form_validation->set_rules('max_limit','Max Limit','required');
+	
+	if($this->form_validation->run()){
+		$chk = $this->common_model->GetSingleData('master_it_section_maxlimit',array('section'=>$this->input->post('name')));
+		
+		if($chk=='')
+		{	
+				
+				$insert1['financial_year'] = $this->input->post('year');
+				$insert1['section'] = $this->input->post('name');
+				$insert1['max_limit'] = $this->input->post('max_limit');
+				$insert1['created_date'] = date('Y-m-d h:i:s');
+				
+				$run = $this->common_model->InsertData('master_it_section_maxlimit',$insert1);
+				$this->session->set_flashdata('msg','<div class="alert alert-success">IT Section Max Limit added successfully!</div>');
+				redirect('superadmin/it_section_maxLimit');
+			
+		}else{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">IT Section Max Limit already exist!</div>');
+			redirect('superadmin/it_section_maxLimit');
+		}
+		
+	 } else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/it_section_maxLimit');
+	}
+}
+
+public function editit_section_maxLimit($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('year', 'Year', 'required');
+	$this->form_validation->set_rules('name','Name','required');
+	$this->form_validation->set_rules('max_limit','Max Limit','required');
+	
+	if($this->form_validation->run()){
+		
+				$insert['financial_year'] = $this->input->post('year');
+				$insert['section'] = $this->input->post('name');
+				$insert['max_limit'] = $this->input->post('max_limit');
+				$run = $this->common_model->UpdateData('master_it_section_maxlimit',array('id'=>$id),$insert);
+				
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">IT Section Max Limit Updated successfully!</div>');
+			redirect('superadmin/it_section_maxLimit');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+		
+		
+	 } else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/it_section_maxLimit');
+	}
+}
+
+public function deleteit_section_maxLimit($id)
+{
+	$run = $this->common_model->UpdateData('master_it_section_maxlimit',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">IT Section Max Limit deleted successfully</div>');
+			 redirect('superadmin/it_section_maxLimit');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/it_section_maxLimit');
+		}
+}
+
+public function changeStatusit_section_maxLimit($id,$status)
+{
+
+	$companies = $this->common_model->GetSingleData('master_it_section_maxlimit',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_it_section_maxlimit',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">IT Section Max Limit Status Changed successfully</div>');
+			redirect('superadmin/it_section_maxLimit');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/it_section_maxLimit');
+	}
+}
+
+
+
+
 	
 	
 

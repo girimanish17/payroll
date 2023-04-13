@@ -1,4 +1,10 @@
-
+<style>
+.labelIT{
+   display: inline-block;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+</style>
 
 <?php include('include/header.php'); ?>  
 <div class="contents demo-card expanded">
@@ -430,7 +436,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                               
                                 <div class="table-responsives">
                               
-                                    <table class="table  mb-0 table-basic mt-2 text-">
+                                    <table class="table  mb-0 table-basic mt-2">
                                         <thead>
                                             <tr  class="userDatatable-header">
                                             <th>Description</th>
@@ -444,6 +450,75 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                                        </table>
                                        <button type="submit" class="btn btn-primary mt-2">Save</button>
                                    </form>
+                                </div>
+                            </div>   
+            </div>
+      </div>
+      
+   </div>
+</div>
+<!-- table end -->
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             <!-- <form action="<?php// echo base_url();?>admin/checked_list_of_values" method="post"> -->
+               
+            
+            <div id="eMsg"></div>
+            <h3>IT Declaration</h3>
+          
+            <div class="col-md-12 row">
+             <div class="col-md-4">
+               <label class="labelIT">Financial Year</label>
+            <select name="list_search" class="form-control mt-2" style="width:50%;" onchange="it_valueGet()" id="f_year">
+                  <option>Financial Year</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+               </select>
+            </div>
+              
+            <div class="col-md-6">
+            <label class="labelIT">Category</label>
+               <select name="list_search" class="form-control mt-2" style="width:60%;" onchange="it_valueGet()" id="it_category">
+                  <option value="">---All---</option>
+                  <?php if($category) { foreach($category as $row) {  ?>
+                     <option value="<?php echo $row->id ?>"><?php echo $row->name ?></option>
+                  <?php } } ?>
+               </select>
+            </div>
+            </div>
+             
+           
+            <div class="form-row mt-0">
+
+                            <div class="card-body">
+                              
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Description</th>
+                                            <th>Section</th>
+                                            <th>MaxLimit</th>
+                                            <th>Deduct%</th>
+                                            <th>Sort Order</th>
+                                            <th>Visible</th>
+                                            <th>Is Infra</th>
+                                            <th>Consider As</th>
+                                            <th>Code</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                          <tbody id="it_declareID" class="">
+                                         
+                                          </tbody>
+                                       </table>
+                                       <!-- <button type="submit" class="btn btn-primary mt-2">Save</button> -->
+                                   <!-- </form> -->
                                 </div>
                             </div>   
             </div>
@@ -593,6 +668,24 @@ function listSearch()
             {
               console.log(response);
               $('#tableDataId').html(response);
+            },
+        });
+}
+
+function it_valueGet() 
+{
+   let year = $('#f_year').val();
+   let category = $('#it_category').val();
+   
+   $.ajax({
+            url : "<?php echo base_url()?>admin/it_declaration_data",
+            method : 'POST',
+            dataType : 'json',
+            data : {year : year, category : category},
+            success : function(response)
+            {
+              console.log(response);
+              $('#it_declareID').html(response);
             },
         });
 }
