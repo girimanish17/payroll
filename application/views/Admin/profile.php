@@ -334,6 +334,72 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
 </div>
 <!-- general option end -->
 
+<!-- general option start -->
+
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         <form method="post" action="<?php echo base_url(); ?>admin/profile" id="companySettingForm" enctype="multipart/form-data">
+             
+            <div id="eMsg"></div>
+            <h3>Password Options</h3>
+            <div class="form-row mt-4">
+				
+				<div class="form-group col-sm-4">
+                  <div class="with-icon">
+                     <label>Minimum Password Length:</label>
+                     <input type="number" value="<?php if($password_option) {echo $password_option->min_pass_length;}  ?>" name="min_pass_length" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Minimum Password Length">
+                  </div>
+            </div>
+
+            <div class="form-group col-sm-4">
+                  <div class="with-icon">
+                     <label>Password Expiry Limit:</label>
+                     <input type="number" value="<?php if($password_option) {echo $password_option->pass_exp_limit;}  ?>" name="pass_exp_limit" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Password Expiry Limit">
+                  </div>
+            </div>
+               <input type="hidden" name="password_option" value="PASSWORD_OPTION">
+            <div class="form-group col-sm-4">
+                  <div class="with-icon">
+                     <label>Expiry Reminder Days:</label>
+                     <input type="number" value="<?php if($password_option) {echo $password_option->exp_reminder_days;}  ?>" name="exp_reminder_days" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Expiry Reminder Days">
+                  </div>
+            </div>
+
+            <div class="form-group col-sm-4">
+                  <div class="with-icon">
+                     <label>Memory List Size:</label>
+                     <input type="number" value="<?php if($password_option) {echo $password_option->memory_list_size;}  ?>" name="memory_list_size" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Memory List Size">
+                  </div>
+            </div>
+
+            <div class="form-group col-sm-4">
+                  <div class="with-icon">
+                     <label>Allowed Invalid Login Attempts:</label>
+                     <input type="number" value="<?php if($password_option) {echo $password_option->allowed_login_attempts;}  ?>" name="allowed_login_attempts" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Allowed Invalid Login Attempts">
+                  </div>
+            </div>
+              
+            <div class="form-group col-sm-4">
+                  <div class="with-icon">
+                     <label>Welcome Mail Password Expiry Days:</label>
+                     <input type="number" value="<?php if($password_option) {echo $password_option->welcome_mail_exp;}  ?>" name="welcome_mail_exp" class="form-control  ih-medium ip-lightradius-xs b-light" id="inputsummary" placeholder="Welcome Mail Password Expiry Days">
+                  </div>
+            </div>
+            
+              
+
+              <div class="form-group col-sm-12">
+                  <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+               </div>
+               
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<!-- general option end -->
+
 <!-- table start -->
 <div class="contents demo-card expanded">
    <div class="row">
@@ -473,7 +539,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
             <div class="col-md-12 row">
              <div class="col-md-4">
                <label class="labelIT">Financial Year</label>
-            <select name="list_search" class="form-control mt-2" style="width:50%;" onchange="it_valueGet()" id="f_year">
+            <select name="" class="form-control mt-2" style="width:50%;" onchange="it_valueGet()" id="f_year">
                   <option>Financial Year</option>
                   <option value="2022">2022</option>
                   <option value="2023">2023</option>
@@ -482,7 +548,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
               
             <div class="col-md-6">
             <label class="labelIT">Category</label>
-               <select name="list_search" class="form-control mt-2" style="width:60%;" onchange="it_valueGet()" id="it_category">
+               <select name="" class="form-control mt-2" style="width:60%;" onchange="it_valueGet()" id="it_category">
                   <option value="">---All---</option>
                   <?php if($category) { foreach($category as $row) {  ?>
                      <option value="<?php echo $row->id ?>"><?php echo $row->name ?></option>
@@ -519,6 +585,110 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                                        </table>
                                        <!-- <button type="submit" class="btn btn-primary mt-2">Save</button> -->
                                    <!-- </form> -->
+                                </div>
+                            </div>   
+            </div>
+      </div>
+      
+   </div>
+</div>
+<!-- table end -->
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             <form action="<?php echo base_url();?>admin/checked_it_sectionMaxLimit" method="post">
+               
+            
+            <div id="eMsg"></div>
+            <h3>IT Section Max Limit</h3>
+          
+           
+               <label class="labelIT">Financial Year</label>
+            <select name="fin_year" class="form-control mt-2" style="width:15%;" onchange="itSectionMax()" id="itSec_year">
+                  <option>Financial Year</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+               </select>
+               
+           
+            <div class="form-row mt-0">
+
+                            <div class="card-body">
+                              
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Section</th>
+                                            <th>MaxLimit</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                          <tbody id="itSectionMlimit" class="">
+                                         
+                                          </tbody>
+                                       </table>
+                                       <button type="submit" class="btn btn-primary mt-2">Save</button>
+                                   </form>
+                                </div>
+                            </div>   
+            </div>
+      </div>
+      
+   </div>
+</div>
+<!-- table end -->
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             <form action="<?php echo base_url();?>admin/sequence_number_checked" method="post">
+               
+            
+            <div id="eMsg"></div>
+            <h3>Sequence Number</h3>
+           
+            <div class="form-row mt-0">
+
+                            <div class="card-body">
+                              
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Key</th>
+                                            <th>Format</th>
+                                            <th>Current Index</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                          <tbody id="seq_num_id" class="">
+                                          <?php if(isset($sequence)) { 
+                                             foreach($sequence as $row) {   
+                                          ?>   
+                                          <tr>
+                                                <td><?php echo $row->name; ?></td>
+                                                <td><?php echo $row->type; ?></td>
+                                                <td><?php echo $row->key; ?></td>
+                                                <td><?php echo $row->format; ?></td>
+                                                <td><?php echo $row->index; ?></td>
+                                                <td><input type="checkbox" <?php if($exarrr) {if(in_array($row->id, $exarrr)) {echo "checked";} } ?> name="seq_num[]" class="checkId" value="<?php echo $row->id; ?>"></td>
+                                             </tr>
+                                          <?php } } ?>
+                                          </tbody>
+                                       </table>
+                                       <button type="submit" class="btn btn-primary mt-2">Save</button>
+                                   </form>
                                 </div>
                             </div>   
             </div>
@@ -643,16 +813,6 @@ var selectedOptions = $('input[type="checkbox"]:checked').map(function() {
 
 console.log(selectedOptions); // Output: ["1", "3"]
 
-// function validateFun(id){
-   
-//    let ss = $('.checkId').val();
-//    // var inputName = $('input[name="check_record[]"]').attr('name');
-//    // var inputName = $(".checkId").attr("name");
-// console.log(inputName); 
-//    // alert(ss);
-  
-//    // console.log(ss);
-// }
 
 function listSearch() 
 {
@@ -689,6 +849,24 @@ function it_valueGet()
             },
         });
 }
+
+function itSectionMax()
+{
+   let year = $('#itSec_year').val();
+   
+   $.ajax({
+            url : "<?php echo base_url()?>admin/itSectionMaxLimit",
+            method : 'POST',
+            dataType : 'json',
+            data : {year : year},
+            success : function(response)
+            {
+              console.log(response);
+              $('#itSectionMlimit').html(response);
+            },
+        });
+}
+
 </script>
 <script type="text/javascript">
 

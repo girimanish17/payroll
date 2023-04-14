@@ -85,6 +85,14 @@ $route['admin/addDesignation']='Admin/CoreHr/addDesignation';
 $route['admin/editDesignation']='Admin/CoreHr/editDesignation';
 $route['admin/deleteDesignation/(:any)']='Admin/CoreHr/deleteDesignation/$1';
 $route['admin/roles'] = 'Admin/Employee/role'; //s
+$route['admin/sequence_number'] = 'admin/home/sequence_number'; //s
+$route['admin/add_sequence_number'] = 'admin/home/add_sequence_number'; //s
+$route['admin/add_sequence_number'] = 'admin/home/add_sequence_number'; //s
+$route['admin/edit_sequence_number'] = 'admin/home/edit_sequence_number'; //s
+$route['admin/delete_sequence_number/(:any)'] = 'admin/home/delete_sequence_number/$1'; //s
+$route['admin/delete_sequence_number/(:any)'] = 'admin/home/delete_sequence_number/$1'; //s
+
+$route['admin/sequence_number_checked'] = 'Admin/Employee/sequence_number_checked';
 
 $route['admin/addEmployee'] = 'Admin/Employee/addEmployee';
 $route['admin/addEmployeeForm'] = 'Admin/Employee/addEmployeeForm';
@@ -104,6 +112,8 @@ $route['admin/delete_list_of_values/(:any)'] = 'Admin/Employee/delete_list_of_va
 $route['admin/add_company_settings'] = 'Admin/Employee/add_company_setting';
 $route['admin/getdesignation'] = 'Admin/Employee/getdesignation';
 $route['admin/validate_empid'] = 'Admin/Employee/validate_empid';
+$route['admin/itSectionMaxLimit'] = 'Admin/Employee/itSectionMaxLimit';
+$route['admin/checked_it_sectionMaxLimit'] = 'Admin/Employee/checked_it_sectionMaxLimit';
 
 $route['admin/addAnnouncement'] = 'Admin/CoreHr/addAnnouncement';
 $route['admin/editAnnouncement'] = 'Admin/CoreHr/editAnnouncement';

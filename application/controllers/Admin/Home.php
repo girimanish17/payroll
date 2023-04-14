@@ -125,9 +125,11 @@ class Home extends CI_Controller
 	
 	public function sequence_number()
 	{
+		// echo "sdfsdf"; die;
 		$user_id = $this->session->userdata('user_id');
 		
 		$data['comp_sequence_numbers'] = $this->common_model->GetAllData('comp_sequence_numbers',array('status'=>1),'id');	
+		
 		
 		$type = $this->session->userdata('user_type');//comp_sequence_numbers
 		
