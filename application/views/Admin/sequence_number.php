@@ -214,9 +214,9 @@
                                     </div>
                                 </div>
 								 <div class="form-group col-md-12 form-group-calender">
-                                    <label class="il-gray fs-14 fw-500 align-center">Format <span class="text-danger">*</span></label>
+                                    <label class="il-gray fs-14 fw-500 align-center">Format <span class="text-danger"></span></label>
                                     <div class="position-relative">
-                                        <input type="text" name="format" value="<?php echo set_value('format') ?>" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Format" required>
+                                        <input type="text" name="format" value="<?php echo set_value('format') ?>" class="form-control  ih-medium ip-gray radius-xs b-light" placeholder="Format" >
                                        
                                     </div>
                                 </div>

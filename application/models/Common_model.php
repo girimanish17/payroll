@@ -65,6 +65,38 @@ class Common_model extends CI_Model {
 		}
 	}
 
+	function getallwhere_join($where)
+	{
+		$this->db->select('master_it_declarations.*, it_declaration_sections.name as section_name'); 
+		$this->db->from('master_it_declarations');
+		$this->db->join('it_declaration_sections','it_declaration_sections.id=master_it_declarations.section_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+		
+		if($query->num_rows())
+		{	
+			return $query->result_array();
+		} else {
+			return array();
+		}    
+	}
+
+	function getallwhere_itsectionlimit($where)
+	{
+		$this->db->select('master_it_section_maxlimit.*, it_declaration_sections.name as section_name'); 
+		$this->db->from('master_it_section_maxlimit');
+		$this->db->join('it_declaration_sections','it_declaration_sections.id=master_it_section_maxlimit.section', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+		
+		if($query->num_rows())
+		{	
+			return $query->result_array();
+		} else {
+			return array();
+		}    
+	}
+
   function getAllrecord($table)
 	{
 		$this->db->select('*');

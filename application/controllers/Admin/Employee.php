@@ -728,12 +728,21 @@ public function expense_type(){
 		$user_id = $this->session->userdata('user_id');
 		$type = $this->session->userdata('user_type');
 
+		$data['category'] = $this->common_model->getAllwhere('it_declaration_categories',array('status'=>1),'id');
+		// echo "<pre>"; print_r($data['category']); die;
+
 		$data['tax'] = $this->common_model->getAllwhere('profession_tax_slabs', array('admin_id' => $user_id));
 			
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
 
 		$data['setting'] = $result = $this->common_model->getSingle('company_settings', array('admin_id' => $user_id));
+		$data['sequence'] = $this->common_model->getAllWhere('comp_sequence_numbers', array('status' => 1));
+		$sq = $this->common_model->getSingle('sequence_number_checked', array('admin_id' => $user_id));
+		$cv = $sq->checked_value;
+		$data['exarrr'] = explode(" ",$cv);
 
+
+		// echo "<pre>"; print_r($exarrr); die;
 		$data['states'] = $this->common_model->GetAllData('master_state',array('state_country_id'=>'101'));
 		// echo "<pre>"; print_r($data['states']); die;
 		if($_POST['company_setting'] == 'COMPUTER_SETTING') 
@@ -820,9 +829,94 @@ public function expense_type(){
 				redirect('admin/profile');
 			}
 		}
+
+		$data['password_option'] = $result_pass = $this->common_model->getSingle('password_options', array('admin_id' => $user_id));
+
+		if($_POST['password_option'] == 'PASSWORD_OPTION')
+		{
+			$this->form_validation->set_rules('min_pass_length', 'Minimum Password Length', 'required');
+			$this->form_validation->set_rules('pass_exp_limit', 'Password Expiry Limit', 'required');
+			$this->form_validation->set_rules('exp_reminder_days', 'Expiry Reminder Days', 'required');
+			$this->form_validation->set_rules('memory_list_size', 'Memory List Size', 'required');
+			$this->form_validation->set_rules('allowed_login_attempts', 'Allowed Invalid Login Attempts', 'required');
+			$this->form_validation->set_rules('welcome_mail_exp', 'Welcome Mail Password Expiry Days', 'required');
+
+			if($this->form_validation->run())
+			{
+				$passOpt['admin_id'] = $user_id;
+				$passOpt['min_pass_length']	= $this->input->post('min_pass_length');
+				$passOpt['pass_exp_limit'] = $this->input->post('pass_exp_limit');
+				$passOpt['exp_reminder_days'] = $this->input->post('exp_reminder_days');
+				$passOpt['memory_list_size'] = $this->input->post('memory_list_size');
+				$passOpt['allowed_login_attempts'] = $this->input->post('allowed_login_attempts');
+				$passOpt['welcome_mail_exp'] = $this->input->post('welcome_mail_exp');
+
+				if($result_pass) {
+					$this->common_model->UpdateData('password_options', array('admin_id' => $user_id), $passOpt);
+				} else {
+					$this->common_model->InsertData('password_options', $passOpt);
+				}
+				redirect('admin/profile');
+			}
+		}
 	
 		// echo ""; print_r($data['countries']); die;
 		$this->load->view('Admin/profile',$data);
+	}
+
+	public function it_declaration_data()
+	{
+		// $year = '2023';
+		// $category = '1';
+		$year = $this->input->post('year');
+		$category = $this->input->post('category');
+		
+		$where = '';
+		if($year && $category) {
+			$where = array('master_it_declarations.financial_year' => $year, 'master_it_declarations.category_id' => $category, 'master_it_declarations.status' => 1);
+		}
+		
+		if($year && $category == '') {
+			$where = array('master_it_declarations.financial_year' => $year, 'master_it_declarations.status' => 1);
+		}
+	
+		$data = $this->common_model->getallwhere_join($where);
+		// echo "<pre>"; print_r($data); die;
+		$checked = 'checked';
+		
+		if($data) {
+			foreach($data as $row) {
+				$html .= '<tr>';
+				$html .= '<td>'.$row["description"].' </td>';
+				$html .= '<td>'.$row["section_name"].'</td>';
+				$html .= '<td>'.$row["max_limit"].'</td>';
+				$html .= '<td>'.$row["deduct"].'</td>';
+				$html .= '<td>'.$row["sort_order"].'</td>';
+
+				if($row['visible'] == 'visible') {
+					$html .= '<td><input type="checkbox" name="" class="checkId" '.$checked.' ></td>';
+				} else if($row['visible'] == 'invisible') {
+					$html .= '<td><input type="checkbox" name="" class="checkId"  ></td>';
+				}
+
+				if($row['is_infra'] == 'yes' || $row['is_infra'] == 'Yes') {
+					$html .= '<td><input type="checkbox" name="" class="checkId" '.$checked.' ></td>';
+				} else if($row['is_infra'] == 'no' || $row['is_infra'] == 'No') {
+					$html .= '<td><input type="checkbox" name="" class="checkId"  ></td>';
+				}
+
+				$html .= '<td>'.$row["consider_as"].'</td>';
+				$html .= '<td>'.$row["code"].'</td>';
+
+				$html .= '</tr>';
+			}
+		}
+		// else {
+		// 	$html .= '<tr>';
+		// 	$html .= '<td>Record not found</td>';
+		// 	$html .= '</tr>';
+		// }
+		echo json_encode($html);
 	}
 
 	public function add_profession_tax() 
@@ -908,6 +1002,60 @@ public function expense_type(){
 		}
 		echo json_encode($html);
 	}
+
+	public function itSectionMaxLimit() 
+	{
+		$admin_id = $this->session->userdata('user_id');
+
+		$year = $this->input->post('year');
+		$data = $this->common_model->getallwhere_itsectionlimit(array('master_it_section_maxlimit.financial_year' => $year, 'master_it_section_maxlimit.status' => 1));
+		// echo "<pre>"; print_r($data); die;
+		if($data) {
+			foreach($data as $row) {
+				$checked="";
+				$dataR = $this->common_model->getSingle('it_sectionMaxLimit_checked', array('admin_id' => $admin_id, 'financial_year' => $year));
+				// echo "<pre>"; print_r($dataR); 
+				$values = $dataR->checked_value;
+				$exarrr = explode(" ",$values);
+				if($dataR)
+				{
+					if(in_array($row['id'],$exarrr))
+					{
+						$checked="checked";
+					}					
+				}
+
+				$html .= '<tr>';
+				$html .= '<td>'.$row['section_name'].' </td>';
+				$html .= '<td>'.$row['max_limit'].' </td>';
+				$html .= '<td><input type="checkbox" name="it_record[]" class="checkId" value="'.$row['id'].'" '.$checked.' ></td>';
+				$html .= '</tr>';
+			}
+		}
+		echo json_encode($html);
+	}
+
+	public function checked_it_sectionMaxLimit()
+	{
+		$admin_id = $this->session->userdata('user_id');
+		$fin_year = $this->input->post('fin_year');
+		$it_record = $this->input->post('it_record');
+
+		$itRecord = implode(" ", $it_record);
+
+		$insertR['admin_id'] = $admin_id;
+		$insertR['financial_year'] = $fin_year;
+		$insertR['checked_value'] = $itRecord;
+
+		$check = $this->common_model->getSingle('it_sectionMaxLimit_checked', array('admin_id' => $admin_id, 'financial_year' => $fin_year));
+		
+		if($check) {
+			$this->common_model->DeleteData('it_sectionMaxLimit_checked', array('admin_id' => $admin_id, 'financial_year' => $fin_year));
+		}
+
+		$this->common_model->InsertData('it_sectionMaxLimit_checked', $insertR);
+		redirect('admin/profile');
+	}
 	
 	public function checked_list_of_values() 
 	{
@@ -930,6 +1078,27 @@ public function expense_type(){
 		$this->common_model->InsertData('list_of_values_checked', $insert);
 		redirect('admin/profile');
 	}
+	
+	public function sequence_number_checked()
+	{
+		$admin_id = $this->session->userdata('user_id');
+		$seqArray = $this->input->post('seq_num');
+		
+		$seqVal = implode(" ", $seqArray);
+		
+		$insertSeq['admin_id'] = $admin_id;
+		$insertSeq['checked_value'] = $seqVal;
+
+		$check = $this->common_model->getSingle('sequence_number_checked', array('admin_id' => $admin_id));
+
+		if($check) {
+			$this->common_model->DeleteData('sequence_number_checked', array('admin_id' => $admin_id));
+		}
+
+		$this->common_model->InsertData('sequence_number_checked', $insertSeq);
+		redirect('admin/profile');
+	}
+
 
 	public function addProfileForm(){
 		$user_id = $this->session->userdata('user_id');
@@ -981,6 +1150,7 @@ public function expense_type(){
 		echo json_encode($json);
 	}
 
+	
 	// public function add_company_setting()
 	// {
 	// 	$admin_id = $this->session->userdata('user_id');

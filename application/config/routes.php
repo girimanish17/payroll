@@ -85,6 +85,14 @@ $route['admin/addDesignation']='Admin/CoreHr/addDesignation';
 $route['admin/editDesignation']='Admin/CoreHr/editDesignation';
 $route['admin/deleteDesignation/(:any)']='Admin/CoreHr/deleteDesignation/$1';
 $route['admin/roles'] = 'Admin/Employee/role'; //s
+$route['admin/sequence_number'] = 'admin/home/sequence_number'; //s
+$route['admin/add_sequence_number'] = 'admin/home/add_sequence_number'; //s
+$route['admin/add_sequence_number'] = 'admin/home/add_sequence_number'; //s
+$route['admin/edit_sequence_number'] = 'admin/home/edit_sequence_number'; //s
+$route['admin/delete_sequence_number/(:any)'] = 'admin/home/delete_sequence_number/$1'; //s
+$route['admin/delete_sequence_number/(:any)'] = 'admin/home/delete_sequence_number/$1'; //s
+
+$route['admin/sequence_number_checked'] = 'Admin/Employee/sequence_number_checked';
 
 $route['admin/addEmployee'] = 'Admin/Employee/addEmployee';
 $route['admin/addEmployeeForm'] = 'Admin/Employee/addEmployeeForm';
@@ -97,12 +105,15 @@ $route['admin/addProfileForm'] = 'Admin/Employee/addProfileForm';
 $route['admin/add_profession_tax'] = 'Admin/Employee/add_profession_tax';
 $route['admin/list_of_values'] = 'Admin/Employee/list_of_values';
 $route['admin/checked_list_of_values'] = 'Admin/Employee/checked_list_of_values';
+$route['admin/it_declaration_data'] = 'Admin/Employee/it_declaration_data';
 $route['admin/edit_profession_tax/(:any)'] = 'Admin/Employee/edit_profession_tax/$1';
 $route['admin/delete_profession_tax/(:any)'] = 'Admin/Employee/delete_profession_tax/$1';
 $route['admin/delete_list_of_values/(:any)'] = 'Admin/Employee/delete_list_of_values/$1';
 $route['admin/add_company_settings'] = 'Admin/Employee/add_company_setting';
 $route['admin/getdesignation'] = 'Admin/Employee/getdesignation';
 $route['admin/validate_empid'] = 'Admin/Employee/validate_empid';
+$route['admin/itSectionMaxLimit'] = 'Admin/Employee/itSectionMaxLimit';
+$route['admin/checked_it_sectionMaxLimit'] = 'Admin/Employee/checked_it_sectionMaxLimit';
 
 $route['admin/addAnnouncement'] = 'Admin/CoreHr/addAnnouncement';
 $route['admin/editAnnouncement'] = 'Admin/CoreHr/editAnnouncement';
@@ -178,6 +189,12 @@ $route['superadmin/addBloodgroup']='Admin/superadmin/addBloodgroup';
 $route['superadmin/editBloodgroup/(:num)']='Admin/superadmin/editBloodgroup/$1';
 $route['superadmin/deleteBloodgroup/(:num)']='Admin/superadmin/deleteBloodgroup/$1';
 $route['superadmin/changeStatusBloodgroup/(:num)/(:any)']='Admin/superadmin/changeStatusBloodgroup/$1/$2';
+
+$route['superadmin/it_section_maxLimit']='Admin/superadmin/it_section_maxLimit';
+$route['superadmin/addit_section_maxLimit']='Admin/superadmin/addit_section_maxLimit';
+$route['superadmin/editit_section_maxLimit/(:num)']='Admin/superadmin/editit_section_maxLimit/$1';
+$route['superadmin/deleteit_section_maxLimit/(:num)']='Admin/superadmin/deleteit_section_maxLimit/$1';
+$route['superadmin/changeStatusit_section_maxLimit/(:num)/(:any)']='Admin/superadmin/changeStatusit_section_maxLimit/$1/$2';
 
 $route['superadmin/qualification']='Admin/superadmin/qualification';
 $route['superadmin/addqualification']='Admin/superadmin/addqualification';
