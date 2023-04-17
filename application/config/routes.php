@@ -113,7 +113,10 @@ $route['admin/add_company_settings'] = 'Admin/Employee/add_company_setting';
 $route['admin/getdesignation'] = 'Admin/Employee/getdesignation';
 $route['admin/validate_empid'] = 'Admin/Employee/validate_empid';
 $route['admin/itSectionMaxLimit'] = 'Admin/Employee/itSectionMaxLimit';
+$route['admin/exmpGroupMapD'] = 'Admin/Employee/exmpGroupMapD';
+$route['admin/ts_slabs_fun'] = 'Admin/Employee/ts_slabs_fun';
 $route['admin/checked_it_sectionMaxLimit'] = 'Admin/Employee/checked_it_sectionMaxLimit';
+$route['admin/checked_exemption_grpMap'] = 'Admin/Employee/checked_exemption_grpMap';
 
 $route['admin/addAnnouncement'] = 'Admin/CoreHr/addAnnouncement';
 $route['admin/editAnnouncement'] = 'Admin/CoreHr/editAnnouncement';
@@ -364,6 +367,24 @@ $route['superadmin/addreligion']='Admin/superadmin/addreligion';
 $route['superadmin/editreligion/(:num)']='Admin/superadmin/editreligion/$1';
 $route['superadmin/deletereligion/(:num)']='Admin/superadmin/deletereligion/$1';
 $route['superadmin/changeStatusreligion/(:num)/(:any)']='Admin/superadmin/changeStatusreligion/$1/$2';
+
+$route['superadmin/exemptionGroupMap']='Admin/superadmin/exemptionGroupMap';
+$route['superadmin/addexemptionGroupMap']='Admin/superadmin/addexemptionGroupMap';
+$route['superadmin/editexemptionGroupMap/(:num)']='Admin/superadmin/editexemptionGroupMap/$1';
+$route['superadmin/deleteexemptionGroupMap/(:num)']='Admin/superadmin/deleteexemptionGroupMap/$1';
+$route['superadmin/changeStatusexemptionGroupMap/(:num)/(:any)']='Admin/superadmin/changeStatusexemptionGroupMap/$1/$2';
+
+$route['superadmin/tax_slabs']='Admin/superadmin/tax_slabs';
+$route['superadmin/addtax_slabs']='Admin/superadmin/addtax_slabs';
+$route['superadmin/edittax_slabs/(:num)']='Admin/superadmin/edittax_slabs/$1';
+$route['superadmin/deletetax_slabs/(:num)']='Admin/superadmin/deletetax_slabs/$1';
+$route['superadmin/changeStatustax_slabs/(:num)/(:any)']='Admin/superadmin/changeStatustax_slabs/$1/$2';
+
+$route['superadmin/profession_tax_slabs']='Admin/superadmin/profession_tax_slabs';
+$route['superadmin/addprofession_tax_slabs']='Admin/superadmin/addprofession_tax_slabs';
+$route['superadmin/editprofession_tax_slabs/(:num)']='Admin/superadmin/editprofession_tax_slabs/$1';
+$route['superadmin/deleteprofession_tax_slabs/(:num)']='Admin/superadmin/deleteprofession_tax_slabs/$1';
+$route['superadmin/changeStatusprofession_tax_slabs/(:num)/(:any)']='Admin/superadmin/changeStatusprofession_tax_slabs/$1/$2';
 
 $route['superadmin/contact_requests']='Admin/superadmin/contact_requests';
 $route['superadmin/subscription_plans']='Admin/superadmin/subscription_plans';

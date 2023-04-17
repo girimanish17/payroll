@@ -405,58 +405,6 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
    <div class="row">
       <div class="col-sm-12">
          
-             
-            <div id="eMsg"></div>
-            <h3>Profession Tax Slabs</h3>
-            <div class="form-row mt-0">
-				
-
-                            <div class="card-body">
-                               <a href="<?php echo base_url();?>admin/add_profession_tax" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a>
-                                <div class="table-responsives">
-                              
-                                    <table class="table  mb-0 table-basic mt-2 text-center">
-                                        <thead>
-                                            <tr  class="userDatatable-header">
-                                            <th>Salary From</th>
-                                            <th>Salary Till</th>
-                                            <th>Tax Amount</th>
-                                            <th>Deduction Month</th>
-                                            <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php if($tax) { 
-                                             foreach($tax as $row) {   
-                                          ?>
-                                          <tr>
-                                             <td><?php echo $row->salary_from; ?></td>
-                                             <td><?php echo $row->salary_till; ?></td>
-                                             <td><?php echo $row->tax_amount; ?></td>
-                                             <td><?php echo $row->deduction_month; ?></td>
-                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
-                                                <a href="<?php echo base_url()?>admin/edit_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
-                                          
-                                             <a href="<?php echo base_url()?>admin/delete_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
-                                          
-                                          </td>
-                                          </tr>
-                                          <?php } } ?>
-                                      </tbody>
-                                    </table>
-                                </div>
-                            </div>   
-            </div>
-      </div>
-   </div>
-</div>
-<!-- table end -->
-
-<!-- table start -->
-<div class="contents demo-card expanded">
-   <div class="row">
-      <div class="col-sm-12">
-         
              <form action="<?php echo base_url();?>admin/checked_list_of_values" method="post">
                
             
@@ -644,6 +592,173 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
 </div>
 <!-- table end -->
 
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             <form action="<?php echo base_url();?>admin/checked_exemption_grpMap" method="post">
+               
+            
+            <div id="eMsg"></div>
+            <h3>Exemption Group Map</h3>
+          
+           
+               <label class="labelIT">Tax Regime</label>
+            <select name="tax_regime_d" class="form-control mt-2" style="width:15%;" onchange="exemptionGrpMap()" id="exmGrpMap">
+                  <option>Select Tax Regime</option>
+                  <option value="New Tax Regime">New Tax Regime</option>
+                  <option value="Old Tax Regime">Old Tax Regime</option>
+               </select>
+               
+           
+            <div class="form-row mt-0">
+
+                            <div class="card-body">
+                              
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Description</th>
+                                            <th>Tax Regime</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                          <tbody id="expGrpID" class="">
+                                         
+                                          </tbody>
+                                       </table>
+                                       <button type="submit" class="btn btn-primary mt-2">Save</button>
+                                   </form>
+                                </div>
+                            </div>   
+            </div>
+      </div>
+      
+   </div>
+</div>
+<!-- table end -->
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             <!-- <form action="<?php// echo base_url();?>admin/checked_list_of_values" method="post"> -->
+               
+            
+            <div id="eMsg"></div>
+            <h3>Tax Slabs</h3>
+          
+            <div class="col-md-12 row">
+             <div class="col-md-4">
+               <label class="labelIT">Financial Year</label>
+            <select name="" class="form-control mt-2" style="width:50%;" onchange="taxSlabFUn()" id="ts_year">
+                  <option>Financial Year</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+               </select>
+            </div>
+              
+            <div class="col-md-6">
+            <label class="labelIT">Regime</label>
+            <select name="" class="form-control mt-2" style="width:35%;" onchange="taxSlabFUn()" id="ts_regime">
+            <option>Select Regime</option>
+                  <option value="New Regime">New Regime</option>
+                  <option value="Old Regime">Old Regime</option>
+                  </select>
+            </div>
+            </div>
+             
+           
+            <div class="form-row mt-0">
+
+                            <div class="card-body">
+                              
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Min Limit</th>
+                                            <th>Max Limit</th>
+                                            <th>Tax Rate</th>
+                                            <th>Surcharge Rate</th>
+                                            </tr>
+                                        </thead>
+                                        
+                                          <tbody id="slabID" class="">
+                                         
+                                          </tbody>
+                                       </table>
+                                       <!-- <button type="submit" class="btn btn-primary mt-2">Save</button> -->
+                                   <!-- </form> -->
+                                </div>
+                            </div>   
+            </div>
+      </div>
+      
+   </div>
+</div>
+<!-- table end -->
+
+
+<!-- table start -->
+<div class="contents demo-card expanded">
+   <div class="row">
+      <div class="col-sm-12">
+         
+             
+            <div id="eMsg"></div>
+            <h3>Profession Tax Slabs</h3>
+            <div class="form-row mt-0">
+				
+
+                            <div class="card-body">
+                               <!-- <a href="<?php echo base_url();?>admin/add_profession_tax" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a> -->
+                                <div class="table-responsives">
+                              
+                                    <table class="table  mb-0 table-basic mt-2 text-center">
+                                        <thead>
+                                            <tr  class="userDatatable-header">
+                                            <th>Salary From</th>
+                                            <th>Salary Till</th>
+                                            <th>Tax Amount</th>
+                                            <th>Deduction Month</th>
+                                            <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                          <?php if($tax) { 
+                                             foreach($tax as $row) {   
+                                          ?>
+                                          <tr>
+                                             <td><?php echo $row->salary_from; ?></td>
+                                             <td><?php echo $row->salary_till; ?></td>
+                                             <td><?php echo $row->tax_amount; ?></td>
+                                             <td><?php echo $row->deduction_month; ?></td>
+                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
+                                                <a href="<?php echo base_url()?>admin/edit_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
+                                          
+                                             <a href="<?php echo base_url()?>admin/delete_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
+                                          
+                                          </td>
+                                          </tr>
+                                          <?php } } ?>
+                                      </tbody>
+                                    </table>
+                                </div>
+                            </div>   
+            </div>
+      </div>
+   </div>
+</div>
+<!-- table end -->
+
 <!-- table start -->
 <div class="contents demo-card expanded">
    <div class="row">
@@ -698,51 +813,6 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
 </div>
 <!-- table end -->
 
-<!-- table start -->
-<div class="contents demo-card expanded">
-   <div class="row">
-      <div class="col-sm-12">
-         
-             
-            <div id="eMsg"></div>
-            <h3>Tax Slabs</h3>
-            <div class="form-row mt-0">
-				
-
-                            <div class="card-body">
-                               <a href="<?php echo base_url();?>admin/list_of_values" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a>
-                                <div class="table-responsives">
-                              
-                                    <table class="table  mb-0 table-basic mt-2 text-center">
-                                        <thead>
-                                            <tr  class="userDatatable-header">
-                                            <th>Description</th>
-                                            <th>Code</th>
-                                            <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                          <?php if($listValues) { 
-                                             foreach($listValues as $row) {   
-                                          ?>
-                                          <tr>
-                                             <td><?php echo $row->description; ?></td>
-                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
-                                          
-                                             <a href="<?php echo base_url()?>admin/delete_list_of_values/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
-                                          
-                                          </td>
-                                          </tr>
-                                          <?php } } ?>
-                                      </tbody>
-                                    </table>
-                                </div>
-                            </div>   
-            </div>
-      </div>
-   </div>
-</div>
-<!-- table end -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
@@ -863,6 +933,40 @@ function itSectionMax()
             {
               console.log(response);
               $('#itSectionMlimit').html(response);
+            },
+        });
+}
+
+function exemptionGrpMap()
+{
+   let tax_regime = $('#exmGrpMap').val();
+   $.ajax({
+            url : "<?php echo base_url()?>admin/exmpGroupMapD",
+            method : 'POST',
+            dataType : 'json',
+            data : {tax_regime : tax_regime},
+            success : function(response)
+            {
+              console.log(response);
+              $('#expGrpID').html(response);
+            },
+        });
+}
+
+function taxSlabFUn()
+{
+   let f_year = $('#ts_year').val();
+   let ts_regime = $('#ts_regime').val();
+
+   $.ajax({
+            url : "<?php echo base_url()?>admin/ts_slabs_fun",
+            method : 'POST',
+            dataType : 'json',
+            data : {f_year : f_year, ts_regime: ts_regime},
+            success : function(response)
+            {
+            //   console.log(response);
+              $('#slabID').html(response);
             },
         });
 }

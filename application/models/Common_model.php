@@ -97,6 +97,22 @@ class Common_model extends CI_Model {
 		}    
 	}
 
+	function getallwhere_profession_taxSlab($where)
+	{
+		$this->db->select('master_profession_taxslabs.*, master_state.state_name'); 
+		$this->db->from('master_profession_taxslabs');
+		$this->db->join('master_state','master_state.state_id=master_profession_taxslabs.state', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+		
+		if($query->num_rows())
+		{	
+			return $query->result_array();
+		} else {
+			return array();
+		}    
+	}
+
   function getAllrecord($table)
 	{
 		$this->db->select('*');

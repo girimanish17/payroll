@@ -1035,6 +1035,88 @@ public function expense_type(){
 		echo json_encode($html);
 	}
 
+	public function exmpGroupMapD()
+	{
+		$admin_id = $this->session->userdata('user_id');
+		$tax_regime = $this->input->post('tax_regime');
+
+		$data = $this->common_model->getAllwhere('master_exemption_groupmap', array('tax_regime' => $tax_regime, 'status' => 1));
+		if($data) {
+			foreach($data as $row) {
+				$checked = '';
+				$dataR =  $this->common_model->getSingle('exemption_grpmap_checked', array('admin_id' => $admin_id, 'tax_regime' => $tax_regime));
+				$values = $dataR->checked_value;
+				$exarrr = explode(" ",$values);
+				if($dataR)
+				{
+					if(in_array($row->id,$exarrr))
+					{
+						$checked="checked";
+					}					
+				}
+
+				$html .='<tr>';
+				$html .='<td>'.$row->description.'</td>';
+				$html .='<td>'.$row->tax_regime.'</td>';
+				$html .='<td><input type="checkbox" name="expGrp[]" class="checkId" value="'.$row->id.'" '.$checked.' ></td>';
+				$html .='</tr>';
+			}
+		}
+
+
+		echo json_encode($html);
+	}
+
+	public function ts_slabs_fun()
+	{
+		$f_year = $this->input->post('f_year');
+		$ts_regime = $this->input->post('ts_regime');
+
+		$where = '';
+
+		if($f_year && $ts_regime) {
+			$where = array('financial_year' => $f_year, 'regime' => $ts_regime, 'status' => 1);
+		}
+
+		$data = $this->common_model->getAllWhere('master_tax_slabs', $where);
+
+		if($data) {
+			foreach($data as $row) {
+				$html .='<tr>';
+				$html .='<td>'.$row->min_limit.'</td>';
+				$html .='<td>'.$row->max_limit.'</td>';
+				$html .='<td>'.$row->tax_rate.'</td>';
+				$html .='<td>'.$row->surcharge_rate.'</td>';
+				$html .='</tr>';
+			}
+		}
+
+		echo json_encode($html);
+	}
+
+	public function checked_exemption_grpMap()
+	{
+		$admin_id = $this->session->userdata('user_id');
+
+		$tax_regime_d = $this->input->post('tax_regime_d');
+		$expGrp = $this->input->post('expGrp');
+
+		$emp = implode(" ", $expGrp);
+
+		$insert['admin_id'] = $admin_id; 
+		$insert['tax_regime'] = $tax_regime_d; 
+		$insert['checked_value'] = $emp; 
+
+		$check = $this->common_model->getSingle('exemption_grpmap_checked', array('admin_id' => $admin_id, 'tax_regime' => $tax_regime_d));
+
+		if($check) {
+			$this->common_model->DeleteData('exemption_grpmap_checked', array('admin_id' => $admin_id, 'tax_regime' => $tax_regime_d));
+		}
+
+		$this->common_model->InsertData('exemption_grpmap_checked', $insert);
+		redirect('admin/profile');
+	}
+
 	public function checked_it_sectionMaxLimit()
 	{
 		$admin_id = $this->session->userdata('user_id');
