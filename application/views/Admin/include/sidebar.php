@@ -941,6 +941,36 @@
                                     </span>
                                 </a>
                             </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/exemptionGroupMap" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Exemption Group Map</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-sitemap"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/tax_slabs" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Tax Slabs</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-sitemap"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/profession_tax_slabs" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Profession Tax Slabs</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-sitemap"></i>
+                                    </span>
+                                </a>
+                            </li>
                              <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/qualification_level" class="menu-link">
                                     <span class="menu-label">

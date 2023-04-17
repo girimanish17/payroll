@@ -4582,7 +4582,377 @@ public function changeStatusit_section_maxLimit($id,$status)
 	}
 }
 
+//iexemption group map
+public function exemptionGroupMap() 
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	// $data[''] = $this->common_model->getAllwhere('it_declaration_sections',array('status!='=>2),'id');
+	$data['groupMap'] = $this->common_model->GetAllData('master_exemption_groupmap', array('status!=' => 2));
+	// echo "<pre>"; print_r($data['groupMap']); die;
+	$this->load->view('Admin/s_exemptionGroupMap',$data);
+}
 
+public function addexemptionGroupMap() 
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('desc', 'Description', 'required');
+	$this->form_validation->set_rules('tax_regime','Tax Regime','required');
+	
+	if($this->form_validation->run())
+	{
+		$chk = $this->common_model->GetSingleData('master_exemption_groupmap',array('description'=>$this->input->post('desc'), 'tax_regime' => $this->input->post('tax_regime')));
+		
+		if($chk=='')
+		{	
+				
+				$insert1['description'] = $this->input->post('desc');
+				$insert1['tax_regime'] = $this->input->post('tax_regime');
+				$insert1['created_date'] = date('Y-m-d h:i:s');
+				
+				$run = $this->common_model->InsertData('master_exemption_groupmap',$insert1);
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Exemption Group Map added successfully!</div>');
+				redirect('superadmin/exemptionGroupMap');
+			
+		}
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Exemption Group Map already exist!</div>');
+			redirect('superadmin/exemptionGroupMap');
+		}
+		
+	 } 
+	 else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/exemptionGroupMap');
+	}
+}
+
+public function editexemptionGroupMap($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('desc', 'Description', 'required');
+	$this->form_validation->set_rules('tax_regime','Tax Regime','required');
+	
+	if($this->form_validation->run()){
+		
+				$insert['description'] = $this->input->post('desc');
+				$insert['tax_regime'] = $this->input->post('tax_regime');
+				$run = $this->common_model->UpdateData('master_exemption_groupmap',array('id'=>$id),$insert);
+				
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Exemption Group Map Updated successfully!</div>');
+			redirect('superadmin/exemptionGroupMap');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+		
+		
+	 } else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/exemptionGroupMap');
+	}
+}
+
+public function deleteexemptionGroupMap($id)
+{
+	$run = $this->common_model->UpdateData('master_exemption_groupmap',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Exemption Group Map deleted successfully</div>');
+			 redirect('superadmin/exemptionGroupMap');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/exemptionGroupMap');
+		}
+}
+
+public function changeStatusexemptionGroupMap($id,$status)
+{
+
+	$companies = $this->common_model->GetSingleData('master_exemption_groupmap',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_exemption_groupmap',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Exemption Group Map Status Changed successfully</div>');
+			redirect('superadmin/exemptionGroupMap');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/exemptionGroupMap');
+	}
+}
+
+//Tax Slabs
+public function tax_slabs() 
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	// $data[''] = $this->common_model->getAllwhere('it_declaration_sections',array('status!='=>2),'id');
+	$data['taxs'] = $this->common_model->GetAllData('master_tax_slabs', array('status!=' => 2));
+	// echo "<pre>"; print_r($data['taxs']); die;
+	$this->load->view('Admin/s_tax_slabs',$data);
+}
+
+public function addtax_slabs() 
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('year', 'Financial Year', 'required');
+	$this->form_validation->set_rules('regime', 'Regime', 'required');
+	$this->form_validation->set_rules('min_limit', 'Min Limit', 'required');
+	$this->form_validation->set_rules('max_limit', 'Max Limit', 'required');
+	$this->form_validation->set_rules('tax_rate','Tax Rate','required');
+	$this->form_validation->set_rules('surcharge_rate','Surcharge Rate','required');
+	
+	if($this->form_validation->run())
+	{
+		// $chk = $this->common_model->GetSingleData('master_exemption_groupmap',array('description'=>$this->input->post('desc'), 'tax_regime' => $this->input->post('tax_regime')));
+		
+		// if($chk=='')
+		// {	
+				
+				$insert1['financial_year'] = $this->input->post('year');
+				$insert1['regime'] = $this->input->post('regime');
+				$insert1['min_limit'] = $this->input->post('min_limit');
+				$insert1['max_limit'] = $this->input->post('max_limit');
+				$insert1['tax_rate'] = $this->input->post('tax_rate');
+				$insert1['surcharge_rate'] = $this->input->post('surcharge_rate');
+				$insert1['created_date'] = date('Y-m-d h:i:s');
+				
+				$run = $this->common_model->InsertData('master_tax_slabs',$insert1);
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Tax Slabs added successfully!</div>');
+				redirect('superadmin/tax_slabs');
+			
+		}
+	// 	else
+	// 	{
+	// 		$this->session->set_flashdata('msg','<div class="alert alert-danger">Tax Slabs already exist!</div>');
+	// 		redirect('superadmin/tax_slabs');
+	// 	}
+		
+	//  } 
+	 else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/tax_slabs');
+	}
+}
+
+public function edittax_slabs($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('year', 'Financial Year', 'required');
+	$this->form_validation->set_rules('regime', 'Regime', 'required');
+	$this->form_validation->set_rules('min_limit', 'Min Limit', 'required');
+	$this->form_validation->set_rules('max_limit', 'Max Limit', 'required');
+	$this->form_validation->set_rules('tax_rate','Tax Rate','required');
+	$this->form_validation->set_rules('surcharge_rate','Surcharge Rate','required');
+	
+	if($this->form_validation->run()){
+		
+		$insert1['financial_year'] = $this->input->post('year');
+		$insert1['regime'] = $this->input->post('regime');
+		$insert1['min_limit'] = $this->input->post('min_limit');
+		$insert1['max_limit'] = $this->input->post('max_limit');
+		$insert1['tax_rate'] = $this->input->post('tax_rate');
+		$insert1['surcharge_rate'] = $this->input->post('surcharge_rate');
+				$run = $this->common_model->UpdateData('master_tax_slabs',array('id'=>$id),$insert1);
+				
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Tax Slabs Updated successfully!</div>');
+			redirect('superadmin/tax_slabs');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+		
+		
+	 } else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/tax_slabs');
+	}
+}
+
+public function deletetax_slabs($id)
+{
+	$run = $this->common_model->UpdateData('master_tax_slabs',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Tax Slabs deleted successfully</div>');
+			 redirect('superadmin/tax_slabs');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/tax_slabs');
+		}
+}
+
+public function changeStatustax_slabs($id,$status)
+{
+
+	$companies = $this->common_model->GetSingleData('master_tax_slabs',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_tax_slabs',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Tax Slabs Status Changed successfully</div>');
+			redirect('superadmin/tax_slabs');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/tax_slabs');
+	}
+}
+
+
+//professio Tax Slabs
+public function profession_tax_slabs() 
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	// $data[''] = $this->common_model->getAllwhere('it_declaration_sections',array('status!='=>2),'id');
+	$data['listData'] = $this->common_model->getallwhere_profession_taxSlab(array('master_profession_taxslabs.status!=' => 2));
+	$data['states'] = $this->common_model->getAllrecord('master_state');
+	// echo "<pre>"; print_r($data['listData']); die;
+	$this->load->view('Admin/s_profession_tax_slabs',$data);
+}
+
+public function addprofession_tax_slabs() 
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('state', 'State', 'required');
+	$this->form_validation->set_rules('location', 'Location', 'required');
+	$this->form_validation->set_rules('date', 'Date', 'required');
+	$this->form_validation->set_rules('salary_from', 'Salary From', 'required');
+	$this->form_validation->set_rules('salary_till', 'Salary Till', 'required');
+	$this->form_validation->set_rules('tax_amount','Tax Amount','required');
+	$this->form_validation->set_rules('deduction_month','Deduction Month','required');
+	
+	if($this->form_validation->run())
+	{
+		// $chk = $this->common_model->GetSingleData('master_exemption_groupmap',array('description'=>$this->input->post('desc'), 'tax_regime' => $this->input->post('tax_regime')));
+		
+		// if($chk=='')
+		// {	
+				
+				$insert1['state'] = $this->input->post('state');
+				$insert1['location'] = $this->input->post('location');
+				$insert1['date'] = $this->input->post('date');
+				$insert1['salary_from'] = $this->input->post('salary_from');
+				$insert1['salary_till'] = $this->input->post('salary_till');
+				$insert1['tax_amount'] = $this->input->post('tax_amount');
+				$insert1['deduction_month'] = $this->input->post('deduction_month');
+				$insert1['entry_date'] = date('Y-m-d h:i:s');
+				
+				$run = $this->common_model->InsertData('master_profession_taxslabs',$insert1);
+				$this->session->set_flashdata('msg','<div class="alert alert-success">Profession Profession Tax Slabs added successfully!</div>');
+				redirect('superadmin/profession_tax_slabs');
+			
+		}
+	// 	else
+	// 	{
+	// 		$this->session->set_flashdata('msg','<div class="alert alert-danger">Profession Tax Slabs already exist!</div>');
+	// 		redirect('superadmin/profession_tax_slabs');
+	// 	}
+		
+	//  } 
+	 else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/profession_tax_slabs');
+	}
+}
+
+public function editprofession_tax_slabs($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	
+	$this->form_validation->set_rules('state', 'State', 'required');
+	$this->form_validation->set_rules('location', 'Location', 'required');
+	$this->form_validation->set_rules('date', 'Date', 'required');
+	$this->form_validation->set_rules('salary_from', 'Salary From', 'required');
+	$this->form_validation->set_rules('salary_till', 'Salary Till', 'required');
+	$this->form_validation->set_rules('tax_amount','Tax Amount','required');
+	$this->form_validation->set_rules('deduction_month','Deduction Month','required');
+	
+	if($this->form_validation->run()){
+		
+		$insert1['state'] = $this->input->post('state');
+				$insert1['location'] = $this->input->post('location');
+				$insert1['date'] = $this->input->post('date');
+				$insert1['salary_from'] = $this->input->post('salary_from');
+				$insert1['salary_till'] = $this->input->post('salary_till');
+				$insert1['tax_amount'] = $this->input->post('tax_amount');
+				$insert1['deduction_month'] = $this->input->post('deduction_month');
+
+				$run = $this->common_model->UpdateData('master_profession_taxslabs',array('id'=>$id),$insert1);
+				
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Profession Tax Slabs Updated successfully!</div>');
+			redirect('superadmin/profession_tax_slabs');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+		
+		
+	 } else {
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+			redirect('superadmin/profession_tax_slabs');
+	}
+}
+
+public function deleteprofession_tax_slabs($id)
+{
+	$run = $this->common_model->UpdateData('master_profession_taxslabs',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Profession Tax Slabs deleted successfully</div>');
+			 redirect('superadmin/profession_tax_slabs');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/profession_tax_slabs');
+		}
+}
+
+public function changeStatusprofession_tax_slabs($id,$status)
+{
+
+	$companies = $this->common_model->GetSingleData('master_profession_taxslabs',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_profession_taxslabs',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Profession Tax Slabs Status Changed successfully</div>');
+			redirect('superadmin/profession_tax_slabs');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/profession_tax_slabs');
+	}
+}
 
 
 	
