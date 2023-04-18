@@ -4828,8 +4828,8 @@ public function profession_tax_slabs()
 	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
 	// $data[''] = $this->common_model->getAllwhere('it_declaration_sections',array('status!='=>2),'id');
 	$data['listData'] = $this->common_model->getallwhere_profession_taxSlab(array('master_profession_taxslabs.status!=' => 2));
-	$data['states'] = $this->common_model->getAllrecord('master_state');
-	// echo "<pre>"; print_r($data['listData']); die;
+	$data['states'] = $this->common_model->getAllwhere('master_state',array('state_country_id'=>'101'));
+
 	$this->load->view('Admin/s_profession_tax_slabs',$data);
 }
 

@@ -115,8 +115,10 @@ $route['admin/validate_empid'] = 'Admin/Employee/validate_empid';
 $route['admin/itSectionMaxLimit'] = 'Admin/Employee/itSectionMaxLimit';
 $route['admin/exmpGroupMapD'] = 'Admin/Employee/exmpGroupMapD';
 $route['admin/ts_slabs_fun'] = 'Admin/Employee/ts_slabs_fun';
+$route['admin/pt_slabs_ajaxFun'] = 'Admin/Employee/pt_slabs_ajaxFun';
 $route['admin/checked_it_sectionMaxLimit'] = 'Admin/Employee/checked_it_sectionMaxLimit';
 $route['admin/checked_exemption_grpMap'] = 'Admin/Employee/checked_exemption_grpMap';
+$route['admin/checked_profession_ts'] = 'Admin/Employee/checked_profession_ts';
 
 $route['admin/addAnnouncement'] = 'Admin/CoreHr/addAnnouncement';
 $route['admin/editAnnouncement'] = 'Admin/CoreHr/editAnnouncement';

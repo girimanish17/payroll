@@ -729,10 +729,9 @@ public function expense_type(){
 		$type = $this->session->userdata('user_type');
 
 		$data['category'] = $this->common_model->getAllwhere('it_declaration_categories',array('status'=>1),'id');
-		// echo "<pre>"; print_r($data['category']); die;
-
-		$data['tax'] = $this->common_model->getAllwhere('profession_tax_slabs', array('admin_id' => $user_id));
-			
+		
+		// $data['states'] = $this->common_model->getAllrecord('master_state');
+		// echo "<pre>"; print_r($data['states']); die;
 		$data['employees'] = $this->common_model->GetSingleData('users',array('user_id'=>$user_id,'user_type'=>2),'user_id');
 
 		$data['setting'] = $result = $this->common_model->getSingle('company_settings', array('admin_id' => $user_id));
@@ -1094,6 +1093,75 @@ public function expense_type(){
 		echo json_encode($html);
 	}
 
+	
+	public function pt_slabs_ajaxFun()
+	{
+		$admin_id = $this->session->userdata('user_id');
+		$state = $this->input->post('state');
+		$location = $this->input->post('location');
+		$effect_date = $this->input->post('effect_date');
+
+		$where = '';
+		if($state && $location && $effect_date) {
+			$where = array('state' => $state, 'location' => $location, 'date' => $effect_date);
+		}
+
+		if($state && $location && $effect_date == '') {
+			$where = array('state' => $state, 'location' => $location);
+		}
+
+		$data = $this->common_model->getAllWhere('master_profession_taxslabs', $where);
+
+		if($data) {
+			foreach($data as $row)
+			{
+				$checked = '';
+				$dataR =  $this->common_model->getSingle('checked_profession_ts', array('admin_id' => $admin_id, 'state' => $state, 'location' => $location));
+				$values = $dataR->checked_value;
+				$exarrr = explode(" ",$values);
+				if($dataR)
+				{
+					if(in_array($row->id,$exarrr))
+					{
+						$checked="checked";
+					}					
+				}
+				
+				$html .= '<tr>';
+				$html .= '<td> '.$row->salary_from.' </td>';
+				$html .= '<td> '.$row->salary_till.' </td>';
+				$html .= '<td> '.$row->tax_amount.' </td>';
+				$html .= '<td> '.$row->deduction_month.' </td>';
+				$html .='<td><input type="checkbox" name="pts_check[]" class="checkId" value="'.$row->id.'" '.$checked.' ></td>';
+				$html .= '</tr>'; 
+			}
+		}
+
+		echo json_encode($html);
+	}
+
+	public function checked_profession_ts()
+	{
+		$admin_id = $this->session->userdata('user_id');
+
+		$state = $this->input->post('state');
+		$location = $this->input->post('location');
+		$checked = $this->input->post('pts_check');
+
+		$pts_imp = implode(' ', $checked);
+		$insert['admin_id'] = $admin_id;
+		$insert['state'] = $state;
+		$insert['location'] = $location;
+		$insert['checked_value'] = $pts_imp;
+
+		$check = $this->common_model->getSingle('checked_profession_ts', array('admin_id' => $admin_id, 'state' => $state, 'location' => $location));
+		if($check) {
+			$this->common_model->DeleteData('checked_profession_ts', array('admin_id' => $admin_id, 'state' => $state, 'location' => $location));
+		}
+		$this->common_model->InsertData('checked_profession_ts', $insert);
+		redirect('admin/profile');
+	}
+
 	public function checked_exemption_grpMap()
 	{
 		$admin_id = $this->session->userdata('user_id');
@@ -1211,7 +1279,7 @@ public function expense_type(){
 			if($company_name){
 				$run = $this->common_model->UpdateData('companies',array('admin_id'=>$user_id),array('name'=>$company_name));
 			}	
-			//echo $this->db->last_query();
+			
 			if($run) {
 			
 				$this->session->set_flashdata('depmsg','<div class="alert alert-success">Profile added successfully</div>');
@@ -1231,7 +1299,6 @@ public function expense_type(){
 
 		echo json_encode($json);
 	}
-
 	
 	// public function add_company_setting()
 	// {
@@ -1294,7 +1361,7 @@ public function expense_type(){
 	public function expense_claim_status($id,$status){
 			
 		$run = $this->common_model->UpdateData('emp_expense_claims',array('id'=>$id),array('status'=>$status));
-		//echo $this->db->last_query();
+		
 		if($run) {
 			if($status==1){
 			$this->session->set_flashdata('msg','<div class="alert alert-success">Approved successfully</div>');
@@ -1312,14 +1379,13 @@ public function expense_type(){
 	public function addRemark(){
 
 		$this->form_validation->set_rules('remark','Remark','required');
-		//echo "<pre>"; print_r($this->input->post()); die;
+		
 		if($this->form_validation->run()){
 			$insert['manager_remarks'] = $this->input->post('remark');
 			$exp_id = $this->input->post('exp_id');
 			$id = $this->input->post('id');
 			$run = $this->common_model->UpdateData('emp_expense_claims',array('id'=>$id),$insert);
 			
-			//echo $this->db->last_query();die;
 			if($run) {
 				
 				$this->session->set_flashdata('depmsg','<div class="alert alert-success">Remark added successfully</div>');
