@@ -5,7 +5,6 @@
     margin-top: 15px;
 }
 </style>
-
 <?php include('include/header.php'); ?>  
 <div class="contents demo-card expanded">
    <div class="container-fluid">
@@ -494,7 +493,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                </select>
             </div>
               
-            <div class="col-md-6">
+            <div class="col-md-6"  style="margin-left: -202px;">
             <label class="labelIT">Category</label>
                <select name="" class="form-control mt-2" style="width:60%;" onchange="it_valueGet()" id="it_category">
                   <option value="">---All---</option>
@@ -664,7 +663,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                </select>
             </div>
               
-            <div class="col-md-6">
+            <div class="col-md-6" style="margin-left: -202px;">
             <label class="labelIT">Regime</label>
             <select name="" class="form-control mt-2" style="width:35%;" onchange="taxSlabFUn()" id="ts_regime">
             <option>Select Regime</option>
@@ -712,14 +711,37 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
    <div class="row">
       <div class="col-sm-12">
          
-             
+              <form action="<?php echo base_url();?>admin/checked_profession_ts" method="post">
             <div id="eMsg"></div>
             <h3>Profession Tax Slabs</h3>
-            <div class="form-row mt-0">
-				
 
+            <div class="col-md-12 row">
+             <div class="col-md-4">
+               <label class="labelIT">State</label>
+            <select name="state" class="form-control mt-2 " style="width:50%;" onchange="pt_slabsFun()" id="pt_state">
+                  <option>Select State</option>
+                 <?php if($states) {foreach($states as $state) { ?>
+                  <option value="<?php echo $state['state_id']; ?>"><?php echo $state['state_name']; ?></option>
+                  <?php }} ?>
+               </select>
+            </div>
+              
+            <div class="col-md-6" style="margin-left: -202px;">
+            <label class="labelIT">Location</label>
+            <select name="location" class="form-control mt-2" style="width:35%;" onchange="pt_slabsFun()" id="pt_location">
+            <option>Select Location</option>
+                  <option value="General">General</option>
+                  </select>
+            </div>
+            </div>
+            <div class="col-md-6">
+            <label class="labelIT">Effective From</label>
+            <input type="date" name="date" value="" style="width:35%;" class="form-control mt-2" onchange="pt_slabsFun()" id="effect_frm">
+            </div>
+
+            <div class="form-row mt-0">
                             <div class="card-body">
-                               <!-- <a href="<?php echo base_url();?>admin/add_profession_tax" class="btn btn-primary btn-sm mb-2" style="float:right">Add New</a> -->
+                             
                                 <div class="table-responsives">
                               
                                     <table class="table  mb-0 table-basic mt-2 text-center">
@@ -732,25 +754,12 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                                             <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                          <?php if($tax) { 
-                                             foreach($tax as $row) {   
-                                          ?>
-                                          <tr>
-                                             <td><?php echo $row->salary_from; ?></td>
-                                             <td><?php echo $row->salary_till; ?></td>
-                                             <td><?php echo $row->tax_amount; ?></td>
-                                             <td><?php echo $row->deduction_month; ?></td>
-                                             <td class="d-flex justify-content-sm-center action_btn" style="text-align:center;">
-                                                <a href="<?php echo base_url()?>admin/edit_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Edit"><span class="la la-edit"></span></a>
-                                          
-                                             <a href="<?php echo base_url()?>admin/delete_profession_tax/<?php echo $row->id; ?>" class="btn btn-sm" title="Delete"><span class="la la-trash"></span></a>
-                                          
-                                          </td>
-                                          </tr>
-                                          <?php } } ?>
+                                        <tbody id="pts_id">
+                            
                                       </tbody>
                                     </table>
+                                    <button type="submit" class="btn btn-primary mt-2">Save</button>
+                                    </form>
                                 </div>
                             </div>   
             </div>
@@ -812,7 +821,14 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
    </div>
 </div>
 <!-- table end -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 
+<script>
+   $(document).ready(function() {
+    $('.selectStates').select2();
+});
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
@@ -971,6 +987,25 @@ function taxSlabFUn()
         });
 }
 
+function pt_slabsFun()
+{
+   let state = $('#pt_state').val();
+   let location = $('#pt_location').val();
+   let effect_date = $('#effect_frm').val();
+
+   $.ajax({
+            url : "<?php echo base_url()?>admin/pt_slabs_ajaxFun",
+            method : 'POST',
+            dataType : 'json',
+            data : {state : state, location: location, effect_date: effect_date},
+            success : function(response)
+            {
+              console.log(response);
+              $('#pts_id').html(response);
+            },
+        });
+}
+
 </script>
 <script type="text/javascript">
 
@@ -1012,9 +1047,6 @@ $(document).ready(function() {
     });
    return false;  
 }  
-
-
-
 
 </script>
 <style>
