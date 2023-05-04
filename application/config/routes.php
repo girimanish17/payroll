@@ -388,6 +388,12 @@ $route['superadmin/editprofession_tax_slabs/(:num)']='Admin/superadmin/editprofe
 $route['superadmin/deleteprofession_tax_slabs/(:num)']='Admin/superadmin/deleteprofession_tax_slabs/$1';
 $route['superadmin/changeStatusprofession_tax_slabs/(:num)/(:any)']='Admin/superadmin/changeStatusprofession_tax_slabs/$1/$2';
 
+$route['superadmin/leave_type']='Admin/superadmin/leave_type';
+$route['superadmin/addleave_type']='Admin/superadmin/addleave_type';
+$route['superadmin/editleave_type/(:num)']='Admin/superadmin/editleave_type/$1';
+$route['superadmin/deleteleave_type/(:num)']='Admin/superadmin/deleteleave_type/$1';
+$route['superadmin/changeStatusleave_type/(:num)/(:any)']='Admin/superadmin/changeStatusleave_type/$1/$2';
+
 $route['superadmin/contact_requests']='Admin/superadmin/contact_requests';
 $route['superadmin/subscription_plans']='Admin/superadmin/subscription_plans';
 $route['superadmin/subscription_plans/(:num)']='Admin/superadmin/subscription_plans/$1';

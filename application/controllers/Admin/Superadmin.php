@@ -4954,12 +4954,121 @@ public function changeStatusprofession_tax_slabs($id,$status)
 	}
 }
 
+// leave type master
+public function leave_type()
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	$data['data'] = $this->common_model->getAllwhere('leave_type', array('status !=' => 2));
+	$this->load->view('Admin/s_leave_type',$data);
+}
 
-	
-	
+public function addleave_type()
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
 
+	$this->form_validation->set_rules('name', 'Name', 'required');
+	$this->form_validation->set_rules('days_per_year', 'Days Per Year', 'required');
+	$this->form_validation->set_rules('req_approval', 'Req Approval', 'required');
+
+	if($this->form_validation->run())
+	{
+		$chk = $this->common_model->getsingle('leave_type', array('name' => $this->input->post('name')));
+		if($chk == '')
+		{
+			$insert['name'] = $this->input->post('name');
+			$insert['days_per_year'] = $this->input->post('days_per_year');
+			$insert['req_approval'] = $this->input->post('req_approval');
+			$insert['created_date'] = date('Y-m-d h:i:s');
+
+			$this->common_model->InsertData('leave_type', $insert);
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Type added successfully!</div>');
+			redirect('superadmin/leave_type');
+		}
+		else 
+		{
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger">Leave Type already exists!</div>');
+			redirect('superadmin/leave_type');
+		}
+		
+	}
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_type');
+	}
+}
+
+public function editleave_type($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('name', 'Name', 'required');
+	$this->form_validation->set_rules('days_per_year', 'Days Per Year', 'required');
+	$this->form_validation->set_rules('req_approval', 'Req Approval', 'required');
+
+	if($this->form_validation->run())
+	{
+		$insertUpd['name'] = $this->input->post('name');
+		$insertUpd['days_per_year'] = $this->input->post('days_per_year');
+		$insertUpd['req_approval'] = $this->input->post('req_approval');
+
+		$run = $this->common_model->UpdateData('leave_type', array('id' => $id), $insertUpd);
+		
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Type Updated successfully!</div>');
+			redirect('superadmin/leave_type');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+
+	} 
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_type');
+}
+}
+
+public function deleteleave_type($id) 
+{
+	$run = $this->common_model->UpdateData('leave_type',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Type deleted successfully</div>');
+			 redirect('superadmin/leave_type');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/leave_type');
+		}
+}
+
+public function changeStatusleave_type($id, $status)
+{
+	
+	$companies = $this->common_model->GetSingleData('leave_type',array('id'=>$id));
+	$run = $this->common_model->UpdateData('leave_type',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Type Status Changed successfully</div>');
+			redirect('superadmin/leave_type');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/leave_type');
+	}
 }
 
 
+
+}
 
 ?>
