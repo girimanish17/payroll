@@ -810,6 +810,17 @@
                                     </span>
                                 </a>
                             </li>
+
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/leave_type" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Leave Type</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-star-of-david"></i>
+                                    </span>
+                                </a>
+                            </li>
                            
                             <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/country" class="menu-link">
