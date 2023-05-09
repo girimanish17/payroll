@@ -15,7 +15,7 @@
 								</span>
 							</li>
 							<li class="atbd-breadcrumb__item">
-								<span>Leave Type</span>
+								<span>Weekend Policy</span>
 							</li>
 						</ul>
 					</div>
@@ -29,25 +29,23 @@
 			<div class="col-md-12">
 				<div class="card mb-30">
 					<div class="card-header">
-						<h5>Leave Type List</h5>
+						<h5>Weekend Policy List</h5>
 						<div class="card-extra">
-							<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Add_NewCompany">+ Add New Leave Type</button>
+							<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Add_NewCompany">+ Add New Weekend Policy</button>
 						</div>
 					</div>
 					<?php echo $this->session->flashdata('msg');
-						if(isset($_SESSION['msg'])){
-						unset($_SESSION['msg']);
-						}
-					?>
+												   if(isset($_SESSION['msg'])){
+													unset($_SESSION['msg']);
+													}
+												  ?>
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered table-social" id="tblUser">
 								<thead>
 									<tr>
 										<th scope="col">ID</th>
-										<th scope="col">Leave Type</th>
-										<th scope="col">Days Per Year</th>
-										<th scope="col">Req Approval</th>
+										<th scope="col">Weekend Policy</th>
 										<th scope="col">Created On</th>
 										<th scope="col">Status</th>
 										<th scope="col">Action</th>
@@ -55,25 +53,23 @@
 								</thead>
 								<tbody>
 								<?php $i = 1;if($data){ foreach($data as $key => $value){
-									//$package = $this->common_model->GetSingleData('packages',array('id'=>$value['package_id']));
+									//$package = $this->common_model->GetSingleData('packages',array('id'=>$value->package_id));
 									//$admins = $this->common_model->GetSingleData('users',array('user_id'=>$value['admin_id']));
 									?>
 									<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $value->name;?></td>
-										<td><?php echo $value->days_per_year;?></td>
-										<td><?php echo $value->req_approval;?></td>
+										<td><?php echo $value->weekend_policy;?></td>
 										<td><?php echo date('d M Y',strtotime($value->created_date));?></td>
-										<td><?php echo $value->status =='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
+										<td><?php echo $value->status=='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
 										<td>
 											<div class="atbd-button-list d-flex flex-wrap">
-											   	<button class="btn btn-icon btn-success btn-squared" title="Edit" data-toggle="modal" data-target="#Edit_NewCompany<?php echo $i; ?>"><i class="la la-edit mr-0"></i></button>
-												<a onclick="return confirm('Are you sure want to delete this Leave Type?');" href="<?php echo base_url(); ?>superadmin/deleteleave_type/<?php echo $value->id; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
+											   <button class="btn btn-icon btn-success btn-squared" title="Edit" data-toggle="modal" data-target="#Edit_NewCompany<?php echo $i; ?>"><i class="la la-edit mr-0"></i></button>
+												<a onclick="return confirm('Are you sure want to delete this Weekend Policy?');" href="<?php echo base_url(); ?>superadmin/deleteweekend_policy/<?php echo $value->id; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
 									
-												<?php if($value->status =='0'){?>
-												<a onclick="return confirm('Are you sure want to change status of this Leave Type?');" href="<?php echo base_url(); ?>superadmin/changeStatusleave_type/<?php echo $value->id;?>/1"><button class="btn btn-icon btn-success btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
+												<?php if($value->status=='0'){?>
+												<a onclick="return confirm('Are you sure want to change status of this Weekend Policy?');" href="<?php echo base_url(); ?>superadmin/changeStatusweekend_policy/<?php echo $value->id;?>/1"><button class="btn btn-icon btn-success btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }else{?>
-												<a onclick="return confirm('Are you sure want to change status of this Leave Type?');" href="<?php echo base_url(); ?>superadmin/changeStatusleave_type/<?php echo $value->id;?>/0"><button class="btn btn-icon btn-danger btn-squared" title="Disable" ><i class="la la-ban mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to change status of this Weekend Policy?');" href="<?php echo base_url(); ?>superadmin/changeStatusweekend_policy/<?php echo $value->id;?>/0"><button class="btn btn-icon btn-danger btn-squared" title="Disable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }?>
 												</div>
 										</td>
@@ -84,30 +80,20 @@
 									<div class="modal-dialog modal-md" role="document">
 										<div class="modal-content modal-bg-white ">
 											<div class="modal-header">
-												<h6 class="modal-title">Edit Leave Type</h6>
+												<h6 class="modal-title">Edit Weekend Policy</h6>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span data-feather="x"></span></button>
 											</div>
 											<div class="modal-body">
 												<div class="Vertical-form">
-													<form action="<?php echo base_url(); ?>superadmin/editleave_type/<?php echo $value->id; ?>" method="post" id="companyForm2" enctype="multipart/form-data">
+													<form action="<?php echo base_url(); ?>superadmin/editweekend_policy/<?php echo $value->id; ?>" method="post" id="companyForm2" enctype="multipart/form-data">
 														<div class="form-row">
 															
 															
-															<div class="form-group col-sm-12">
-																<label>Leave Type</label>
-																<input type="text" name="name"  value="<?php echo $value->name;?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Leave Type">
-															</div>
-
-															<div class="form-group col-sm-12">
-																<label>Days Per Year</label>
-																<input type="text" name="days_per_year"  value="<?php echo $value->days_per_year;?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Days Per Year">
-															</div>
-															
-															<div class="form-group col-sm-12">
-																<label>Req Approval</label>
-																<input type="text" name="req_approval"  value="<?php echo $value->req_approval;?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Req Approval">
-															</div>
+														<div class="form-group col-sm-12">
+															<label>Weekend Policy</label>
+															<textarea name="weekend_policy" rows="8" cols="10"  class="form-control" placeholder="Weekend Policy"><?php echo $value->weekend_policy; ?></textarea>
+														</div>
 															
 															<div class="layout-button mt-25">
 																<button type="submit" class="btn btn-primary btn-sm btn-default btn-squared px-30"><i class="la la-check"></i>Update</button>
@@ -142,30 +128,18 @@
 <div class="modal-dialog modal-md" role="document">
 	<div class="modal-content modal-bg-white ">
 		<div class="modal-header">
-			<h6 class="modal-title">Add New Leave Type</h6>
+			<h6 class="modal-title">Add New Weekend Policy</h6>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span data-feather="x"></span></button>
 		</div>
 		<div class="modal-body">
 			<div class="Vertical-form">
-				<form action="<?php echo base_url(); ?>superadmin/addleave_type" method="post" id="companyForm" enctype="multipart/form-data">
+				<form action="<?php echo base_url(); ?>superadmin/addweekend_policy" method="post" id="companyForm" enctype="multipart/form-data">
 					<div class="form-row">
 						
-						
-						
 						<div class="form-group col-sm-12">
-							<label> Leave Type</label>
-							<input type="text" name="name"  value="<?php echo set_value('name') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Leave Type">
-						</div>
-
-						<div class="form-group col-sm-12">
-							<label>Days Per Year</label>
-							<input type="text" name="days_per_year"  value="<?php echo set_value('days_per_year') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Days Per Year">
-						</div>
-						
-						<div class="form-group col-sm-12">
-							<label>Req Approval</label>
-							<input type="text" name="req_approval"  value="<?php echo set_value('req_approval') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Req Approval">
+							<label>Weekend Policy</label>
+							<textarea name="weekend_policy" rows="8" cols="10"  class="form-control" placeholder="Weekend Policy"><?php echo set_value('weekend_policy') ?></textarea>
 						</div>
 						
 						<div class="layout-button mt-25">

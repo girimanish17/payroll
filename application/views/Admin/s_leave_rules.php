@@ -1,3 +1,5 @@
+
+
 <?php include('include/header.php'); ?>  
 
 
@@ -15,7 +17,7 @@
 								</span>
 							</li>
 							<li class="atbd-breadcrumb__item">
-								<span>Leave Type</span>
+								<span>Leave Rules</span>
 							</li>
 						</ul>
 					</div>
@@ -29,9 +31,9 @@
 			<div class="col-md-12">
 				<div class="card mb-30">
 					<div class="card-header">
-						<h5>Leave Type List</h5>
+						<h5>Leave Rules List</h5>
 						<div class="card-extra">
-							<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Add_NewCompany">+ Add New Leave Type</button>
+							<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#Add_NewCompany">+ Add New Leave Rules</button>
 						</div>
 					</div>
 					<?php echo $this->session->flashdata('msg');
@@ -46,8 +48,7 @@
 									<tr>
 										<th scope="col">ID</th>
 										<th scope="col">Leave Type</th>
-										<th scope="col">Days Per Year</th>
-										<th scope="col">Req Approval</th>
+										<th scope="col">Description</th>
 										<th scope="col">Created On</th>
 										<th scope="col">Status</th>
 										<th scope="col">Action</th>
@@ -60,22 +61,21 @@
 									?>
 									<tr>
 										<td><?php echo $i;?></td>
-										<td><?php echo $value->name;?></td>
-										<td><?php echo $value->days_per_year;?></td>
-										<td><?php echo $value->req_approval;?></td>
-										<td><?php echo date('d M Y',strtotime($value->created_date));?></td>
-										<td><?php echo $value->status =='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
+										<td><?php echo $value['name'];?></td>
+										<td><?php echo $value['description'];?></td>
+										<td><?php echo date('d M Y',strtotime($value['created_date']));?></td>
+										<td><?php echo $value['status'] =='1'?"<span class='badge badge-success rounded-pill'>Active":"<span class='badge badge-danger rounded-pill'>Inactive";?></span></td>
 										<td>
 											<div class="atbd-button-list d-flex flex-wrap">
 											   	<button class="btn btn-icon btn-success btn-squared" title="Edit" data-toggle="modal" data-target="#Edit_NewCompany<?php echo $i; ?>"><i class="la la-edit mr-0"></i></button>
-												<a onclick="return confirm('Are you sure want to delete this Leave Type?');" href="<?php echo base_url(); ?>superadmin/deleteleave_type/<?php echo $value->id; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to delete this Leave Rules?');" href="<?php echo base_url(); ?>superadmin/deleteleave_rules/<?php echo $value['id']; ?>"><button class="btn btn-icon btn-danger btn-squared" title="Delete" data-toggle="modal" data-target="#modal-delete"><i class="la la-trash mr-0"></i></button></a>
 									
-												<?php if($value->status =='0'){?>
-												<a onclick="return confirm('Are you sure want to change status of this Leave Type?');" href="<?php echo base_url(); ?>superadmin/changeStatusleave_type/<?php echo $value->id;?>/1"><button class="btn btn-icon btn-success btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
+												<?php if($value['status'] =='0'){?>
+												<a onclick="return confirm('Are you sure want to change status of this Leave Rules?');" href="<?php echo base_url(); ?>superadmin/changeStatusleave_rules/<?php echo $value['id'];?>/1"><button class="btn btn-icon btn-success btn-squared" title="Enable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }else{?>
-												<a onclick="return confirm('Are you sure want to change status of this Leave Type?');" href="<?php echo base_url(); ?>superadmin/changeStatusleave_type/<?php echo $value->id;?>/0"><button class="btn btn-icon btn-danger btn-squared" title="Disable" ><i class="la la-ban mr-0"></i></button></a>
+												<a onclick="return confirm('Are you sure want to change status of this Leave Rules?');" href="<?php echo base_url(); ?>superadmin/changeStatusleave_rules/<?php echo $value['id'];?>/0"><button class="btn btn-icon btn-danger btn-squared" title="Disable" ><i class="la la-ban mr-0"></i></button></a>
 												<?php }?>
-												</div>
+											</div>
 										</td>
 									</tr>
 								
@@ -90,24 +90,24 @@
 											</div>
 											<div class="modal-body">
 												<div class="Vertical-form">
-													<form action="<?php echo base_url(); ?>superadmin/editleave_type/<?php echo $value->id; ?>" method="post" id="companyForm2" enctype="multipart/form-data">
+													<form action="<?php echo base_url(); ?>superadmin/editleave_rules/<?php echo $value['id']; ?>" method="post" id="companyForm2" enctype="multipart/form-data">
 														<div class="form-row">
 															
 															
-															<div class="form-group col-sm-12">
-																<label>Leave Type</label>
-																<input type="text" name="name"  value="<?php echo $value->name;?>" class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Leave Type">
-															</div>
+														<div class="form-group col-sm-12">
+															<label> Leave Type</label>
+															<select name="name" class="form-control">
+																<option value="">Select Leave Type</option>
+																<?php if($leave_type) {foreach($leave_type as $leave) { ?>
+																	<option  <?php if( $value['leave_type']== $leave->id){ echo "selected"; } ?>  value="<?php echo $leave->id ?>"><?php echo $leave->name ?></option>
+																<?php } } ?>	
+															</select>
+														</div>
 
-															<div class="form-group col-sm-12">
-																<label>Days Per Year</label>
-																<input type="text" name="days_per_year"  value="<?php echo $value->days_per_year;?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Days Per Year">
-															</div>
-															
-															<div class="form-group col-sm-12">
-																<label>Req Approval</label>
-																<input type="text" name="req_approval"  value="<?php echo $value->req_approval;?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Req Approval">
-															</div>
+														<div class="form-group col-sm-12">
+															<label>Description</label>
+															<textarea name="description" rows="6" cols="10"  class="form-control" placeholder="Description"><?php echo $value['description'] ?></textarea>
+														</div>
 															
 															<div class="layout-button mt-25">
 																<button type="submit" class="btn btn-primary btn-sm btn-default btn-squared px-30"><i class="la la-check"></i>Update</button>
@@ -142,31 +142,32 @@
 <div class="modal-dialog modal-md" role="document">
 	<div class="modal-content modal-bg-white ">
 		<div class="modal-header">
-			<h6 class="modal-title">Add New Leave Type</h6>
+			<h6 class="modal-title">Add New Leave Rules</h6>
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span data-feather="x"></span></button>
 		</div>
 		<div class="modal-body">
 			<div class="Vertical-form">
-				<form action="<?php echo base_url(); ?>superadmin/addleave_type" method="post" id="companyForm" enctype="multipart/form-data">
+				<form action="<?php echo base_url(); ?>superadmin/addleave_rules" method="post" id="companyForm" enctype="multipart/form-data">
 					<div class="form-row">
 						
 						
 						
 						<div class="form-group col-sm-12">
 							<label> Leave Type</label>
-							<input type="text" name="name"  value="<?php echo set_value('name') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Enter Leave Type">
+							<select name="name" class="form-control">
+								<option value="">Select Leave Type</option>
+								<?php if($leave_type) {foreach($leave_type as $leave) { ?>
+									<option  <?php if( set_value('name')== $leave->id){ echo "selected"; } ?>  value="<?php echo $leave->id ?>"><?php echo $leave->name ?></option>
+								<?php } } ?>	
+							</select>
 						</div>
 
 						<div class="form-group col-sm-12">
-							<label>Days Per Year</label>
-							<input type="text" name="days_per_year"  value="<?php echo set_value('days_per_year') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Days Per Year">
+							<label>Description</label>
+							<textarea name="description" rows="6" cols="10"  class="form-control" placeholder="Description"><?php echo set_value('description') ?></textarea>
 						</div>
 						
-						<div class="form-group col-sm-12">
-							<label>Req Approval</label>
-							<input type="text" name="req_approval"  value="<?php echo set_value('req_approval') ?>"  class="form-control ih-medium ip-gray radius-xs b-light px-15"  placeholder="Req Approval">
-						</div>
 						
 						<div class="layout-button mt-25">
 							<button type="submit" class="btn btn-primary btn-sm btn-default btn-squared px-30"><i class="la la-check"></i>Save</button>

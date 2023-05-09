@@ -815,7 +815,7 @@ $company = $this->common_model->GetSingleData('companies',array('admin_id'=>$emp
                                    </form>
                                 </div>
                             </div>   
-            </div>
+            </div>       
       </div>
       
    </div>

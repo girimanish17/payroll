@@ -5068,6 +5068,445 @@ public function changeStatusleave_type($id, $status)
 }
 
 
+// leave rules master
+public function leave_rules()
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	$data['data'] = $this->common_model->getallwhere_leaveRules(array('master_leave_rules.status !=' => 2));
+	// echo "<pre>"; print_r($data); die;
+	$data['leave_type'] = $this->common_model->getAllwhere('leave_type', array('status' => 1));
+	$this->load->view('Admin/s_leave_rules',$data);
+}
+
+public function addleave_rules()
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('name', 'Name', 'required');
+	$this->form_validation->set_rules('description', 'Description', 'required');
+
+	if($this->form_validation->run())
+	{
+		$chk = $this->common_model->getsingle('master_leave_rules', array('leave_type' => $this->input->post('name')));
+		if($chk == '')
+		{
+			$insert['leave_type'] = $this->input->post('name');
+			$insert['description'] = $this->input->post('description');
+			$insert['created_date'] = date('Y-m-d h:i:s');
+
+			$this->common_model->InsertData('master_leave_rules', $insert);
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Rules added successfully!</div>');
+			redirect('superadmin/leave_rules');
+		}
+		else 
+		{
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger">Leave Rules already exists!</div>');
+			redirect('superadmin/leave_rules');
+		}
+		
+	}
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_rules');
+	}
+}
+
+public function editleave_rules($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('name', 'Leave Type', 'required');
+	$this->form_validation->set_rules('description', 'Description', 'required');
+
+	if($this->form_validation->run())
+	{
+		$insertUpd['leave_type'] = $this->input->post('name');
+		$insertUpd['description'] = $this->input->post('description');
+
+		$run = $this->common_model->UpdateData('master_leave_rules', array('id' => $id), $insertUpd);
+		
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Rules Updated successfully!</div>');
+			redirect('superadmin/leave_rules');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+
+	} 
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_rules');
+}
+}
+
+public function deleteleave_rules($id) 
+{
+	$run = $this->common_model->UpdateData('master_leave_rules',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Rules deleted successfully</div>');
+			 redirect('superadmin/leave_rules');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/leave_rules');
+		}
+}
+
+public function changeStatusleave_rules($id, $status)
+{
+	
+	$companies = $this->common_model->GetSingleData('master_leave_rules',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_leave_rules',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Rules Status Changed successfully</div>');
+			redirect('superadmin/leave_rules');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/leave_rules');
+	}
+}
+
+
+// weekend policy master
+public function weekend_policy()
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	$data['data'] = $this->common_model->getallwhere('master_weekend_policy', array('status !=' => 2));
+	// echo "<pre>"; print_r($data); die;
+	$this->load->view('Admin/s_weekend_policy',$data);
+}
+
+public function addweekend_policy()
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('weekend_policy', 'Weekend Policy', 'trim|required');
+
+	if($this->form_validation->run())
+	{
+		$chk = $this->common_model->getsingle('master_weekend_policy', array('weekend_policy' => $this->input->post('weekend_policy')));
+		if($chk == '')
+		{
+			$insert['weekend_policy'] = $this->input->post('weekend_policy');
+			$insert['created_date'] = date('Y-m-d h:i:s');
+
+			$this->common_model->InsertData('master_weekend_policy', $insert);
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Weekend Policy added successfully!</div>');
+			redirect('superadmin/weekend_policy');
+		}
+		else 
+		{
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger">Weekend Policy already exists!</div>');
+			redirect('superadmin/weekend_policy');
+		}
+		
+	}
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/weekend_policy');
+	}
+}
+
+public function editweekend_policy($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('weekend_policy', 'Weekend Policy', 'trim|required');
+
+	if($this->form_validation->run())
+	{
+		$insert['weekend_policy'] = $this->input->post('weekend_policy');
+
+		$run = $this->common_model->UpdateData('master_weekend_policy', array('id' => $id), $insert);
+		
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Weekend Policy Updated successfully!</div>');
+			redirect('superadmin/weekend_policy');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+
+	} 
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/weekend_policy');
+}
+}
+
+public function deleteweekend_policy($id) 
+{
+	$run = $this->common_model->UpdateData('master_weekend_policy',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Weekend Policy deleted successfully</div>');
+			 redirect('superadmin/weekend_policy');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/weekend_policy');
+		}
+}
+
+public function changeStatusweekend_policy($id, $status)
+{
+	
+	$companies = $this->common_model->GetSingleData('master_weekend_policy',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_weekend_policy',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Weekend Policy Status Changed successfully</div>');
+			redirect('superadmin/weekend_policy');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/weekend_policy');
+	}
+}
+
+// leave scheme master
+public function leave_scheme()
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	$data['data'] = $this->common_model->getallwhere('master_leave_scheme', array('status !=' => 2));
+	// echo "<pre>"; print_r($data); die;
+	$this->load->view('Admin/s_leave_scheme',$data);
+}
+
+public function addleave_scheme()
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('leave_scheme', 'Leave Scheme', 'trim|required');
+
+	if($this->form_validation->run())
+	{
+		$chk = $this->common_model->getsingle('master_leave_scheme', array('leave_scheme' => $this->input->post('leave_scheme')));
+		if($chk == '')
+		{
+			$insert['leave_scheme'] = $this->input->post('leave_scheme');
+			$insert['created_date'] = date('Y-m-d h:i:s');
+
+			$this->common_model->InsertData('master_leave_scheme', $insert);
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Scheme added successfully!</div>');
+			redirect('superadmin/leave_scheme');
+		}
+		else 
+		{
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger">Leave Scheme already exists!</div>');
+			redirect('superadmin/leave_scheme');
+		}
+		
+	}
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_scheme');
+	}
+}
+
+public function editleave_scheme($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('leave_scheme', 'Leave Scheme', 'trim|required');
+
+	if($this->form_validation->run())
+	{
+		$insert['leave_scheme'] = $this->input->post('leave_scheme');
+
+		$run = $this->common_model->UpdateData('master_leave_scheme', array('id' => $id), $insert);
+		
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Scheme Updated successfully!</div>');
+			redirect('superadmin/leave_scheme');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+
+	} 
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_scheme');
+	}
+}
+
+public function deleteleave_scheme($id) 
+{
+	$run = $this->common_model->UpdateData('master_leave_scheme',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Scheme deleted successfully</div>');
+			 redirect('superadmin/leave_scheme');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/leave_scheme');
+		}
+}
+
+public function changeStatusleave_scheme($id, $status)
+{
+	
+	$companies = $this->common_model->GetSingleData('master_leave_scheme',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_leave_scheme',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Scheme Status Changed successfully</div>');
+			redirect('superadmin/leave_scheme');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/leave_scheme');
+	}
+}
+
+// leave reasons master
+public function leave_reason()
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+	$data['data'] = $this->common_model->getallwhere_leaveReason(array('master_leave_reason.status !=' => 2));
+	// echo "<pre>"; print_r($data); die;
+	$data['leave_type'] = $this->common_model->getAllwhere('leave_type', array('status' => 1));
+	$data['leave_scheme'] = $this->common_model->getAllwhere('master_leave_scheme', array('status' => 1));
+	$this->load->view('Admin/s_leave_reason',$data);
+}
+
+public function addleave_reason()
+{
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('leave_type', 'Leave Type', 'trim|required');
+	$this->form_validation->set_rules('leave_scheme', 'Leave Scheme', 'trim|required');
+	$this->form_validation->set_rules('reason', 'Reason', 'trim|required');
+
+	if($this->form_validation->run())
+	{
+		// $chk = $this->common_model->getsingle('master_leave_reason', array('leave_scheme' => $this->input->post('leave_scheme')));
+		// if($chk == '')
+		// {
+			$insert['leave_type'] = $this->input->post('leave_type');
+			$insert['leave_scheme'] = $this->input->post('leave_scheme');
+			$insert['reason'] = $this->input->post('reason');
+			$insert['created_date'] = date('Y-m-d h:i:s');
+
+			$this->common_model->InsertData('master_leave_reason', $insert);
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Reason added successfully!</div>');
+			redirect('superadmin/leave_reason');
+		// }
+		// else 
+		// {
+		// 	$this->session->set_flashdata('msg', '<div class="alert alert-danger">Leave Scheme already exists!</div>');
+		// 	redirect('superadmin/leave_scheme');
+		// }
+		
+	}
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_reason');
+	}
+}
+
+public function editleave_reason($id)
+{
+	$user_id = $this->session->userdata('user_id');
+	$type = $this->session->userdata('user_type');if($type!=3){ redirect(); }
+
+	$this->form_validation->set_rules('leave_type', 'Leave Type', 'trim|required');
+	$this->form_validation->set_rules('leave_scheme', 'Leave Scheme', 'trim|required');
+	$this->form_validation->set_rules('reason', 'Reason', 'trim|required');
+
+	if($this->form_validation->run())
+	{
+		$insert['leave_type'] = $this->input->post('leave_type');
+		$insert['leave_scheme'] = $this->input->post('leave_scheme');
+		$insert['reason'] = $this->input->post('reason');
+
+		$run = $this->common_model->UpdateData('master_leave_reason', array('id' => $id), $insert);
+		
+		if($run)
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Reason Updated successfully!</div>');
+			redirect('superadmin/leave_reason');
+		} 
+		else
+		{
+			$this->session->set_flashdata('msg','<div class="alert alert-danger">Something went wrong</div>');
+		}
+
+	} 
+	else 
+	{
+		$this->session->set_flashdata('msg','<div class="alert alert-danger">'.validation_errors().'</div>');
+		redirect('superadmin/leave_reason');
+	}
+}
+
+public function deleteleave_reason($id) 
+{
+	$run = $this->common_model->UpdateData('master_leave_reason',array('id'=>$id),array('status'=>2));
+		//echo $this->db->last_query();
+		if($run) {
+			
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Reason deleted successfully</div>');
+			 redirect('superadmin/leave_reason');
+						
+		} else {
+			$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			 redirect('superadmin/leave_reason');
+		}
+}
+
+public function changeStatusleave_reason($id, $status)
+{
+	
+	$companies = $this->common_model->GetSingleData('master_leave_reason',array('id'=>$id));
+	$run = $this->common_model->UpdateData('master_leave_reason',array('id'=>$id),array('status'=>$status));
+
+	//echo $this->db->last_query();
+	if($run) {
+		
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Leave Reason Status Changed successfully</div>');
+			redirect('superadmin/leave_reason');
+					
+	} else {
+		$this->session->set_flashdata('msg','<div class="alert alert-success">Something went wrong</div>');
+			redirect('superadmin/leave_reason');
+	}
+}
 
 }
 
