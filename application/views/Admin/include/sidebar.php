@@ -821,7 +821,50 @@
                                     </span>
                                 </a>
                             </li>
+
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/leave_rules" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Leave Rules</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-star-of-david"></i>
+                                    </span>
+                                </a>
+                            </li>
                            
+                             <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/weekend_policy" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Weekend Policy</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-sitemap"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/leave_scheme" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Leave Scheme</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-sitemap"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="menu-item ">
+                                <a href="<?php echo base_url(); ?>superadmin/leave_reason" class="menu-link">
+                                    <span class="menu-label">
+                                        <span class="menu-name">Leave Reasons</span>
+                                    </span>
+                                    <span class="menu-icon">
+                                        <i class="la la-sitemap"></i>
+                                    </span>
+                                </a>
+                            </li>
+
                             <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/country" class="menu-link">
                                     <span class="menu-label">
@@ -1012,16 +1055,7 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="menu-item ">
-                                <a href="<?php echo base_url(); ?>superadmin/bankAccountType" class="menu-link">
-                                    <span class="menu-label">
-                                        <span class="menu-name">Bank Account Type</span>
-                                    </span>
-                                    <span class="menu-icon">
-                                        <i class="la la-sitemap"></i>
-                                    </span>
-                                </a>
-                            </li>
+                           
                             <li class="menu-item ">
                                 <a href="<?php echo base_url(); ?>superadmin/bloodgroup" class="menu-link">
                                     <span class="menu-label">

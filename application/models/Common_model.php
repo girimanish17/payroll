@@ -113,6 +113,40 @@ class Common_model extends CI_Model {
 		}    
 	}
 
+	function getallwhere_leaveRules($where)
+	{
+		$this->db->select('master_leave_rules.*, leave_type.name'); 
+		$this->db->from('master_leave_rules');
+		$this->db->join('leave_type','leave_type.id=master_leave_rules.leave_type', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+		
+		if($query->num_rows())
+		{	
+			return $query->result_array();
+		} else {
+			return array();
+		}    
+	}
+
+	function getallwhere_leaveReason($where)
+	{
+		$this->db->select('master_leave_reason.*, leave_type.name as leave_type_name, master_leave_scheme.leave_scheme as leave_scheme_name'); 
+		$this->db->from('master_leave_reason');
+		$this->db->join('leave_type','leave_type.id=master_leave_reason.leave_type', 'left');
+		$this->db->join('master_leave_scheme','master_leave_scheme.id=master_leave_reason.leave_scheme', 'left');
+		$this->db->where($where);
+		$query = $this->db->get();
+		// echo $this->db->last_query(); die;
+		
+		if($query->num_rows())
+		{	
+			return $query->result_array();
+		} else {
+			return array();
+		}    
+	}
+
   function getAllrecord($table)
 	{
 		$this->db->select('*');
